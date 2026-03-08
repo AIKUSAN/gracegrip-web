@@ -288,7 +288,7 @@ export function AppProvider({ children }) {
   }
 
   const daysSinceBackup = appState.lastExportDate
-    ? Math.floor((Date.now() - new Date(appState.lastExportDate).getTime()) / 86400000)
+    ? Math.floor((today.getTime() - new Date(appState.lastExportDate).getTime()) / 86400000)
     : null
 
   const onToggleReminder = () => {
