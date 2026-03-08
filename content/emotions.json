@@ -1,0 +1,32 @@
+[
+  {
+    "id": "stressed",
+    "label": "I feel stressed",
+    "prompt": "Choose peace over pressure."
+  },
+  {
+    "id": "lonely",
+    "label": "I feel lonely",
+    "prompt": "You are not abandoned."
+  },
+  {
+    "id": "anxious",
+    "label": "I feel anxious",
+    "prompt": "Ground your mind and body."
+  },
+  {
+    "id": "unworthy",
+    "label": "I feel unworthy",
+    "prompt": "Receive grace instead of condemnation."
+  },
+  {
+    "id": "ashamed",
+    "label": "I feel ashamed",
+    "prompt": "Shame does not get the final word."
+  },
+  {
+    "id": "tempted",
+    "label": "I feel tempted",
+    "prompt": "Fight early. Fight honestly."
+  }
+]

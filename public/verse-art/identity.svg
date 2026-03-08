@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">Identity category artwork</title>
+  <desc id="desc">Layered forms and central glow symbolizing belonging and purpose.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a314d"/>
+      <stop offset="0.5" stop-color="#425f9a"/>
+      <stop offset="1" stop-color="#5c88cc"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.35" r="0.5">
+      <stop offset="0" stop-color="#d8e5ff" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#d8e5ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#bg)"/>
+  <circle cx="600" cy="210" r="190" fill="url(#halo)"/>
+  <path d="M0 520C132 486 274 470 420 492C570 514 684 574 838 562C982 551 1092 490 1200 460V600H0Z" fill="#1e2944" fill-opacity="0.62"/>
+  <path d="M0 555C170 520 326 525 490 560C620 588 770 600 940 582C1034 572 1128 547 1200 525V600H0Z" fill="#131d33" fill-opacity="0.55"/>
+</svg>

@@ -1,0 +1,58 @@
+export const verses = [
+  {
+    id: '1cor-10-13',
+    reference: '1 Corinthians 10:13',
+    text: 'No temptation has overtaken you except what is common to mankind. And God is faithful; He will not let you be tempted beyond what you can bear.',
+    emotions: ['stressed', 'tempted'],
+    panic: true,
+  },
+  {
+    id: '2tim-1-7',
+    reference: '2 Timothy 1:7',
+    text: 'For God gave us a spirit not of fear but of power and love and self-control.',
+    emotions: ['anxious', 'tempted'],
+    panic: true,
+  },
+  {
+    id: 'ps-34-18',
+    reference: 'Psalm 34:18',
+    text: 'The Lord is near to the brokenhearted and saves the crushed in spirit.',
+    emotions: ['lonely', 'unworthy'],
+    panic: false,
+  },
+  {
+    id: 'rom-8-1',
+    reference: 'Romans 8:1',
+    text: 'There is therefore now no condemnation for those who are in Christ Jesus.',
+    emotions: ['unworthy', 'ashamed'],
+    panic: true,
+  },
+  {
+    id: 'gal-5-22-23',
+    reference: 'Galatians 5:22-23',
+    text: 'The fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, self-control.',
+    emotions: ['stressed', 'anxious', 'tempted'],
+    panic: false,
+  },
+  {
+    id: 'phil-4-8',
+    reference: 'Philippians 4:8',
+    text: 'Whatever is true, honorable, just, pure, lovely, commendable, think about these things.',
+    emotions: ['tempted', 'stressed'],
+    panic: false,
+  },
+  {
+    id: 'isa-41-10',
+    reference: 'Isaiah 41:10',
+    text: 'Fear not, for I am with you; be not dismayed, for I am your God.',
+    emotions: ['anxious', 'lonely'],
+    panic: true,
+  },
+  {
+    id: 'matt-11-28',
+    reference: 'Matthew 11:28',
+    text: 'Come to me, all who labor and are heavy laden, and I will give you rest.',
+    emotions: ['stressed', 'ashamed'],
+    panic: false,
+  },
+]

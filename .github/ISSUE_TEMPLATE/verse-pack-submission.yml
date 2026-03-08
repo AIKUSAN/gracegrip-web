@@ -1,0 +1,19 @@
+name: Verse Pack Submission
+description: Propose verses for an emotion/theme
+title: "[Verses]: "
+labels: ["content", "verses"]
+body:
+  - type: input
+    id: theme
+    attributes:
+      label: Emotion/Theme
+      placeholder: "e.g., Anxiety, Shame, Temptation"
+    validations:
+      required: true
+  - type: textarea
+    id: verses
+    attributes:
+      label: Verses
+      description: Include references and translation used.
+    validations:
+      required: true

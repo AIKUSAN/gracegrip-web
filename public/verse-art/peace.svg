@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">Peace category artwork</title>
+  <desc id="desc">Soft horizon, water reflections, and calm sky gradients.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9fd1d7"/>
+      <stop offset="0.45" stop-color="#7bb4bd"/>
+      <stop offset="1" stop-color="#5a8f99"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#sky)"/>
+  <rect y="322" width="1200" height="278" fill="#4b7681"/>
+  <path d="M0 290C130 260 260 260 390 292C510 321 670 332 820 310C968 290 1084 256 1200 244V350H0Z" fill="#cbe4e8" fill-opacity="0.64"/>
+  <path d="M0 402C136 382 300 378 440 406C572 431 700 448 860 436C994 425 1100 396 1200 376V462H0Z" fill="#8cb6bf" fill-opacity="0.4"/>
+  <circle cx="208" cy="120" r="64" fill="#eef8fb" fill-opacity="0.62"/>
+</svg>

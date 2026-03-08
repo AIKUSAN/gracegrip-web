@@ -1,0 +1,17 @@
+name: Devotional Submission
+description: Propose a new devotional
+title: "[Devotional]: "
+labels: ["content", "devotional"]
+body:
+  - type: textarea
+    id: devotional
+    attributes:
+      label: Devotional Text
+      description: Keep it practical and grace-first.
+    validations:
+      required: true
+  - type: input
+    id: scripture
+    attributes:
+      label: Scripture References
+      placeholder: "e.g., Romans 8:1; 1 Corinthians 10:13"
