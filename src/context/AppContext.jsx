@@ -126,6 +126,13 @@ export function AppProvider({ children }) {
     return EMERGENCY_ENCOURAGEMENTS[dayKey % EMERGENCY_ENCOURAGEMENTS.length]
   }, [today])
 
+  const greeting = useMemo(() => {
+    const hour = today.getHours()
+    if (hour < 12) return 'Good morning'
+    if (hour < 17) return 'Good afternoon'
+    return 'Good evening'
+  }, [today])
+
   const filteredVerses = useMemo(
     () => verses.filter((verse) => verse.category === activeScriptureTab),
     [activeScriptureTab],
@@ -364,6 +371,7 @@ export function AppProvider({ children }) {
     todayDevotional,
     encouragementOfDay,
     emergencyEncouragement,
+    greeting,
     filteredVerses,
     emergencyVerses,
     sortedJournalEntries,
