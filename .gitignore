@@ -91,6 +91,7 @@ audit-report.json
 
 # ─── Internal Docs (agent notes, audit trails, handovers) ────
 internal_docs/
+handover_to_devops/
 .claude/
 .specstory/
 .claude/settings.local.json
