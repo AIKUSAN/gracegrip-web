@@ -1,3 +1,4 @@
+// © 2026 GraceGrip | Built for Freedom | MIT License
 import { Libre_Baskerville, Manrope } from 'next/font/google'
 import { Toaster } from 'sonner'
 import { AppProvider } from '../src/context/AppContext'
