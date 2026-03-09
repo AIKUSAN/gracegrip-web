@@ -15,7 +15,7 @@ npm run validate:content # JSON schema check — run after any content/ edit
 ## Architecture
 
 **Next.js 16 App Router** with static export (`output: 'export'`, `distDir: 'dist'`).
-No server — the entire app deploys as static files to GitHub Pages.
+No server — the entire app deploys as static files to Vercel.
 
 - **Routing**: File-based via `app/` directory. 6 routes (see table below).
 - **State**: Single global React Context (`src/context/AppContext.jsx`) via `AppProvider` + `useApp()` hook. No Redux/Zustand.
@@ -50,7 +50,7 @@ No server — the entire app deploys as static files to GitHub Pages.
 | `scripts/validate-content.mjs` | Schema validator for content/*.json |
 | `next.config.mjs` | Static export config, distDir, reactStrictMode |
 | `components.json` | shadcn/ui config (style: maia, JSX, Tabler icons) |
-| `.github/workflows/deploy.yml` | CI/CD — builds and deploys to GitHub Pages on push to main |
+| `.github/workflows/deploy.yml` | CI/CD — lint + build gate on every push/PR (Vercel auto-deploys from `main`) |
 
 ## Routes
 
@@ -90,7 +90,7 @@ Always run `npm run validate:content` after editing any `content/` file.
 
 - **localStorage key**: stored under `gracegrip_v1`. Renaming this key silently wipes all user data. Bump deliberately for breaking migrations only.
 - **Fonts**: `next/font/google` self-hosts fonts at build. No runtime Google Fonts request. The CSP (`font-src 'self'`) enforces this.
-- **CSP**: Enforced via `<meta httpEquiv>` in `app/layout.jsx` (required for static GitHub Pages). If migrating to a server host, move to `next.config.mjs` `headers()`.
+- **CSP**: Enforced via `<meta httpEquiv>` in `app/layout.jsx` for resource-loading directives. `frame-ancestors 'none'` is additionally injected as an HTTP header by `vercel.json` (meta CSP cannot enforce `frame-ancestors` per W3C spec).
 - **Theme**: dark mode toggles `.dark` class on `<html>`. Three modes: `light`, `dark`, `system`.
 - **Streak logic**: `updateStreak` only increments if `lastCheckIn` was yesterday. Same-day calls are no-ops (idempotent).
 - **Daily content**: `todayDevotional`, `encouragementOfDay`, `emergencyEncouragement`, and `greeting` all derive from a single `today` date state in AppContext. Auto-rolls at local midnight via `setTimeout` + `visibilitychange`/`focus` listener.
@@ -105,7 +105,7 @@ Always run `npm run validate:content` after editing any `content/` file.
 2. No cloud sync of personal data by default.
 3. No paid wall on core support features.
 4. Grace-first language — never shame-spiral UX.
-5. Must deploy as a static site (GitHub Pages compatible).
+5. Must deploy as a static site (Vercel / any static host compatible).
 
 ## Rules
 
@@ -126,6 +126,6 @@ and mobile layout.
 
 ## Deployment
 
-- GitHub Actions workflow (`.github/workflows/deploy.yml`) builds and deploys on push to `main`.
-- Live URL pattern: `https://<username>.github.io/GraceGrip-WebApp/`
-- **Custom domain or rename**: Update `basePath` in `next.config.mjs` to match the new path.
+- GitHub Actions workflow (`.github/workflows/deploy.yml`) runs CI (lint + build) on every push/PR.
+- **Vercel** auto-deploys from `main` separately. Security headers (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `frame-ancestors CSP`) are injected by `vercel.json`.
+- Live URL: `https://gracegrip.app`

@@ -13,10 +13,11 @@ No server runtime — the entire app is static HTML/CSS/JS.
 
 ## Deploy Target
 
-**GitHub Pages** via `.github/workflows/deploy.yml`.
-- Triggers on push to `main`.
-- Uploads `./dist` as the Pages artifact.
-- Live URL pattern: `https://<username>.github.io/GraceGrip-WebApp/`
+**Vercel** — auto-deploys from `main` branch.
+- CI workflow (`.github/workflows/deploy.yml`) runs lint + build gate on every push/PR.
+- Vercel picks up the push and deploys the static export.
+- Live URL: `https://gracegrip.app`
+- Security headers (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `frame-ancestors 'none'` CSP) are injected by `vercel.json`.
 
 ## Pre-Deploy Quality Gates
 
@@ -39,20 +40,19 @@ Before merging any significant change, manually verify:
 - [ ] Dark mode toggle (light → dark → system)
 - [ ] Welcome screen gate (first visit)
 
-## CSP Migration Note
+## CSP Note
 
-The CSP is currently enforced via `<meta httpEquiv>` in `app/layout.jsx` because GitHub Pages does not support custom HTTP headers.
+The full CSP is enforced via `<meta httpEquiv>` in `app/layout.jsx`. This covers all resource loading directives.
 
-If deploying to a server host (Vercel, Netlify, Cloudflare Pages):
-1. Move the CSP to `next.config.mjs` `headers()` for stronger enforcement.
-2. Remove the `<meta>` tag from `app/layout.jsx`.
-3. The layout file contains a comment documenting this explicitly.
+`frame-ancestors 'none'` is additionally injected as an HTTP header by `vercel.json` (meta CSP cannot enforce `frame-ancestors` per W3C spec — browsers ignore it there).
+
+Do NOT duplicate the full CSP in `vercel.json` headers — having two CSP policies (HTTP header + meta) causes both to apply simultaneously, which can unexpectedly block legitimate resources.
 
 ## Custom Domain
 
-- Domain `gracegrip.app` is planned but not yet active.
-- When ready: create `public/CNAME` with the domain value and configure DNS.
-- Update `basePath` in `next.config.mjs` if switching from subpath to root domain.
+- Live at `https://gracegrip.app` (Vercel custom domain).
+- DNS is configured and SSL is active.
+- No `basePath` needed — app serves at the root.
 
 ## Package Lock
 

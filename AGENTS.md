@@ -1,6 +1,6 @@
 # AGENTS.md — GraceGrip WebApp
 
-> **Stack**: Next.js 16 (App Router, static export) · React 19 · Tailwind CSS v4 · GitHub Pages
+> **Stack**: Next.js 16 (App Router, static export) · React 19 · Tailwind CSS v4 · Vercel
 > **Language**: JavaScript (JSX) — no TypeScript
 
 ## Folder Structure
@@ -19,7 +19,7 @@
 | `content/` | Source JSON data — `verses.json`, `devotionals.json`, `emotions.json` (validated by `scripts/validate-content.mjs`) |
 | `public/` | Static SVG assets — `logo.svg`, `favicon.svg`, `bmc-button.svg`, `kofi_logo.svg`, `verse-art/*.svg` |
 | `scripts/` | Build tooling — `validate-content.mjs` (JSON schema validator) |
-| `.github/workflows/` | CI/CD — `deploy.yml` (build + deploy to GitHub Pages on push to main) |
+| `.github/workflows/` | CI/CD — `deploy.yml` (lint + build gate on every push/PR; Vercel auto-deploys from `main`) |
 | `.claude/rules/` | AI agent rules — `security.md`, `deployment.md`, `ui-standards.md` |
 
 ## Key Conventions
@@ -34,6 +34,7 @@
 - **New AppContext values (Phase 1+2)**: `backupSelections`, `onToggleBackupSelection`, `onExportData`, `onShareData`, `canShare`, `daysSinceBackup`, `onQRImport`
 - **QRTransfer patterns**: `onQRImportRef` (useRef for scanner callback stability); html5-qrcode loaded via dynamic `import()` in useEffect only (SSR safety); visibility via `.qr-canvas--hidden` class, not inline style
 - **Dead code in `HeroSection.jsx`**: The `app` mode branch (lines 122–157) and `onPanic` prop (line 43) are confirmed dead — never called. Do not add new callers against these paths. See `PROJECT_MANIFEST.md §17` and `HANDOVER_DEVOPS.md §1` for the full cleanup verification checklist.
+- **Deploy target**: Vercel (auto-deploys from `main`). Live at `https://gracegrip.app`. Security headers injected via `vercel.json`.
 
 ## Quality Gates
 
@@ -41,6 +42,7 @@
 npm run lint              # ESLint — must pass
 npm run build             # Static export — must succeed
 npm run validate:content  # JSON schema — must pass
+npm audit                 # No high/critical vulnerabilities
 ```
 
 ## Rules
