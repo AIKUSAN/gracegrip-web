@@ -153,6 +153,57 @@ Definition of Done: ✅
 
 ---
 
+## DevOps & CI Tasks
+
+### GG-DEVOPS-01 Vercel Migration
+Status: done
+Goal: migrate from GitHub Pages to Vercel with custom domain, SSL, and env vars.
+
+Changes made:
+- Vercel project `gracegrip-webapp` created (team `aikusans-projects`, ID `prj_Ta1AqXQ0hHaKb6Fq5OhJJh7Xt2qe`)
+- Custom domains `gracegrip.app` + `www.gracegrip.app` configured (Cloudflare DNS, proxy OFF)
+- SSL certificate force-issued via Vercel
+- `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY` added to Vercel dashboard
+- All stale GitHub Pages deployments (4) and environments (2: `github-pages`, `Production`) deleted from GitHub
+
+Definition of Done: ✅
+- https://gracegrip.app live and SSL-valid
+- Vercel auto-deploys on push to `main`
+
+---
+
+### GG-CI-01 CI-Only GitHub Actions Workflow
+Status: done
+Goal: replace GitHub Pages deploy workflow with lint + build CI gates only.
+
+Changes made:
+- `.github/workflows/deploy.yml` — removed GitHub Pages deploy steps; kept `npm audit`, `npm run lint`, `npm run build`
+- Commit: `1e4be4d`
+
+Definition of Done: ✅
+- Workflow runs on push to `main` — audit + lint + build only
+- No GitHub Pages artifacts created
+
+---
+
+### GG-CI-02 ESLint Fix — next lint → eslint + purity
+Status: done
+Goal: fix CI failure caused by Next.js 16 dropping `next lint` CLI and secondary react-hooks/purity violation.
+
+Root Cause: `next lint` CLI removed from Next.js 16. Running `eslint .` directly exposed a `react-hooks/purity` error: `Date.now()` called at render time in `daysSinceBackup` in `AppContext.jsx`.
+
+Changes made:
+- `package.json` — `"lint": "next lint"` → `"lint": "eslint ."`
+- `src/context/AppContext.jsx` — `Date.now()` → `today.getTime()` (uses stable `useState` value initialized once at mount)
+- Commit: `9d1b34c`
+
+Definition of Done: ✅
+- `npm run lint` — zero errors/warnings
+- `npm run build` — 9/9 static pages
+- CI passes on `main`
+
+---
+
 ## P0 Tasks (Beta Stabilization)
 
 ### GG-P0-01 Core Flow QA
@@ -181,17 +232,20 @@ Definition of Done:
 - Lint/build pass
 
 ### GG-P0-03 Deploy Confidence
-Status: todo
-Goal: guarantee auto deployment to GitHub Pages.
+Status: done
+Goal: guarantee automated deployment with working live URL and passing CI.
 
-Files:
-- `.github/workflows/deploy.yml`
-- `next.config.mjs`
-- `README.md`
+Changes made:
+- Migrated from GitHub Pages to Vercel (project `gracegrip-webapp`, team `aikusans-projects`)
+- Custom domains `gracegrip.app` + `www.gracegrip.app` configured; SSL active
+- CI-only GitHub Actions workflow (`.github/workflows/deploy.yml`) — lint + build gates
+- `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY` configured in Vercel dashboard
+- Fixed `next lint` → `eslint .` (Next.js 16 dropped `next lint` CLI)
 
-Definition of Done:
-- Successful workflow run on push
-- Live URL accessible from another device/network
+Definition of Done: ✅
+- `npm run lint` zero errors
+- `npm run build` 9/9 static routes
+- Live URL https://gracegrip.app accessible; Vercel auto-deploys on push to `main`
 
 ## P1 Tasks
 

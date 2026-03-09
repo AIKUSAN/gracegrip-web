@@ -34,7 +34,7 @@
 | Utility | clsx, tailwind-merge, class-variance-authority | — |
 | Linting | ESLint + eslint-config-next | ^9.39.1 |
 | Build | Turbopack | bundled with Next.js |
-| Deployment | GitHub Pages via GitHub Actions | — |
+| Deployment | Vercel (gracegrip.app + www.gracegrip.app); CI gate via GitHub Actions | — |
 | QR Generation | qrcode | ^1.5.x |
 | QR Scanning | html5-qrcode (dynamic import) | ^2.3.x |
 | Compression | fflate | ^0.8.x |
@@ -138,7 +138,7 @@ GraceGrip-WebApp/
 │   └── build-logo-assets.ps1
 │
 ├── .github/
-│   ├── workflows/deploy.yml    # CI/CD → GitHub Pages on push to main
+│   ├── workflows/deploy.yml    # CI gate only (lint + build + audit); Vercel auto-deploys from main
 │   ├── ISSUE_TEMPLATE/
 │   └── pull_request_template.md
 │
@@ -353,16 +353,25 @@ Daily devotional selected by `dayOfYear % devotionals.length` — deterministic,
 
 ## 11. Deployment
 
-### GitHub Actions CI/CD
+### Vercel (Production)
+
+**Project:** `gracegrip-webapp` (team `aikusans-projects`, ID `prj_Ta1AqXQ0hHaKb6Fq5OhJJh7Xt2qe`)
+**Trigger:** Vercel auto-deploys on push to `main` (no config required)  
+**Live URL:** https://gracegrip.app (+ www.gracegrip.app)  
+**Custom domains:** `gracegrip.app` + `www.gracegrip.app` (Cloudflare DNS, proxy OFF, SSL active)  
+**Env vars:** `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY` — set in Vercel dashboard only (never in `.env.local` in production)
+
+### GitHub Actions CI Gate
 
 **Workflow file:** `.github/workflows/deploy.yml`  
-**Trigger:** Push to `main` or manual `workflow_dispatch`  
-**Pipeline:**
+**Trigger:** Push to `main` or PR  
+**Pipeline (gate only — no deploy):**
 1. Checkout → Setup Node 20 → `npm ci`
-2. `npm run build`
-3. Upload `./dist` artifact → Deploy to GitHub Pages
+2. `npm audit --audit-level=high`
+3. `npm run lint` (runs `eslint .` — note: `next lint` CLI dropped in Next.js 16)
+4. `npm run build`
 
-**Live URL pattern:** `https://<username>.github.io/GraceGrip-WebApp/`
+Vercel handles deployment independently. CI only validates code quality.
 
 ### Static Output
 All 9 routes are statically prerendered at build time. No server required.
@@ -394,7 +403,7 @@ Same items, icon-only, no labels.
 2. No cloud sync of personal data by default
 3. No paid wall on core support features
 4. Grace-first language — zero shame-spiral UX
-5. Must deploy as a static site (GitHub Pages compatible)
+5. Must deploy as a static site (deployed on Vercel at gracegrip.app)
 6. `gracegrip_v1` localStorage key must never be silently renamed
 
 ---
@@ -432,7 +441,7 @@ See [ROADMAP.md](ROADMAP.md) and [TASKS.md](TASKS.md) for full detail.
 
 ## 16. Key Gotchas
 
-- `BASE_URL`: use `import.meta.env.BASE_URL` for paths to `public/` assets — hardcoded `/logo.svg` breaks on GitHub Pages subpath.
+- Public asset paths: `/logo.svg` and other `/public` refs work correctly — Vercel serves the app from the domain root with no `basePath` configured. No subpath escaping needed.
 - Theme: `dark` class lives on `<html>`. Toggling via `AppContext` `useEffect` is the only correct method — do not imperatively mutate elsewhere.
 - Streak idempotency: calling `updateStreak` twice on the same day is a safe no-op.
 - Panic timer interval is cleared with `window.clearInterval` — clear it on unmount to prevent memory leaks.

@@ -1,6 +1,6 @@
 # HANDOVER_DEVOPS.md
 **GraceGrip WebApp — DevOps Handover Manifest**
-Generated: 2026-03-07 | Build Target: GitHub Pages (static export)
+Generated: 2026-03-07 | Build Target: Vercel (gracegrip.app) | Updated: 2026-03-08
 
 ---
 
@@ -38,7 +38,7 @@ These files were audited for live imports. Files marked ✅ have been purged. Fi
 | Output | `output: 'export'` → fully static, no server required |
 | Build output dir | `dist/` (set via `distDir` in `next.config.mjs`) |
 | CSS engine | Tailwind CSS v4 via `@tailwindcss/postcss` |
-| Bundle runtime | `dist/` served as static files; compatible with GitHub Pages |
+| Bundle runtime | `dist/` served as static files; deployed to Vercel (gracegrip.app) |
 
 ### Font Stack
 | Role | Family | Loading Method |
@@ -173,9 +173,11 @@ npm run validate:content  # JSON schema check for content/*.json
 
 ## 6. Deployment Notes
 
-- **GitHub Pages**: GitHub Actions workflow auto-deploys on push to `main`. Static export output goes to `dist/` (configured in `next.config.mjs`).
-- **Custom domain or rename**: Update `basePath` in `next.config.mjs` to match the new path.
-- **Server deployment** (Vercel/Netlify): Move CSP from `<meta>` in `app/layout.jsx` to `headers()` in `next.config.mjs` for hardened enforcement.
+- **Vercel (active)**: App is live at https://gracegrip.app. Vercel auto-deploys on push to `main`. No manual deploy steps required. Project: `gracegrip-webapp`, team `aikusans-projects`.
+- **Custom domains**: `gracegrip.app` + `www.gracegrip.app` configured in Vercel dashboard. Cloudflare DNS — proxy OFF, SSL active.
+- **CI gate**: GitHub Actions (`.github/workflows/deploy.yml`) runs `npm audit` + `npm run lint` (`eslint .`) + `npm run build` on push. No deploy steps in CI — Vercel handles that separately.
+- **CSP**: `frame-ancestors 'none'` is injected as an HTTP header by `vercel.json` (meta CSP cannot enforce `frame-ancestors` per W3C spec). Do not duplicate the full CSP in `vercel.json` headers.
+- **Env vars**: `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY` are set in Vercel dashboard only.
 
 ---
 
@@ -238,7 +240,7 @@ Root cause: `transform: scale()` is visual-only and does not affect layout flow.
 
 ### Summary
 
-All UI polish tasks for the Emergency and Scripture pages are complete and build-verified. The codebase is stable. No infrastructure, routing, or data schema changes were made. The app is a static Next.js export and deploys via GitHub Actions to GitHub Pages.
+All UI polish tasks for the Emergency and Scripture pages are complete and build-verified. The codebase is stable. No infrastructure, routing, or data schema changes were made. The app is a static Next.js export deployed on Vercel (gracegrip.app). GitHub Actions runs CI (lint + build + audit) gates only — Vercel auto-deploys from `main` separately.
 
 ### Files Modified (This Session)
 
@@ -259,6 +261,6 @@ All UI polish tasks for the Emergency and Scripture pages are complete and build
 
 ### Recommended Action
 
-Merge to `main` to trigger auto-deploy via the existing GitHub Actions workflow (`.github/workflows/deploy.yml`). No secrets, config, or environment variable changes required. No `basePath` changes needed.
+Merge to `main`. Vercel auto-deploys from `main` (no manual steps). GitHub Actions CI gates (audit + lint + build) will run automatically. No `basePath`, secrets, or config changes required. Live at https://gracegrip.app within ~60s of merge.
 
 *End of Handover Manifest.*

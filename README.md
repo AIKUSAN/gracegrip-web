@@ -25,8 +25,9 @@ Provide immediate support without requiring a login, subscription, or credit car
 
 ## Tech Stack
 
-- React + Vite
-- Static hosting on GitHub Pages
+- Next.js 16 (App Router, static export)
+- React 19 + Tailwind CSS v4
+- Deployed on Vercel (https://gracegrip.app)
 
 ## Development
 
@@ -39,8 +40,9 @@ npm run dev
 
 ```bash
 npm run build
-npm run preview
 ```
+
+Static output is written to `dist/` and deployed automatically by Vercel.
 
 ## Content Validation
 
@@ -50,18 +52,17 @@ npm run validate:content
 
 Run this after editing files in `content/` to verify schema and emotion references before opening a PR.
 
-## Deploying to GitHub Pages
+## Deploying
 
-1. Keep repository name as `GraceGrip-WebApp` or update `basePath` in `next.config.mjs`.
-2. Build app with `npm run build`.
-3. Publish with the GitHub Actions workflow in `.github/workflows/deploy.yml`.
-4. Access URL pattern: `https://<your-github-username>.github.io/GraceGrip-WebApp/`
+The app is deployed on **Vercel** and auto-deploys on every push to `main`.
+
+- **Live URL**: https://gracegrip.app
+- **Vercel project**: `gracegrip-webapp` (team `aikusans-projects`)
+- **CI gates** (`.github/workflows/deploy.yml`): audit + lint + build — no deploy steps
 
 ## Access Anywhere
 
-1. Push this project to GitHub on branch `main`.
-2. In repository settings, set GitHub Pages source to `GitHub Actions`.
-3. Open `https://<your-github-username>.github.io/GraceGrip-WebApp/` from any device.
+Push to `main` — Vercel deploys automatically. Open https://gracegrip.app from any device.
 
 ## Content Notes
 

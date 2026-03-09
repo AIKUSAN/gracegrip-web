@@ -54,14 +54,17 @@ Goal: public, stable, trustworthy beta.
 - Clear privacy language
 - Strong disclaimer visibility
 
-3. Deployment reliability
-- Auto deploy via GitHub Actions
-- Confirm live Pages URL and routing
+3. Deployment reliability ✅ DONE (2026-03-08)
+- Vercel deployment live at https://gracegrip.app (auto-deploys on push to `main`)
+- Custom domains `gracegrip.app` + `www.gracegrip.app` (Cloudflare DNS, SSL active)
+- CI-only GitHub Actions workflow: `npm audit` + `npm run lint` + `npm run build` gates
+- `npm run lint` runs `eslint .` (Next.js 16 dropped `next lint` CLI)
+- Stale GitHub Pages deployments + environments cleaned up from GitHub
 
-Exit Criteria:
-- Build/lint pass
-- Public URL works
-- Core flows manually verified
+Exit Criteria: ✅ MET (2026-03-08)
+- Build/lint pass ✅ (`npm run lint` zero errors; `npm run build` 9/9 routes)
+- Public URL works ✅ (https://gracegrip.app live)
+- Core flows manually verified ✅
 
 ## P1 - Content and Contribution Layer (Next)
 Goal: scale content safely without backend complexity.
@@ -89,58 +92,6 @@ Goal: improve retention while preserving privacy-first constraints.
 1. Better offline/PWA behavior
 2. Expanded guided recovery flows
 3. Optional privacy-respecting feedback channel → **Phase 3 above**
-4. Optional analytics only if explicitly approved
-
-Exit Criteria:
-- Higher engagement without forced account creation
-- Privacy guarantees unchanged
-Goal: public, stable, trustworthy beta.
-
-1. Core flow reliability
-- Panic Button modal and countdown stable
-- Streak update/reset reliable
-- Favorites and backup import/export reliable
-
-2. Public beta polish
-- Clear beta messaging
-- Clear privacy language
-- Strong disclaimer visibility
-
-3. Deployment reliability
-- Auto deploy via GitHub Actions
-- Confirm live Pages URL and routing
-
-Exit Criteria:
-- Build/lint pass
-- Public URL works
-- Core flows manually verified
-
-## P1 - Content and Contribution Layer (Next)
-Goal: scale content safely without backend complexity.
-
-1. Content structure migration
-- Move content to contributor-friendly JSON/Markdown
-- Add content validation scripts
-
-2. Open-source workflow
-- `CONTRIBUTING.md`
-- issue/PR templates
-- review checklist for tone/theology/safety
-
-3. Accessibility/UX pass
-- keyboard and screen-reader support
-- contrast and focus improvements
-
-Exit Criteria:
-- Non-dev contributors can submit content safely
-- Accessibility baseline improved
-
-## P2 - Growth Features (Later)
-Goal: improve retention while preserving privacy-first constraints.
-
-1. Better offline/PWA behavior
-2. Expanded guided recovery flows
-3. Optional privacy-respecting feedback channel
 4. Optional analytics only if explicitly approved
 
 Exit Criteria:
