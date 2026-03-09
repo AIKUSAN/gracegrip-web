@@ -88,6 +88,10 @@ audit-report.json
 # ─── Local AI / MCP Tool Artifacts ──────────────────────────
 .playwright-mcp/
 .mcp-debug-tools/
+
+# ─── Internal Docs (agent notes, audit trails, handovers) ────
+internal_docs/
+.claude/
 .specstory/
 .claude/settings.local.json
 
