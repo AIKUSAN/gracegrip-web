@@ -107,6 +107,18 @@ See [CONTRIBUTING.md](internal_docs/CONTRIBUTING.md) for the review checklist, t
 
 ---
 
+## 🛡️ Branding & Forking
+
+See [NOTICE.md](NOTICE.md) for the full attribution and forking policy.
+
+**tl;dr:**
+- **Code (MIT):** Free to fork, clone, and modify for personal or community use.
+- **Brand (Protected):** "GraceGrip", the logo, and the "Walk in Freedom" tagline are IP of IKE / AIKUSAN. Forks must use a different name and visual identity.
+- **Mission (Non-Negotiable):** No paywalls. No shame triggers. No privacy violations.
+- **Attribution:** Retain the `© 2026 GraceGrip` copyright header in all source files.
+
+---
+
 ## Disclaimer
 
 GraceGrip provides spiritual and peer support content. It is **not** professional mental health care.

@@ -1,3 +1,4 @@
+/* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
 import * as React from "react"
 import { cva } from "class-variance-authority";
 

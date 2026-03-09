@@ -1,4 +1,4 @@
-// © 2026 GraceGrip | Built for Freedom | MIT License
+/* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
 'use client'
 import { useState } from 'react'
 import {

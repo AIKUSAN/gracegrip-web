@@ -1,3 +1,4 @@
+/* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
 'use client';
 import React from 'react';
 import { motion } from 'motion/react';

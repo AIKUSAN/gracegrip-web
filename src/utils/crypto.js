@@ -1,3 +1,4 @@
+/* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
 /**
  * Web Crypto API helpers for AES-GCM 256-bit encryption of sensitive localStorage data.
  *

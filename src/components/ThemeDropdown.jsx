@@ -1,3 +1,4 @@
+/* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
 import { useState, useRef, useEffect } from 'react'
 import { Sun, Moon, Monitor, ChevronDown } from 'lucide-react'
 
