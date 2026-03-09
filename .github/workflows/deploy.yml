@@ -1,4 +1,4 @@
-name: CI
+name: CI / Deploy
 
 on:
   push:
@@ -9,16 +9,17 @@ on:
       - main
   workflow_dispatch:
 
-permissions:
-  contents: read
-
+# Allow one concurrent run per ref for CI; deployment uses its own concurrency group below.
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  lint-and-build:
+  build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,8 +39,44 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Validate content
+        run: npm run validate:content
+
       - name: Build
         run: npm run build
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+
+      - name: Upload Pages artifact
+        # Only upload on push/workflow_dispatch — not on PRs.
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    # Only deploy on push (or manual trigger) to main, never on PRs.
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write    # Required by actions/deploy-pages
+      id-token: write # Required for OIDC token
+
+    # Dedicated concurrency group for deployments — never cancel a running deploy.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+

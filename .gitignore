@@ -90,3 +90,5 @@ audit-report.json
 .mcp-debug-tools/
 .specstory/
 .claude/settings.local.json
+
+.vercel
