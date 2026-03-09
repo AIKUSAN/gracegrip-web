@@ -1,3 +1,4 @@
+/* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
 import Image from 'next/image'
 
 export function DynamicLogo({ size = 40, className = '', alt = 'GraceGrip logo' }) {

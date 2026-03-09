@@ -1,3 +1,4 @@
+/* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
 'use client'
 
 import { Bookmark, BookmarkCheck, BookOpen, LayoutGrid, ScrollText, ArrowDownToLine } from 'lucide-react'

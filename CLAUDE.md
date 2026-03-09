@@ -20,6 +20,7 @@ All data stays on-device. No accounts, no tracking, no cloud sync.
     2. Provide a 'Visual Impact Summary' of UI changes.
     3. Verify that the 'Grace-First' color palette (Sage/Cream) is maintained.
 - **IKE's Approval:** Claude is authorized to `git commit`, but **strictly forbidden** from running `git push`. Only the user (IKE) will execute the final push after a manual review of the Vercel Preview URL.
+- **Attribution Check:** Before accepting any community contribution, verify that the `/* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License */` header is intact in every modified source file. Any PR that strips these headers is a **hard-fail** — reject without further review.
 
 ---
 
