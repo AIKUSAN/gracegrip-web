@@ -53,7 +53,6 @@ export function HeroSection({
         {!isWelcome && (
           <div className="hero-pill-row">
             <p className="privacy-pill">No account. No subscription. No tracking.</p>
-            <p className="beta-pill">Public Beta</p>
           </div>
         )}
         <button
