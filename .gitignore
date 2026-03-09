@@ -97,3 +97,13 @@ handover_to_devops/
 .claude/settings.local.json
 
 .vercel
+
+# ─── Agentic / Internal Planning Files ──────────────────────
+CLAUDE.md
+CHRONICLES.md
+ProjectManifest.md
+PROJECT_MANIFEST.md
+BRAIN.md
+TASKS.md
+ROADMAP.md
+*.plan
