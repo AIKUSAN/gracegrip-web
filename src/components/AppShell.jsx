@@ -1,3 +1,4 @@
+// © 2026 GraceGrip | Built for Freedom | MIT License
 'use client'
 
 import { Heart } from 'lucide-react'
