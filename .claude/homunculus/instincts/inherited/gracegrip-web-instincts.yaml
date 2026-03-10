@@ -1,0 +1,615 @@
+# Instincts generated from https://github.com/AIKUSAN/gracegrip-web
+# Generated: 2026-03-10T01:41:03.739Z
+# Version: 2.0
+
+---
+id: gracegrip-web-commit-conventional
+trigger: "when writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Commit Conventional
+
+## Action
+
+Use conventional commit format with prefixes: chore, docs, fix, feat, security
+
+## Evidence
+
+- 23 commits analyzed
+- Detected conventional commit pattern
+- Examples: security: harden .gitignore — lock down all agentic/internal docs, docs: finalize v1.0.0 — update all MD files and release documentation
+
+---
+id: gracegrip-web-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Commit Length
+
+## Action
+
+Write moderate-length commit messages (~50 characters)
+
+## Evidence
+
+- Average commit message length: 62 chars
+- Based on 23 commits
+
+---
+id: gracegrip-web-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Naming Files
+
+## Action
+
+Use camelCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: camelCase
+
+---
+id: gracegrip-web-import-relative
+trigger: "when importing modules"
+confidence: 0.75
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Import Relative
+
+## Action
+
+Use relative imports for project files
+
+## Evidence
+
+- Import analysis shows relative import pattern
+- Example: import { x } from '../lib/x'
+
+---
+id: gracegrip-web-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: gracegrip-web-arch-type-based
+trigger: "when adding new code"
+confidence: 0.8
+domain: architecture
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Arch Type Based
+
+## Action
+
+Place code in the appropriate type folder (components/, services/, utils/, etc.)
+
+## Evidence
+
+- Type-based module organization detected
+- Folders: components, content, context, data, lib
+
+---
+id: gracegrip-web-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: gracegrip-web-workflow-database-migration
+trigger: "when modifying the database schema or adding tables"
+confidence: 0.7
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Workflow Database Migration
+
+## Action
+
+Follow the database-migration workflow:
+1. Create migration file
+2. Update schema definitions
+3. Generate/update types
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~4x per month
+- Files: migrations/*
+
+---
+id: gracegrip-web-workflow-feature-development
+trigger: "when implementing a new feature"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Workflow Feature Development
+
+## Action
+
+Follow the feature-development workflow:
+1. Add feature implementation
+2. Add tests for feature
+3. Update documentation
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~16x per month
+- Files: /*, src/components/*, src/components/pages/*
+
+---
+id: gracegrip-web-workflow-dependency-update
+trigger: "when doing dependency update"
+confidence: 0.7
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Workflow Dependency Update
+
+## Action
+
+Follow the dependency-update workflow:
+1. Update package.json with new version
+2. Regenerate package-lock.json
+3. Merge via pull request or direct commit
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~4x per month
+- Files: package.json, package-lock.json
+
+---
+id: gracegrip-web-workflow-documentation-mass-update
+trigger: "when doing documentation mass update"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Workflow Documentation Mass Update
+
+## Action
+
+Follow the documentation-mass-update workflow:
+1. Identify affected documentation files
+2. Update version numbers, dates, or platform references
+3. Commit all changes together
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: *.md, README.md, ROADMAP.md
+
+---
+id: gracegrip-web-workflow-security-configuration
+trigger: "when doing security configuration"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Workflow Security Configuration
+
+## Action
+
+Follow the security-configuration workflow:
+1. Add security configuration files
+2. Update .gitignore for sensitive files
+3. Add security headers via vercel.json or meta tags
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: .gitignore, vercel.json, SECURITY.md
+
+---
+id: gracegrip-web-workflow-copyright-header-injection
+trigger: "when doing copyright header injection"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Workflow Copyright Header Injection
+
+## Action
+
+Follow the copyright-header-injection workflow:
+1. Identify source files needing headers
+2. Add /* */ MIT copyright headers
+3. Update existing // headers to /* */ format
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: src/components/**/*.jsx, src/utils/*.js, app/**/*.jsx
+
+---
+id: gracegrip-web-workflow-deployment-platform-migration
+trigger: "when doing deployment platform migration"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Workflow Deployment Platform Migration
+
+## Action
+
+Follow the deployment-platform-migration workflow:
+1. Update CI/CD workflow files
+2. Modify build configuration
+3. Update documentation references
+4. Add/remove platform-specific files
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: .github/workflows/deploy.yml, next.config.mjs, vercel.json
+
+---
+id: gracegrip-web-conventional-commits
+trigger: "When making any commit"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Conventional Commits
+
+## Action
+
+Use conventional commit format with prefixes: chore, docs, fix, feat, security, release, revert, ci
+
+## Evidence
+
+- All commits follow conventional format
+- 8 distinct prefixes used consistently
+- Average length 62 chars
+
+---
+id: gracegrip-web-camelcase-files
+trigger: "When creating new JavaScript files"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Camelcase Files
+
+## Action
+
+Use camelCase naming convention
+
+## Evidence
+
+- Naming conventions analysis shows camelCase for files
+- Consistent pattern across src folder structure
+
+---
+id: gracegrip-web-pascalcase-components
+trigger: "When creating React components"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Pascalcase Components
+
+## Action
+
+Use PascalCase naming convention
+
+## Evidence
+
+- Naming conventions show PascalCase for classes
+- React components in src/components follow this pattern
+
+---
+id: gracegrip-web-relative-imports
+trigger: "When importing modules within the project"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Relative Imports
+
+## Action
+
+Use relative import paths
+
+## Evidence
+
+- Import style analysis shows relative imports preferred
+- Project structure supports relative pathing
+
+---
+id: gracegrip-web-named-exports
+trigger: "When exporting functions or components"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Named Exports
+
+## Action
+
+Use named exports instead of default exports
+
+## Evidence
+
+- Export style analysis indicates named exports
+- Consistent with module organization pattern
+
+---
+id: gracegrip-web-try-catch-errors
+trigger: "When handling errors in code"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Try Catch Errors
+
+## Action
+
+Use try-catch blocks for error handling
+
+## Evidence
+
+- Error handling style shows try-catch preference
+- No custom error classes or global handlers detected
+
+---
+id: gracegrip-web-type-based-folders
+trigger: "When organizing new code files"
+confidence: 0.9
+domain: architecture
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Type Based Folders
+
+## Action
+
+Place files in type-based folders: components, context, data, lib, utils
+
+## Evidence
+
+- Module organization is type-based
+- Consistent folder structure: components, content, context, data, lib, utils
+
+---
+id: gracegrip-web-dependabot-prs
+trigger: "When dependency updates are available"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Dependabot Prs
+
+## Action
+
+Let dependabot create pull requests for package updates, then merge
+
+## Evidence
+
+- Multiple dependabot merge commits
+- Commits show 'bump @supabase/supabase-js', 'bump eslint/js', 'bump motion'
+
+---
+id: gracegrip-web-security-prefix
+trigger: "When making security-related changes"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Security Prefix
+
+## Action
+
+Use 'security:' commit prefix and include rationale in message
+
+## Evidence
+
+- Commit: 'security: harden .gitignore — lock down all agentic/internal docs'
+- Security workflow includes .gitignore updates
+
+---
+id: gracegrip-web-docs-mass-update
+trigger: "When preparing releases or platform changes"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Docs Mass Update
+
+## Action
+
+Update all markdown files together in single commit with 'docs:' prefix
+
+## Evidence
+
+- Commit: 'docs: finalize v1.0.0 — update all MD files and release documentation'
+- Documentation workflow affects multiple .md files
+
+---
+id: gracegrip-web-chore-deps-format
+trigger: "When updating dependencies manually"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Chore Deps Format
+
+## Action
+
+Use format 'chore(deps): bump [package] from [old] to [new]'
+
+## Evidence
+
+- Commit: 'chore(deps): bump @supabase/supabase-js from 2.98.0 to 2.99.0'
+- Consistent dependency update format
+
+---
+id: gracegrip-web-release-naming
+trigger: "When creating release commits"
+confidence: 0.8
+domain: git
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Release Naming
+
+## Action
+
+Use format 'release: vX.Y.Z - [Descriptive Name]'
+
+## Evidence
+
+- Commit: 'release: v1.0.0 - The Foundation for Freedom'
+- Release workflow includes descriptive naming
+
+---
+id: gracegrip-web-copyright-headers
+trigger: "When preparing for public release"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Copyright Headers
+
+## Action
+
+Add MIT copyright headers to all source files using /* */ format
+
+## Evidence
+
+- Copyright header workflow affects src/components/**/*.jsx, src/utils/*.js
+- Workflow updates // headers to /* */ format
+
+---
+id: gracegrip-web-gitignore-security
+trigger: "When hardening security"
+confidence: 0.8
+domain: workflow
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Gitignore Security
+
+## Action
+
+Update .gitignore to exclude agentic/internal documentation
+
+## Evidence
+
+- Commit: 'security: harden .gitignore — lock down all agentic/internal docs'
+- Security workflow includes .gitignore updates
+
+---
+id: gracegrip-web-platform-migration
+trigger: "When switching deployment platforms"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Platform Migration
+
+## Action
+
+Update CI workflow, config files, and all documentation references together
+
+## Evidence
+
+- Commit: 'ci: replace GitHub Pages deploy with Vercel CI workflow'
+- Migration workflow affects .github/workflows, next.config.mjs, vercel.json
+
