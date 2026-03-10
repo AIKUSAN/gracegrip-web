@@ -4,7 +4,7 @@
 
 | Version | Supported |
 |---------|-----------|
-| Latest (`main`) | ✅ Actively maintained |
+| v1.0.0 (`main`) | ✅ Actively maintained |
 | Any prior release | ❌ Not supported |
 
 GraceGrip is a continuously deployed static web app. Only the current `main` branch receives security fixes.
