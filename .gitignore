@@ -90,20 +90,29 @@ audit-report.json
 .mcp-debug-tools/
 
 # ─── Internal Docs (agent notes, audit trails, handovers) ────
-internal_docs/
-handover_to_devops/
-.claude/
-.specstory/
-.claude/settings.local.json
+# IRONCLAD: These NEVER enter the public repo under any circumstance.
+# Do NOT use `git add -f` on these paths. Use `git add <file>` explicitly.
+/internal_docs/
+/handover_to_devops/
+/.claude/
+/.specstory/
+/.claude/settings.local.json
 
 .vercel
 
 # ─── Agentic / Internal Planning Files ──────────────────────
-CLAUDE.md
-CHRONICLES.md
-ProjectManifest.md
-PROJECT_MANIFEST.md
-BRAIN.md
-TASKS.md
-ROADMAP.md
+# Root-level agent/AI control files — local only
+/CLAUDE.md
+/BRAIN.md
+/CHRONICLES.md
+/TASKS.md
+/ROADMAP.md
+/PROJECT_MANIFEST.md
+/ProjectManifest.md
+/AGENTS.md
+/HANDOVER_DEVOPS.md
+/SECOPS_READY.md
+/SECURITY_VERDICT.md
+/LIVE_SECURITY_CERTIFICATE.md
 *.plan
+*.agent.md
