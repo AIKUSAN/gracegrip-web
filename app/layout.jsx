@@ -1,4 +1,5 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
+import { Analytics } from '@vercel/analytics/react'
 import { Libre_Baskerville, Manrope } from 'next/font/google'
 import { Toaster } from 'sonner'
 import { AppProvider } from '../src/context/AppContext'
@@ -77,7 +78,7 @@ export default function RootLayout({ children }) {
             because meta CSP cannot enforce frame-ancestors per W3C spec. */}
         <meta
           httpEquiv="Content-Security-Policy"
-          content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; media-src 'self'; worker-src 'none';"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co https://va.vercel-scripts.com; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; media-src 'self'; worker-src 'none';"
         />
         <meta name="referrer" content="no-referrer" />
         {/* Schema.org JSON-LD — helps Google identify GraceGrip as a SoftwareApplication
@@ -123,6 +124,7 @@ export default function RootLayout({ children }) {
         <AppProvider>
           {children}
           <Toaster position="bottom-center" richColors />
+          <Analytics />
         </AppProvider>
       </body>
     </html>
