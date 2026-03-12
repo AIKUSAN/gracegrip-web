@@ -10,7 +10,7 @@
     "validate:content": "node scripts/validate-content.mjs"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.99.0",
+    "@supabase/supabase-js": "^2.99.1",
     "@tabler/icons-react": "^3.40.0",
     "@tailwindcss/postcss": "^4.2.1",
     "@vercel/analytics": "^2.0.0",
