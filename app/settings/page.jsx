@@ -30,8 +30,28 @@ export default function Page() {
   } = useApp()
 
   return (
-    <AppShell>
-      <SettingsPage
+    <>
+      <noscript>
+        <main style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '640px', margin: '0 auto' }}>
+          <h1>Settings — GraceGrip</h1>
+          <p>
+            Manage your GraceGrip experience: set your profile name, choose between light,
+            dark, or system theme, configure daily reminders, and manage your private data backup.
+          </p>
+          <h2>Settings Options</h2>
+          <ul>
+            <li>Profile name — personalize your experience</li>
+            <li>Theme — light, dark, or follow system preference</li>
+            <li>Daily reminder — set a notification time for check-ins</li>
+            <li>Backup &amp; restore — export or import your encrypted data</li>
+            <li>QR transfer — move your data between devices without internet</li>
+            <li>Reset &amp; clear — manage your recovery data privately</li>
+          </ul>
+          <p>All settings and data stay on your device. Free, private, no account required.</p>
+        </main>
+      </noscript>
+      <AppShell>
+        <SettingsPage
         profileNameInput={profileNameInput}
         onChangeProfileNameInput={setProfileNameInput}
         onSaveProfileName={onSaveProfileName}
@@ -55,6 +75,7 @@ export default function Page() {
         onChangeReminderTime={onChangeReminderTime}
         onSubmitFeedback={onSubmitFeedback}
       />
-    </AppShell>
+      </AppShell>
+    </>
   )
 }

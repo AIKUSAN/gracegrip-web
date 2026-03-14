@@ -116,3 +116,6 @@ audit-report.json
 /LIVE_SECURITY_CERTIFICATE.md
 *.plan
 *.agent.md
+
+# Favycon source package (compiled outputs are in public/)
+favicons/

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Background: Cream #f6f1e9 -->
+  <rect width="1200" height="630" fill="#f6f1e9"/>
+
+  <!-- Left accent bar: Brand teal -->
+  <rect x="0" y="0" width="12" height="630" fill="#305f4f"/>
+
+  <!-- Bottom amber band -->
+  <rect x="0" y="560" width="1200" height="70" fill="#eadcc8"/>
+
+  <!-- Decorative circle (subtle brand teal) -->
+  <circle cx="1080" cy="100" r="200" fill="#305f4f" opacity="0.06"/>
+  <circle cx="120" cy="530" r="140" fill="#305f4f" opacity="0.05"/>
+
+  <!-- Logo wordmark -->
+  <text
+    x="80"
+    y="200"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="96"
+    font-weight="700"
+    fill="#305f4f"
+    letter-spacing="-2"
+  >GraceGrip</text>
+
+  <!-- Tagline -->
+  <text
+    x="80"
+    y="272"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="32"
+    font-weight="400"
+    fill="#305f4f"
+    opacity="0.75"
+  >Scripture-Based Addiction Recovery</text>
+
+  <!-- Divider line -->
+  <rect x="80" y="308" width="120" height="3" fill="#305f4f" opacity="0.4"/>
+
+  <!-- Feature pills -->
+  <!-- Pill 1 -->
+  <rect x="80" y="360" width="220" height="48" rx="24" fill="#305f4f" opacity="0.12"/>
+  <text x="190" y="390" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#305f4f" text-anchor="middle" dominant-baseline="middle">Daily Scripture</text>
+
+  <!-- Pill 2 -->
+  <rect x="316" y="360" width="220" height="48" rx="24" fill="#305f4f" opacity="0.12"/>
+  <text x="426" y="390" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#305f4f" text-anchor="middle" dominant-baseline="middle">Urge Support</text>
+
+  <!-- Pill 3 -->
+  <rect x="552" y="360" width="220" height="48" rx="24" fill="#305f4f" opacity="0.12"/>
+  <text x="662" y="390" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#305f4f" text-anchor="middle" dominant-baseline="middle">Private Journal</text>
+
+  <!-- Pill 4 -->
+  <rect x="788" y="360" width="220" height="48" rx="24" fill="#305f4f" opacity="0.12"/>
+  <text x="898" y="390" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#305f4f" text-anchor="middle" dominant-baseline="middle">No Account</text>
+
+  <!-- Bottom bar text -->
+  <text
+    x="80"
+    y="603"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="24"
+    fill="#305f4f"
+    opacity="0.6"
+  >Free · Private · Grace-First · gracegrip.app</text>
+</svg>
