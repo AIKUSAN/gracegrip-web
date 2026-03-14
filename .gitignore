@@ -117,5 +117,5 @@ audit-report.json
 *.plan
 *.agent.md
 
-# Favycon source package (compiled outputs are in public/)
-favicons/
+# Favycon source package (compiled outputs are in public/favicons/)
+/favicons/
