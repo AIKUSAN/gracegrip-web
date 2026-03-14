@@ -150,6 +150,68 @@ export default function RootLayout({ children }) {
             }),
           }}
         />
+        {/* FAQPage JSON-LD — enables expandable Q&A rich snippets in Google search results.
+            Recovery apps are frequently searched via questions; this schema surfaces answers
+            directly in the SERP without requiring backlinks or domain authority. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: [
+                {
+                  '@type': 'Question',
+                  name: 'Is GraceGrip free?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Yes. GraceGrip is completely free — no subscription, no premium tier, no ads. It will always be free.',
+                  },
+                },
+                {
+                  '@type': 'Question',
+                  name: 'Do I need to create an account to use GraceGrip?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'No account is required. GraceGrip stores everything on your device. There is no sign-up, no email, and no password.',
+                  },
+                },
+                {
+                  '@type': 'Question',
+                  name: 'Is my journal private?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Yes. Journal entries are encrypted with AES via the Web Crypto API before being saved. Your entries never leave your device and are never sent to any server.',
+                  },
+                },
+                {
+                  '@type': 'Question',
+                  name: 'Does GraceGrip work offline?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Yes. All Scripture, devotionals, and tools are bundled into the app at build time. Once loaded, GraceGrip works fully offline — no internet connection needed.',
+                  },
+                },
+                {
+                  '@type': 'Question',
+                  name: 'What addictions does GraceGrip support?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'GraceGrip is built primarily for pornography and masturbation addiction recovery, with a Scripture-based, grace-first approach. The tools — urge management, journaling, devotionals — can support any habit or addiction recovery journey.',
+                  },
+                },
+                {
+                  '@type': 'Question',
+                  name: 'Is GraceGrip only for Christians?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'GraceGrip is rooted in Christian faith and uses Scripture as its primary source of encouragement. It is designed for people who find strength in their faith. Anyone is welcome to use it.',
+                  },
+                },
+              ],
+            }),
+          }}
+        />
       </head>
       <body style={{ fontFamily: 'var(--font-sans, Manrope, system-ui, sans-serif)' }}>
         <AppProvider>
