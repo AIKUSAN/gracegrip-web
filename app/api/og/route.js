@@ -10,7 +10,7 @@
  *   screenshot, and returns it. The OG image IS the real homepage —
  *   zero maintenance, auto-updates with every design change.
  *
- * Fallback path — next/og branded card (logo + wordmark):
+ * Fallback path — next/og logo-only card:
  *   If Chrome fails for any reason (cold start timeout, network blip),
  *   renders a clean branded card in-process using next/og (Satori).
  *   Short cache TTL (5 min) so crawlers retry the screenshot path soon.
@@ -39,9 +39,9 @@ const CREAM = '#f6f1e9'
 const AMBER = '#eadcc8'
 
 /**
- * Fallback branded card rendered via next/og (Satori, in-process).
+ * Fallback card rendered via next/og (Satori, in-process).
  * Shown when the Puppeteer screenshot fails for any reason.
- * Uses Georgia (system font) — no external font fetch, cannot crash.
+ * Logo mark + wordmark + tagline on the brand gradient — zero external deps.
  * Cached for only 5 min so crawlers retry the screenshot path soon.
  */
 function renderFallbackCard() {
@@ -65,19 +65,16 @@ function renderFallbackCard() {
             justifyContent: 'center',
             background: 'rgba(255,255,255,0.92)',
             borderRadius: 20,
-            padding: '60px 80px',
+            padding: '60px 100px',
             boxShadow: '0 4px 40px rgba(29,43,40,0.08)',
           }}
         >
-          {/* Logo mark */}
           <img
             src="https://gracegrip.app/favicons/favicon-192x192.png"
-            width={100}
-            height={100}
-            style={{ objectFit: 'contain', marginBottom: 20 }}
+            width={120}
+            height={120}
+            style={{ objectFit: 'contain', marginBottom: 24 }}
           />
-
-          {/* Wordmark */}
           <div
             style={{
               fontFamily: 'Georgia, serif',
@@ -91,15 +88,13 @@ function renderFallbackCard() {
           >
             GRACEGRIP
           </div>
-
-          {/* Tagline */}
           <div
             style={{
               fontFamily: 'Georgia, serif',
               fontSize: 22,
               fontStyle: 'italic',
               color: BRAND,
-              marginTop: 16,
+              marginTop: 18,
               display: 'flex',
             }}
           >
