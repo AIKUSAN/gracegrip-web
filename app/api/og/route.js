@@ -5,21 +5,25 @@
  * Next.js Serverless Route Handler — screenshots the live GraceGrip homepage.
  * Served at https://gracegrip.app/api/og (1200×630 PNG).
  *
- * Uses @sparticuz/chromium + puppeteer-core to take a real screenshot of
- * https://gracegrip.app at a 1200×630 viewport — no custom JSX card, no
- * manual sync needed. The OG image IS the homepage.
+ * Primary path  — Puppeteer + @sparticuz/chromium:
+ *   Opens https://gracegrip.app in headless Chrome, takes a 1200×630
+ *   screenshot, and returns it. The OG image IS the real homepage —
+ *   zero maintenance, auto-updates with every design change.
  *
- * Performance:
+ * Fallback path — next/og branded card (logo + wordmark):
+ *   If Chrome fails for any reason (cold start timeout, network blip),
+ *   renders a clean branded card in-process using next/og (Satori).
+ *   Short cache TTL (5 min) so crawlers retry the screenshot path soon.
+ *
+ * Performance (primary path):
  *   • First request after deploy  → ~5–10s (Chrome cold start + render)
  *   • All subsequent requests     → ~50ms  (Vercel CDN cache, 24h TTL)
- *   • stale-while-revalidate      → old image served instantly while
- *                                   a fresh screenshot is taken in background
- *
- * When the homepage design changes, the OG image updates automatically
- * within 24 hours of the next deploy — no code changes needed here.
+ *   • stale-while-revalidate      → stale image served instantly while
+ *                                   a fresh screenshot generates in background
  */
 
 import chromium from '@sparticuz/chromium'
+import { ImageResponse } from 'next/og'
 import puppeteer from 'puppeteer-core'
 
 // Must be Node.js serverless — Chrome cannot run in the V8-only edge runtime
@@ -28,10 +32,91 @@ export const runtime = 'nodejs'
 // Allow up to 30s for Chrome cold start + page render + screenshot
 export const maxDuration = 30
 
+// Brand tokens (mirrors app/globals.css) — used by the fallback card only
+const BRAND = '#305f4f'
+const INK = '#1d2b28'
+const CREAM = '#f6f1e9'
+const AMBER = '#eadcc8'
+
+/**
+ * Fallback branded card rendered via next/og (Satori, in-process).
+ * Shown when the Puppeteer screenshot fails for any reason.
+ * Uses Georgia (system font) — no external font fetch, cannot crash.
+ * Cached for only 5 min so crawlers retry the screenshot path soon.
+ */
+function renderFallbackCard() {
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          width: '1200px',
+          height: '630px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: `linear-gradient(140deg, ${CREAM} 0%, #fff8ed 40%, ${AMBER} 100%)`,
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'rgba(255,255,255,0.92)',
+            borderRadius: 20,
+            padding: '60px 80px',
+            boxShadow: '0 4px 40px rgba(29,43,40,0.08)',
+          }}
+        >
+          {/* Logo mark */}
+          <img
+            src="https://gracegrip.app/favicons/favicon-192x192.png"
+            width={100}
+            height={100}
+            style={{ objectFit: 'contain', marginBottom: 20 }}
+          />
+
+          {/* Wordmark */}
+          <div
+            style={{
+              fontFamily: 'Georgia, serif',
+              fontSize: 72,
+              fontWeight: 700,
+              color: INK,
+              letterSpacing: 6,
+              lineHeight: 1,
+              display: 'flex',
+            }}
+          >
+            GRACEGRIP
+          </div>
+
+          {/* Tagline */}
+          <div
+            style={{
+              fontFamily: 'Georgia, serif',
+              fontSize: 22,
+              fontStyle: 'italic',
+              color: BRAND,
+              marginTop: 16,
+              display: 'flex',
+            }}
+          >
+            A private, grace-first companion for the hard days.
+          </div>
+        </div>
+      </div>
+    ),
+    { width: 1200, height: 630 },
+  )
+}
+
 export async function GET() {
   let browser = null
 
   try {
+    // ── Primary path: real homepage screenshot ──────────────────────────────
     browser = await puppeteer.launch({
       args: chromium.args,
       defaultViewport: { width: 1200, height: 630, deviceScaleFactor: 1 },
@@ -61,15 +146,19 @@ export async function GET() {
     return new Response(screenshot, {
       headers: {
         'Content-Type': 'image/png',
-        // Vercel CDN: fresh for 24h, then serve stale while regenerating in background
+        // CDN: fresh for 24h, serve stale while regenerating in background
         'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=3600',
       },
     })
   } catch {
-    // Return 500 so social crawlers retry on the next scrape rather than
-    // caching a broken image
-    return new Response('OG screenshot unavailable', { status: 500 })
+    // ── Fallback path: branded card with logo + wordmark ────────────────────
+    // Chrome failed — return a valid branded PNG so crawlers never see a broken
+    // image. Short TTL (5 min) ensures the screenshot path is retried soon.
+    const fallback = renderFallbackCard()
+    fallback.headers.set('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=60')
+    return fallback
   } finally {
+    // Always close Chrome — prevents leaked processes regardless of outcome
     if (browser) await browser.close()
   }
 }
