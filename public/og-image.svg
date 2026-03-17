@@ -1,72 +1,122 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <!-- Background: Cream #f6f1e9 -->
-  <rect width="1200" height="630" fill="#f6f1e9"/>
+  <defs>
+    <!-- Body background: linear-gradient(140deg, #f6f1e9, #fff8ed 40%, #eadcc8) -->
+    <linearGradient id="bg-base" x1="17.9%" y1="11.7%" x2="82.1%" y2="88.3%" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#f6f1e9"/>
+      <stop offset="40%"  stop-color="#fff8ed"/>
+      <stop offset="100%" stop-color="#eadcc8"/>
+    </linearGradient>
 
-  <!-- Left accent bar: Brand teal -->
-  <rect x="0" y="0" width="12" height="630" fill="#305f4f"/>
+    <!-- Amber radial: circle at 10% 15%, rgba(178,109,47,0.18), transparent 35% -->
+    <radialGradient id="grad-amber" cx="120" cy="95" r="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#b26d2f" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#b26d2f" stop-opacity="0"/>
+    </radialGradient>
 
-  <!-- Bottom amber band -->
-  <rect x="0" y="550" width="1200" height="80" fill="#eadcc8"/>
+    <!-- Teal radial: circle at 90% 0%, rgba(48,95,79,0.2), transparent 32% -->
+    <radialGradient id="grad-teal" cx="1080" cy="0" r="384" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#305f4f" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#305f4f" stop-opacity="0"/>
+    </radialGradient>
 
-  <!-- Decorative circles (subtle brand teal) -->
-  <circle cx="1080" cy="100" r="200" fill="#305f4f" opacity="0.06"/>
-  <circle cx="120" cy="530" r="140" fill="#305f4f" opacity="0.05"/>
+    <!-- Card drop shadow -->
+    <filter id="card-shadow" x="-6%" y="-8%" width="112%" height="128%">
+      <feDropShadow dx="0" dy="6" stdDeviation="18" flood-color="#1d2b28" flood-opacity="0.09"/>
+    </filter>
+  </defs>
 
-  <!-- ═══════════════════════════════════════════════════
-       Logo mark injected here by scripts/generate-og-image.mjs
-       at transform="translate(60,35) scale(0.14925) translate(-939,-140)"
-       with feFlood+feComposite filter to recolor to brand teal #305f4f
-       ═══════════════════════════════════════════════════ -->
+  <!-- ═══════════ BACKGROUND ═══════════ -->
+  <rect width="1200" height="630" fill="url(#bg-base)"/>
+  <rect width="1200" height="630" fill="url(#grad-amber)"/>
+  <rect width="1200" height="630" fill="url(#grad-teal)"/>
 
-  <!-- Wordmark — positioned right of logo mark (~x:230) -->
+  <!-- ═══════════ MAIN CARD ═══════════ -->
+  <rect x="100" y="28" width="1000" height="382" rx="18"
+        fill="#ffffff" fill-opacity="0.84" filter="url(#card-shadow)"/>
+
+  <!-- Logo mark — injected by scripts/generate-og-image.mjs
+       Centered at (600, 100): translate(600,100) scale(0.08528) translate(-1408,-652.5) -->
+  <!-- __LOGO_INJECT__ -->
+
+  <!-- Wordmark -->
   <text
-    x="228"
-    y="145"
+    x="600" y="198"
     font-family="Georgia, 'Times New Roman', serif"
-    font-size="88"
-    font-weight="700"
-    fill="#305f4f"
-    letter-spacing="-2"
-  >GraceGrip</text>
+    font-size="66" font-weight="700"
+    fill="#1d2b28"
+    text-anchor="middle"
+    letter-spacing="8"
+  >GRACEGRIP</text>
 
-  <!-- Tagline -->
+  <!-- Subtitle -->
   <text
-    x="228"
-    y="196"
+    x="600" y="232"
     font-family="Arial, Helvetica, sans-serif"
-    font-size="28"
-    font-weight="400"
-    fill="#305f4f"
-    opacity="0.75"
-  >Scripture-Based Addiction Recovery</text>
+    font-size="17" font-weight="400"
+    fill="#305f4f" fill-opacity="0.85"
+    text-anchor="middle"
+  >A private, grace-first companion for the hard days.</text>
 
-  <!-- Divider line -->
-  <rect x="228" y="220" width="120" height="3" fill="#305f4f" opacity="0.4"/>
+  <!-- Divider -->
+  <rect x="532" y="250" width="136" height="2" rx="1" fill="#305f4f" fill-opacity="0.2"/>
 
-  <!-- Feature pills -->
-  <!-- Pill 1 -->
-  <rect x="60" y="288" width="222" height="48" rx="24" fill="#305f4f" opacity="0.12"/>
-  <text x="171" y="318" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#305f4f" text-anchor="middle" dominant-baseline="middle">Daily Scripture</text>
-
-  <!-- Pill 2 -->
-  <rect x="298" y="288" width="222" height="48" rx="24" fill="#305f4f" opacity="0.12"/>
-  <text x="409" y="318" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#305f4f" text-anchor="middle" dominant-baseline="middle">Urge Support</text>
-
-  <!-- Pill 3 -->
-  <rect x="536" y="288" width="222" height="48" rx="24" fill="#305f4f" opacity="0.12"/>
-  <text x="647" y="318" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#305f4f" text-anchor="middle" dominant-baseline="middle">Private Journal</text>
-
-  <!-- Pill 4 -->
-  <rect x="774" y="288" width="222" height="48" rx="24" fill="#305f4f" opacity="0.12"/>
-  <text x="885" y="318" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#305f4f" text-anchor="middle" dominant-baseline="middle">No Account</text>
-
-  <!-- Bottom bar text -->
+  <!-- Main headline -->
   <text
-    x="60"
-    y="597"
+    x="600" y="294"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="40" font-weight="700"
+    fill="#1d2b28"
+    text-anchor="middle"
+  >You don&#x2019;t have to fight alone</text>
+
+  <!-- CTA Button -->
+  <rect x="425" y="316" width="350" height="52" rx="26" fill="#305f4f"/>
+  <text
+    x="600" y="349"
     font-family="Arial, Helvetica, sans-serif"
-    font-size="24"
-    fill="#305f4f"
-    opacity="0.6"
-  >Free · Private · Grace-First · gracegrip.app</text>
+    font-size="18" font-weight="700"
+    fill="#ffffff"
+    text-anchor="middle"
+  >Begin Your Journey</text>
+
+  <!-- ═══════════ FEATURE CARDS ═══════════ -->
+
+  <!-- Card 1: Privacy-First -->
+  <rect x="90" y="432" width="326" height="170" rx="14"
+        fill="#ffffff" fill-opacity="0.84" filter="url(#card-shadow)"/>
+  <text x="253" y="469"
+        font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600"
+        fill="#305f4f" text-anchor="middle">Privacy-First</text>
+  <text x="253" y="492"
+        font-family="Arial, Helvetica, sans-serif" font-size="13"
+        fill="#305f4f" fill-opacity="0.65" text-anchor="middle">Your data stays on this device.</text>
+  <text x="253" y="509"
+        font-family="Arial, Helvetica, sans-serif" font-size="13"
+        fill="#305f4f" fill-opacity="0.65" text-anchor="middle">No account, no tracking.</text>
+
+  <!-- Card 2: Scripture-Powered -->
+  <rect x="436" y="432" width="326" height="170" rx="14"
+        fill="#ffffff" fill-opacity="0.84" filter="url(#card-shadow)"/>
+  <text x="599" y="469"
+        font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600"
+        fill="#305f4f" text-anchor="middle">Scripture-Powered</text>
+  <text x="599" y="492"
+        font-family="Arial, Helvetica, sans-serif" font-size="13"
+        fill="#305f4f" fill-opacity="0.65" text-anchor="middle">Verses and devotionals to</text>
+  <text x="599" y="509"
+        font-family="Arial, Helvetica, sans-serif" font-size="13"
+        fill="#305f4f" fill-opacity="0.65" text-anchor="middle">steady your thoughts.</text>
+
+  <!-- Card 3: Practical Tools -->
+  <rect x="782" y="432" width="326" height="170" rx="14"
+        fill="#ffffff" fill-opacity="0.84" filter="url(#card-shadow)"/>
+  <text x="945" y="469"
+        font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600"
+        fill="#305f4f" text-anchor="middle">Practical Tools</text>
+  <text x="945" y="492"
+        font-family="Arial, Helvetica, sans-serif" font-size="13"
+        fill="#305f4f" fill-opacity="0.65" text-anchor="middle">Breathing, grounding and</text>
+  <text x="945" y="509"
+        font-family="Arial, Helvetica, sans-serif" font-size="13"
+        fill="#305f4f" fill-opacity="0.65" text-anchor="middle">emergency actions.</text>
 </svg>
