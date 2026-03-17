@@ -6,7 +6,7 @@
  * Served at https://gracegrip.app/api/og (1200×630 PNG).
  *
  * Design mirrors the homepage welcome screen at 1200×630 viewport:
- *   • Libre Baskerville loaded live from Google Fonts (same font as the site)
+ *   • Libre Baskerville served from /public/fonts/ (TTF — Satori cannot parse wOFF2)
  *   • Large logo mark, bold GRACEGRIP wordmark, tagline, headline, body, CTA
  *   • Feature cards peeking at the bottom — matching the real homepage layout
  *
@@ -25,35 +25,24 @@ const CREAM = '#f6f1e9'
 const AMBER = '#eadcc8'
 
 /**
- * Fetches a Libre Baskerville woff2 binary from Google Fonts CDN.
- * Uses a Chrome User-Agent so Google returns woff2 (required by Satori).
+ * Fetches a Libre Baskerville TTF binary from our own origin (/public/fonts/).
+ * Self-hosted TTF is required — Satori (next/og) only parses raw TrueType/OpenType.
+ * wOFF2 from Google Fonts CDN causes "Unsupported OpenType signature wOF2" errors.
  * Returns null on any failure — caller falls back to Georgia.
  */
 async function loadLibreBaskerville(weight) {
   try {
-    const css = await fetch(
-      `https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@${weight}`,
-      {
-        headers: {
-          'User-Agent':
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 ' +
-            '(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        },
-        signal: AbortSignal.timeout(3000),
-      },
-    ).then((r) => r.text())
-
-    const match = css.match(/src: url\((.+?)\) format\('woff2'\)/)
-    if (!match) return null
-    return fetch(match[1], { signal: AbortSignal.timeout(3000) }).then((r) => r.arrayBuffer())
+    return fetch(`https://gracegrip.app/fonts/libre-baskerville-${weight}.ttf`, {
+      signal: AbortSignal.timeout(5000),
+    }).then((r) => r.arrayBuffer())
   } catch {
     return null
   }
 }
 
 export async function GET() {
-  // Load Libre Baskerville Bold + Regular in parallel
-  // Falls back gracefully to Georgia if Google Fonts is unreachable
+  // Load Libre Baskerville Bold + Regular in parallel from our own CDN
+  // Falls back gracefully to Georgia if the fetch fails
   const [fontBold, fontRegular] = await Promise.all([
     loadLibreBaskerville(700),
     loadLibreBaskerville(400),
