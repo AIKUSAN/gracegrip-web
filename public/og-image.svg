@@ -6,18 +6,24 @@
   <rect x="0" y="0" width="12" height="630" fill="#305f4f"/>
 
   <!-- Bottom amber band -->
-  <rect x="0" y="560" width="1200" height="70" fill="#eadcc8"/>
+  <rect x="0" y="550" width="1200" height="80" fill="#eadcc8"/>
 
-  <!-- Decorative circle (subtle brand teal) -->
+  <!-- Decorative circles (subtle brand teal) -->
   <circle cx="1080" cy="100" r="200" fill="#305f4f" opacity="0.06"/>
   <circle cx="120" cy="530" r="140" fill="#305f4f" opacity="0.05"/>
 
-  <!-- Logo wordmark -->
+  <!-- ═══════════════════════════════════════════════════
+       Logo mark injected here by scripts/generate-og-image.mjs
+       at transform="translate(60,35) scale(0.14925) translate(-939,-140)"
+       with feFlood+feComposite filter to recolor to brand teal #305f4f
+       ═══════════════════════════════════════════════════ -->
+
+  <!-- Wordmark — positioned right of logo mark (~x:230) -->
   <text
-    x="80"
-    y="200"
+    x="228"
+    y="145"
     font-family="Georgia, 'Times New Roman', serif"
-    font-size="96"
+    font-size="88"
     font-weight="700"
     fill="#305f4f"
     letter-spacing="-2"
@@ -25,39 +31,39 @@
 
   <!-- Tagline -->
   <text
-    x="80"
-    y="272"
+    x="228"
+    y="196"
     font-family="Arial, Helvetica, sans-serif"
-    font-size="32"
+    font-size="28"
     font-weight="400"
     fill="#305f4f"
     opacity="0.75"
   >Scripture-Based Addiction Recovery</text>
 
   <!-- Divider line -->
-  <rect x="80" y="308" width="120" height="3" fill="#305f4f" opacity="0.4"/>
+  <rect x="228" y="220" width="120" height="3" fill="#305f4f" opacity="0.4"/>
 
   <!-- Feature pills -->
   <!-- Pill 1 -->
-  <rect x="80" y="360" width="220" height="48" rx="24" fill="#305f4f" opacity="0.12"/>
-  <text x="190" y="390" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#305f4f" text-anchor="middle" dominant-baseline="middle">Daily Scripture</text>
+  <rect x="60" y="288" width="222" height="48" rx="24" fill="#305f4f" opacity="0.12"/>
+  <text x="171" y="318" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#305f4f" text-anchor="middle" dominant-baseline="middle">Daily Scripture</text>
 
   <!-- Pill 2 -->
-  <rect x="316" y="360" width="220" height="48" rx="24" fill="#305f4f" opacity="0.12"/>
-  <text x="426" y="390" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#305f4f" text-anchor="middle" dominant-baseline="middle">Urge Support</text>
+  <rect x="298" y="288" width="222" height="48" rx="24" fill="#305f4f" opacity="0.12"/>
+  <text x="409" y="318" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#305f4f" text-anchor="middle" dominant-baseline="middle">Urge Support</text>
 
   <!-- Pill 3 -->
-  <rect x="552" y="360" width="220" height="48" rx="24" fill="#305f4f" opacity="0.12"/>
-  <text x="662" y="390" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#305f4f" text-anchor="middle" dominant-baseline="middle">Private Journal</text>
+  <rect x="536" y="288" width="222" height="48" rx="24" fill="#305f4f" opacity="0.12"/>
+  <text x="647" y="318" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#305f4f" text-anchor="middle" dominant-baseline="middle">Private Journal</text>
 
   <!-- Pill 4 -->
-  <rect x="788" y="360" width="220" height="48" rx="24" fill="#305f4f" opacity="0.12"/>
-  <text x="898" y="390" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#305f4f" text-anchor="middle" dominant-baseline="middle">No Account</text>
+  <rect x="774" y="288" width="222" height="48" rx="24" fill="#305f4f" opacity="0.12"/>
+  <text x="885" y="318" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#305f4f" text-anchor="middle" dominant-baseline="middle">No Account</text>
 
   <!-- Bottom bar text -->
   <text
-    x="80"
-    y="603"
+    x="60"
+    y="597"
     font-family="Arial, Helvetica, sans-serif"
     font-size="24"
     fill="#305f4f"

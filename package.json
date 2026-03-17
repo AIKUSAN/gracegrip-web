@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/generate-og-image.mjs && next build",
+    "generate:og": "node scripts/generate-og-image.mjs",
     "start": "next start",
     "lint": "eslint .",
     "validate:content": "node scripts/validate-content.mjs",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@resvg/resvg-js": "^2.6.2",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "eslint": "^10.0.3",
