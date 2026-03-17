@@ -74,5 +74,4 @@ const pngData = resvg.render()
 const pngBuffer = pngData.asPng()
 
 writeFileSync(resolve(root, 'public/og-image.png'), pngBuffer)
-// eslint-disable-next-line no-console
 console.log('✓ og-image.png generated (1200×630)')

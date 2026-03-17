@@ -80,7 +80,7 @@ export const metadata = {
     type: 'website',
     images: [
       {
-        url: '/og-image.png',
+        url: '/api/og',
         width: 1200,
         height: 630,
         alt: 'GraceGrip — Scripture-Based Addiction Recovery App',
