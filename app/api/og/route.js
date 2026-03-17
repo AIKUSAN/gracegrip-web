@@ -5,24 +5,21 @@
  * Next.js Serverless Route Handler — screenshots the live GraceGrip homepage.
  * Served at https://gracegrip.app/api/og (1200×630 PNG).
  *
- * Supports ?theme=dark for a dark-mode screenshot + dark fallback card.
- * The og:image in layout.jsx points to /api/og (light, default for social).
- *
  * Primary path  — Puppeteer + @sparticuz/chromium:
  *   Opens https://gracegrip.app in headless Chrome, takes a 1200×630
- *   screenshot. Dark theme: injects the .dark class before render so the
- *   real homepage dark mode is captured.
+ *   screenshot, and returns it. The OG image IS the real homepage —
+ *   zero maintenance, auto-updates with every design change.
  *
  * Fallback path — next/og branded card (logo + wordmark + tagline):
- *   If Chrome fails for any reason, renders a clean branded card in-process.
- *   Light fallback: cream/amber gradient, dark ink.
- *   Dark fallback:  deep teal gradient, cream ink, inverted logo.
+ *   If Chrome fails for any reason (cold start timeout, network blip),
+ *   renders a clean branded card in-process using next/og (Satori).
  *   Short cache TTL (5 min) so crawlers retry the screenshot path soon.
  *
  * Performance (primary path):
  *   • First request after deploy  → ~5–10s (Chrome cold start + render)
  *   • All subsequent requests     → ~50ms  (Vercel CDN cache, 24h TTL)
- *   • Each theme variant cached independently on Vercel's CDN
+ *   • stale-while-revalidate      → stale image served instantly while
+ *                                   a fresh screenshot generates in background
  */
 
 import chromium from '@sparticuz/chromium'
@@ -35,35 +32,19 @@ export const runtime = 'nodejs'
 // Allow up to 30s for Chrome cold start + page render + screenshot
 export const maxDuration = 30
 
-// ── Light theme tokens (mirrors app/globals.css) ─────────────────────────────
-const LIGHT = {
-  outerBg: 'linear-gradient(140deg, #f6f1e9 0%, #fff8ed 40%, #eadcc8 100%)',
-  cardBg: 'rgba(255,255,255,0.92)',
-  cardShadow: '0 4px 40px rgba(29,43,40,0.08)',
-  wordmark: '#1d2b28',
-  tagline: '#305f4f',
-  logoFilter: 'none',
-}
-
-// ── Dark theme tokens (mirrors .dark overrides in app/globals.css) ────────────
-const DARK = {
-  outerBg: 'linear-gradient(140deg, #0f1c19 0%, #152420 40%, #1a2e28 100%)',
-  cardBg: 'rgba(255,255,255,0.07)',
-  cardShadow: '0 4px 40px rgba(0,0,0,0.4)',
-  wordmark: '#eef4f8',
-  tagline: '#6db89e',
-  // Invert the dark logo PNG so it reads as light on a dark background
-  logoFilter: 'invert(1) hue-rotate(180deg)',
-}
+// Brand tokens (mirrors app/globals.css) — used by the fallback card only
+const BRAND = '#305f4f'
+const INK = '#1d2b28'
+const CREAM = '#f6f1e9'
+const AMBER = '#eadcc8'
 
 /**
  * Fallback card rendered via next/og (Satori, in-process).
- * Shown when Puppeteer fails. Supports both light and dark themes.
- * Uses Georgia (system font) — no external fetch, cannot crash.
+ * Shown when Puppeteer fails. Uses Georgia (system font) — no external
+ * fetch, cannot crash. Light mode only — OG images are always fetched
+ * by crawler bots that have no system theme preference.
  */
-function renderFallbackCard(dark = false) {
-  const t = dark ? DARK : LIGHT
-
+function renderFallbackCard() {
   return new ImageResponse(
     (
       <div
@@ -73,7 +54,7 @@ function renderFallbackCard(dark = false) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: t.outerBg,
+          background: `linear-gradient(140deg, ${CREAM} 0%, #fff8ed 40%, ${AMBER} 100%)`,
         }}
       >
         <div
@@ -82,24 +63,24 @@ function renderFallbackCard(dark = false) {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            background: t.cardBg,
+            background: 'rgba(255,255,255,0.92)',
             borderRadius: 20,
             padding: '60px 100px',
-            boxShadow: t.cardShadow,
+            boxShadow: '0 4px 40px rgba(29,43,40,0.08)',
           }}
         >
           <img
             src="https://gracegrip.app/favicons/favicon-192x192.png"
             width={120}
             height={120}
-            style={{ objectFit: 'contain', marginBottom: 24, filter: t.logoFilter }}
+            style={{ objectFit: 'contain', marginBottom: 24 }}
           />
           <div
             style={{
               fontFamily: 'Georgia, serif',
               fontSize: 72,
               fontWeight: 700,
-              color: t.wordmark,
+              color: INK,
               letterSpacing: 6,
               lineHeight: 1,
               display: 'flex',
@@ -112,7 +93,7 @@ function renderFallbackCard(dark = false) {
               fontFamily: 'Georgia, serif',
               fontSize: 22,
               fontStyle: 'italic',
-              color: t.tagline,
+              color: BRAND,
               marginTop: 18,
               display: 'flex',
             }}
@@ -126,8 +107,7 @@ function renderFallbackCard(dark = false) {
   )
 }
 
-export async function GET(request) {
-  const dark = new URL(request.url).searchParams.get('theme') === 'dark'
+export async function GET() {
   let browser = null
 
   try {
@@ -141,19 +121,11 @@ export async function GET(request) {
 
     const page = await browser.newPage()
 
-    // Pre-seed localStorage: bypass onboarding gate + apply requested theme.
-    // evaluateOnNewDocument runs before page scripts so the app boots with
-    // the correct theme class already on <html> — no flash of wrong theme.
-    await page.evaluateOnNewDocument((isDark) => {
-      localStorage.setItem(
-        'gracegrip_v1',
-        JSON.stringify({
-          onboardingComplete: true,
-          ...(isDark && { themePreference: 'dark' }),
-        }),
-      )
-      if (isDark) document.documentElement.classList.add('dark')
-    }, dark)
+    // Pre-seed localStorage so the onboarding gate is bypassed and the real
+    // homepage renders (not the first-time welcome screen)
+    await page.evaluateOnNewDocument(() => {
+      localStorage.setItem('gracegrip_v1', JSON.stringify({ onboardingComplete: true }))
+    })
 
     await page.goto('https://gracegrip.app', {
       waitUntil: 'networkidle2',
@@ -169,15 +141,15 @@ export async function GET(request) {
     return new Response(screenshot, {
       headers: {
         'Content-Type': 'image/png',
-        // Each theme variant is cached independently on Vercel's CDN
+        // CDN: fresh for 24h, serve stale while regenerating in background
         'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=3600',
       },
     })
   } catch {
-    // ── Fallback path: themed branded card ──────────────────────────────────
+    // ── Fallback path: branded card with logo + wordmark ────────────────────
     // Chrome failed — serve a valid PNG so crawlers never see a broken image.
     // Short TTL (5 min) ensures the screenshot path is retried soon.
-    const fallback = renderFallbackCard(dark)
+    const fallback = renderFallbackCard()
     fallback.headers.set('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=60')
     return fallback
   } finally {
