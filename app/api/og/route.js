@@ -39,12 +39,13 @@ async function loadLibreBaskerville(weight) {
             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 ' +
             '(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
         },
+        signal: AbortSignal.timeout(3000),
       },
     ).then((r) => r.text())
 
     const match = css.match(/src: url\((.+?)\) format\('woff2'\)/)
     if (!match) return null
-    return fetch(match[1]).then((r) => r.arrayBuffer())
+    return fetch(match[1], { signal: AbortSignal.timeout(3000) }).then((r) => r.arrayBuffer())
   } catch {
     return null
   }
