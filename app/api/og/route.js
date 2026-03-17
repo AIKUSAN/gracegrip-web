@@ -5,27 +5,68 @@
  * Next.js Edge Route Handler — renders the GraceGrip OG card at request time.
  * Served at https://gracegrip.app/api/og (1200×630 PNG).
  *
- * Uses next/og (Satori under the hood) to convert React JSX → PNG on each request.
- * No static file to maintain — always reflects the current brand design.
+ * Design mirrors the homepage welcome screen at 1200×630 viewport:
+ *   • Libre Baskerville loaded live from Google Fonts (same font as the site)
+ *   • Large logo mark, bold GRACEGRIP wordmark, tagline, headline, body, CTA
+ *   • Feature cards peeking at the bottom — matching the real homepage layout
  *
- * Satori constraints (applies to all JSX inside ImageResponse):
- *   - All styles must be inline with absolute values (no CSS variables or Tailwind)
- *   - Every container with children needs display: 'flex'
- *   - <img> tags require absolute URLs (this runs server-side, not in the browser)
+ * When the site's copy, headline, or brand colors change, update this file
+ * once — the OG image refreshes on every request automatically.
  */
 
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
-// Brand tokens (mirrors app/globals.css CSS variables)
+// Brand tokens (mirrors app/globals.css)
 const BRAND = '#305f4f'
 const INK = '#1d2b28'
 const CREAM = '#f6f1e9'
 const AMBER = '#eadcc8'
-const CARD_SHADOW = '0 6px 36px rgba(29,43,40,0.09)'
 
-export function GET() {
+/**
+ * Fetches a Libre Baskerville woff2 binary from Google Fonts CDN.
+ * Uses a Chrome User-Agent so Google returns woff2 (required by Satori).
+ * Returns null on any failure — caller falls back to Georgia.
+ */
+async function loadLibreBaskerville(weight) {
+  try {
+    const css = await fetch(
+      `https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@${weight}`,
+      {
+        headers: {
+          'User-Agent':
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 ' +
+            '(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        },
+      },
+    ).then((r) => r.text())
+
+    const match = css.match(/src: url\((.+?)\) format\('woff2'\)/)
+    if (!match) return null
+    return fetch(match[1]).then((r) => r.arrayBuffer())
+  } catch {
+    return null
+  }
+}
+
+export async function GET() {
+  // Load Libre Baskerville Bold + Regular in parallel
+  // Falls back gracefully to Georgia if Google Fonts is unreachable
+  const [fontBold, fontRegular] = await Promise.all([
+    loadLibreBaskerville(700),
+    loadLibreBaskerville(400),
+  ])
+
+  const fonts = []
+  if (fontBold)
+    fonts.push({ name: 'Libre Baskerville', data: fontBold, weight: 700, style: 'normal' })
+  if (fontRegular)
+    fonts.push({ name: 'Libre Baskerville', data: fontRegular, weight: 400, style: 'normal' })
+
+  // Use loaded font if available, otherwise fall back to Georgia
+  const SERIF = 'Libre Baskerville, Georgia, serif'
+
   return new ImageResponse(
     (
       <div
@@ -34,88 +75,100 @@ export function GET() {
           height: '630px',
           display: 'flex',
           flexDirection: 'column',
-          // Mirrors body background: linear-gradient(140deg, #f6f1e9, #fff8ed 40%, #eadcc8)
+          // Matches body: linear-gradient(140deg, #f6f1e9, #fff8ed 40%, #eadcc8)
           background: `linear-gradient(140deg, ${CREAM} 0%, #fff8ed 40%, ${AMBER} 100%)`,
           position: 'relative',
         }}
       >
-        {/* ── Main card ─────────────────────────────────────────── */}
+        {/* ── Main card — mirrors the homepage welcome card ─────────
+            Positioned to match the 1200×630 homepage viewport:
+            the card fills most of the frame, feature cards peek below */}
         <div
           style={{
             position: 'absolute',
-            left: 100,
-            top: 28,
-            width: 1000,
-            height: 382,
-            background: 'rgba(255,255,255,0.88)',
-            borderRadius: 18,
+            left: 50,
+            top: 22,
+            width: 1100,
+            height: 535,
+            background: 'rgba(255,255,255,0.92)',
+            borderRadius: 20,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: CARD_SHADOW,
+            boxShadow: '0 4px 40px rgba(29,43,40,0.08)',
           }}
         >
-          {/* Logo mark — favicon PNG served from same origin */}
+          {/* Logo mark — large, matching homepage proportions */}
           <img
             src="https://gracegrip.app/favicons/favicon-192x192.png"
-            width={64}
-            height={64}
-            style={{ objectFit: 'contain', marginBottom: 8 }}
+            width={100}
+            height={100}
+            style={{ objectFit: 'contain', marginBottom: 14 }}
           />
 
-          {/* Wordmark */}
+          {/* GRACEGRIP wordmark */}
           <div
             style={{
-              fontFamily: 'Georgia, serif',
-              fontSize: 64,
+              fontFamily: SERIF,
+              fontSize: 76,
               fontWeight: 700,
               color: INK,
-              letterSpacing: 8,
-              lineHeight: 1.1,
+              letterSpacing: 6,
+              lineHeight: 1,
               display: 'flex',
             }}
           >
             GRACEGRIP
           </div>
 
-          {/* Tagline */}
+          {/* Tagline — italic, teal, matches homepage */}
           <div
             style={{
-              fontFamily: 'Arial, sans-serif',
-              fontSize: 17,
+              fontFamily: SERIF,
+              fontSize: 18,
+              fontWeight: 400,
+              fontStyle: 'italic',
               color: BRAND,
-              marginTop: 6,
+              marginTop: 10,
               display: 'flex',
             }}
           >
             A private, grace-first companion for the hard days.
           </div>
 
-          {/* Divider */}
-          <div
-            style={{
-              width: 136,
-              height: 2,
-              background: 'rgba(48,95,79,0.2)',
-              borderRadius: 1,
-              margin: '16px 0',
-              display: 'flex',
-            }}
-          />
-
           {/* Headline */}
           <div
             style={{
-              fontFamily: 'Georgia, serif',
-              fontSize: 38,
+              fontFamily: SERIF,
+              fontSize: 50,
               fontWeight: 700,
               color: INK,
               textAlign: 'center',
+              marginTop: 22,
+              lineHeight: 1.2,
               display: 'flex',
             }}
           >
             You don't have to fight alone
+          </div>
+
+          {/* Description — matches homepage body copy */}
+          <div
+            style={{
+              fontFamily: 'Arial, sans-serif',
+              fontSize: 15,
+              color: '#4a5e5a',
+              textAlign: 'center',
+              marginTop: 16,
+              lineHeight: 1.55,
+              maxWidth: 720,
+              display: 'flex',
+            }}
+          >
+            GraceGrip helps men and women break free through the power of Christ,
+            Scripture, and grace-filled accountability tools. No shame. No judgment.
+            Just freedom.
           </div>
 
           {/* CTA Button */}
@@ -123,104 +176,109 @@ export function GET() {
             style={{
               display: 'flex',
               background: BRAND,
-              borderRadius: 26,
-              padding: '14px 48px',
+              borderRadius: 28,
+              padding: '15px 52px',
               color: '#ffffff',
               fontFamily: 'Arial, sans-serif',
               fontSize: 18,
               fontWeight: 700,
-              marginTop: 18,
+              marginTop: 26,
+              letterSpacing: 0.3,
             }}
           >
             Begin Your Journey
           </div>
         </div>
 
-        {/* ── Feature cards row ─────────────────────────────────── */}
+        {/* ── Feature cards — peeking at the bottom of the frame ───
+            Matches how the homepage shows them at 630px height: only
+            the titles are visible, cards cut off by the viewport edge */}
         <div
           style={{
             position: 'absolute',
-            left: 90,
-            top: 432,
-            width: 1020,
-            height: 170,
+            left: 50,
+            top: 572,
+            width: 1100,
             display: 'flex',
             flexDirection: 'row',
-            gap: 20,
+            gap: 16,
           }}
         >
-          {/* Card 1 — Privacy-First */}
+          {/* Privacy-First */}
           <div
             style={{
               flex: 1,
               background: 'rgba(255,255,255,0.88)',
-              borderRadius: 14,
+              borderRadius: '14px 14px 0 0',
+              padding: '16px 20px 40px',
               display: 'flex',
-              flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              padding: '0 20px',
-              boxShadow: CARD_SHADOW,
+              boxShadow: '0 -2px 16px rgba(29,43,40,0.05)',
             }}
           >
-            <div style={{ fontFamily: 'Arial, sans-serif', fontSize: 17, fontWeight: 600, color: BRAND, display: 'flex' }}>
+            <div
+              style={{
+                fontFamily: 'Arial, sans-serif',
+                fontSize: 15,
+                fontWeight: 600,
+                color: BRAND,
+                display: 'flex',
+              }}
+            >
               Privacy-First
             </div>
-            <div style={{ fontFamily: 'Arial, sans-serif', fontSize: 13, color: BRAND, opacity: 0.65, marginTop: 6, display: 'flex' }}>
-              Your data stays on this device.
-            </div>
-            <div style={{ fontFamily: 'Arial, sans-serif', fontSize: 13, color: BRAND, opacity: 0.65, marginTop: 2, display: 'flex' }}>
-              No account, no tracking.
-            </div>
           </div>
 
-          {/* Card 2 — Scripture-Powered */}
+          {/* Scripture-Powered */}
           <div
             style={{
               flex: 1,
               background: 'rgba(255,255,255,0.88)',
-              borderRadius: 14,
+              borderRadius: '14px 14px 0 0',
+              padding: '16px 20px 40px',
               display: 'flex',
-              flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              padding: '0 20px',
-              boxShadow: CARD_SHADOW,
+              boxShadow: '0 -2px 16px rgba(29,43,40,0.05)',
             }}
           >
-            <div style={{ fontFamily: 'Arial, sans-serif', fontSize: 17, fontWeight: 600, color: BRAND, display: 'flex' }}>
+            <div
+              style={{
+                fontFamily: 'Arial, sans-serif',
+                fontSize: 15,
+                fontWeight: 600,
+                color: BRAND,
+                display: 'flex',
+              }}
+            >
               Scripture-Powered
             </div>
-            <div style={{ fontFamily: 'Arial, sans-serif', fontSize: 13, color: BRAND, opacity: 0.65, marginTop: 6, display: 'flex' }}>
-              Verses and devotionals to
-            </div>
-            <div style={{ fontFamily: 'Arial, sans-serif', fontSize: 13, color: BRAND, opacity: 0.65, marginTop: 2, display: 'flex' }}>
-              steady your thoughts.
-            </div>
           </div>
 
-          {/* Card 3 — Practical Tools */}
+          {/* Practical Tools */}
           <div
             style={{
               flex: 1,
               background: 'rgba(255,255,255,0.88)',
-              borderRadius: 14,
+              borderRadius: '14px 14px 0 0',
+              padding: '16px 20px 40px',
               display: 'flex',
-              flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              padding: '0 20px',
-              boxShadow: CARD_SHADOW,
+              boxShadow: '0 -2px 16px rgba(29,43,40,0.05)',
             }}
           >
-            <div style={{ fontFamily: 'Arial, sans-serif', fontSize: 17, fontWeight: 600, color: BRAND, display: 'flex' }}>
+            <div
+              style={{
+                fontFamily: 'Arial, sans-serif',
+                fontSize: 15,
+                fontWeight: 600,
+                color: BRAND,
+                display: 'flex',
+              }}
+            >
               Practical Tools
-            </div>
-            <div style={{ fontFamily: 'Arial, sans-serif', fontSize: 13, color: BRAND, opacity: 0.65, marginTop: 6, display: 'flex' }}>
-              Breathing, grounding and
-            </div>
-            <div style={{ fontFamily: 'Arial, sans-serif', fontSize: 13, color: BRAND, opacity: 0.65, marginTop: 2, display: 'flex' }}>
-              emergency actions.
             </div>
           </div>
         </div>
@@ -229,6 +287,7 @@ export function GET() {
     {
       width: 1200,
       height: 630,
+      fonts,
     },
   )
 }
