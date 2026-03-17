@@ -1,33 +1,31 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License */
 /**
- * api/og.jsx
+ * app/api/og/route.js
  *
- * Vercel Edge Function — dynamically renders the GraceGrip OG image at request time.
+ * Next.js Edge Route Handler — renders the GraceGrip OG card at request time.
  * Served at https://gracegrip.app/api/og (1200×630 PNG).
  *
- * Uses @vercel/og (Satori under the hood) to convert React JSX → PNG on every request.
+ * Uses next/og (Satori under the hood) to convert React JSX → PNG on each request.
  * No static file to maintain — always reflects the current brand design.
  *
- * Constraints (Satori):
- *   - All styles must be inline with absolute values (no CSS variables)
- *   - display: flex required on every container with children
- *   - <img> tags must use absolute URLs (edge runs server-side, not in browser)
- *   - Fonts: Satori bundles Noto Sans; Georgia/Arial fall back to Noto
+ * Satori constraints (applies to all JSX inside ImageResponse):
+ *   - All styles must be inline with absolute values (no CSS variables or Tailwind)
+ *   - Every container with children needs display: 'flex'
+ *   - <img> tags require absolute URLs (this runs server-side, not in the browser)
  */
 
-import { ImageResponse } from '@vercel/og'
+import { ImageResponse } from 'next/og'
 
-export const config = { runtime: 'edge' }
+export const runtime = 'edge'
 
 // Brand tokens (mirrors app/globals.css CSS variables)
 const BRAND = '#305f4f'
 const INK = '#1d2b28'
 const CREAM = '#f6f1e9'
 const AMBER = '#eadcc8'
-
 const CARD_SHADOW = '0 6px 36px rgba(29,43,40,0.09)'
 
-export default function handler() {
+export function GET() {
   return new ImageResponse(
     (
       <div
@@ -58,7 +56,7 @@ export default function handler() {
             boxShadow: CARD_SHADOW,
           }}
         >
-          {/* Logo mark — favicon PNG, pre-generated at build time */}
+          {/* Logo mark — favicon PNG served from same origin */}
           <img
             src="https://gracegrip.app/favicons/favicon-192x192.png"
             width={64}
@@ -151,7 +149,7 @@ export default function handler() {
             gap: 20,
           }}
         >
-          {/* Card 1 */}
+          {/* Card 1 — Privacy-First */}
           <div
             style={{
               flex: 1,
@@ -176,7 +174,7 @@ export default function handler() {
             </div>
           </div>
 
-          {/* Card 2 */}
+          {/* Card 2 — Scripture-Powered */}
           <div
             style={{
               flex: 1,
@@ -201,7 +199,7 @@ export default function handler() {
             </div>
           </div>
 
-          {/* Card 3 */}
+          {/* Card 3 — Practical Tools */}
           <div
             style={{
               flex: 1,
