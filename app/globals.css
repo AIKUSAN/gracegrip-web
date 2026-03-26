@@ -2068,10 +2068,8 @@ textarea:focus-visible {
 
 .footer-support-heading {
   font-size: 0.78rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: var(--ink-soft);
+  font-weight: 500;
+  color: color-mix(in srgb, var(--ink-soft) 70%, transparent);
   margin: 0 0 0.9rem;
 }
 
@@ -2102,6 +2100,13 @@ textarea:focus-visible {
 .footer-support-link:hover {
   opacity: 1;
   transform: translateY(-1px);
+}
+
+.footer-legal {
+  font-size: 0.78rem;
+  color: color-mix(in srgb, var(--ink-soft) 60%, transparent);
+  margin: 0.55rem 0 0;
+  line-height: 1.5;
 }
 
 .footer-copyright {

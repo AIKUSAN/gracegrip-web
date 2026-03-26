@@ -314,6 +314,19 @@ export function SettingsPage({
               favorites stay on this device unless you specifically export them.
             </p>
           </div>
+          <div className="settings-about-item">
+            <p className="settings-about-item-title">Version</p>
+            <p className="muted" style={{ margin: 0, fontSize: '0.84rem', lineHeight: 1.5 }}>
+              v1.0.1 — Released March 26, 2026. Walk in Freedom.
+            </p>
+          </div>
+          <div className="settings-about-item">
+            <p className="settings-about-item-title">Legal Notice</p>
+            <p className="muted" style={{ margin: 0, fontSize: '0.84rem', lineHeight: 1.5 }}>
+              GraceGrip is peer support and spiritual encouragement, not professional mental
+              health care. If you are in immediate danger, contact local emergency services.
+            </p>
+          </div>
         </div>
         <p className="settings-about-footer muted">
           GraceGrip stays free and local-first. No tracking pixels. No hidden paywalls.
