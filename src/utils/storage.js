@@ -55,7 +55,12 @@ const normalizeState = (candidate) => {
     typeof safeCandidate.onboardingComplete === 'boolean'
       ? safeCandidate.onboardingComplete
       : hasExistingUsage
-  const profileName = typeof safeCandidate.profileName === 'string' ? safeCandidate.profileName : ''
+  // Guard: if decryption failed, the sentinel `{"__enc":true,...}` passes typeof check but
+  // must not be displayed. Fall back to empty string so the UI shows 'friend' instead.
+  const profileName =
+    typeof safeCandidate.profileName === 'string' && !safeCandidate.profileName.includes('"__enc"')
+      ? safeCandidate.profileName
+      : ''
   const profileCreatedAt =
     typeof safeCandidate.profileCreatedAt === 'string' ? safeCandidate.profileCreatedAt : ''
 

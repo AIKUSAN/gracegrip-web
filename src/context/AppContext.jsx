@@ -113,9 +113,9 @@ export function AppProvider({ children }) {
 
   // ─── Memos ────────────────────────────────────────────────────────────
   const todayDevotional = useMemo(() => {
-    const startOfYear = new Date(today.getFullYear(), 0, 0)
-    const dayOfYear = Math.floor((today.getTime() - startOfYear.getTime()) / 86400000)
-    return devotionals[dayOfYear % devotionals.length]
+    // Use day-of-month (1–31, local time) so the plan aligns with the calendar month
+    const dayOfMonth = today.getDate()
+    return devotionals[(dayOfMonth - 1) % devotionals.length]
   }, [today])
 
   const encouragementOfDay = useMemo(() => {

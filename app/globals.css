@@ -3327,40 +3327,72 @@ textarea:focus-visible {
   align-items: flex-start;
 }
 
-/* About grid — 2-col on desktop, 1-col on mobile */
-.settings-about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-  margin-bottom: 0.85rem;
+/* ── About unified block ──────────────────────────────────────────── */
+.about-meta-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
 }
-@media (max-width: 600px) {
-  .settings-about-grid {
-    grid-template-columns: 1fr;
-  }
+.about-meta-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
 }
-.settings-about-item {
-  background: color-mix(in srgb, var(--brand) 5%, var(--card));
-  border: 1px solid color-mix(in srgb, var(--brand) 18%, var(--line));
-  border-radius: 0.65rem;
-  padding: 0.9rem;
+.about-meta-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
-.settings-about-item-title {
-  font-size: 0.84rem;
+.about-meta-icon {
+  color: var(--brand);
+  flex-shrink: 0;
+}
+.about-meta-name {
+  font-size: 1rem;
   font-weight: 700;
   color: var(--ink);
-  margin: 0 0 0.4rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
-.settings-about-item p.muted {
+.about-version-pill,
+.about-license-pill {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  letter-spacing: 0.03em;
+}
+.about-version-pill {
+  background: color-mix(in srgb, var(--brand) 14%, var(--card));
+  color: var(--brand);
+  border: 1px solid color-mix(in srgb, var(--brand) 28%, transparent);
+}
+.about-license-pill {
+  background: color-mix(in srgb, var(--ink-soft) 10%, var(--card));
+  color: var(--ink-soft);
+  border: 1px solid color-mix(in srgb, var(--ink-soft) 22%, transparent);
+}
+.about-meta-desc {
   margin: 0;
   font-size: 0.84rem;
-  line-height: 1.5;
+  color: var(--ink-soft);
+  line-height: 1.55;
 }
-.settings-about-footer {
-  font-size: 0.82rem;
-  margin: 0;
+.about-sub-divider {
+  height: 1px;
+  background: var(--line);
+  margin: 1.1rem 0 0.85rem;
+}
+.about-sub-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--ink-soft);
+  margin: 0 0 0.5rem;
 }
 
 /* ── Streak card: checked-in note ─────────────────────────────────── */
@@ -3385,34 +3417,56 @@ textarea:focus-visible {
   text-decoration: underline;
 }
 
-/* ── Settings: FAQ ────────────────────────────────────────────────── */
+/* ── Settings: FAQ / Legal accordion ──────────────────────────────── */
 .faq-list {
   display: flex;
   flex-direction: column;
-  gap: 0;
   margin: 0;
   padding: 0;
-  list-style: none;
 }
-.faq-item {
-  padding: 0.75rem 0;
+.faq-details {
   border-bottom: 1px solid var(--line);
 }
-.faq-item:last-child {
+.faq-details:last-child {
   border-bottom: none;
-  padding-bottom: 0;
 }
-.faq-item dt {
-  font-size: 0.9rem;
+.faq-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 0;
+  font-size: 0.875rem;
   font-weight: 700;
   color: var(--ink);
-  margin-bottom: 0.3rem;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
 }
-.faq-item dd {
+.faq-summary::-webkit-details-marker { display: none; }
+.faq-summary::after {
+  content: '+';
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--ink-soft);
+  flex-shrink: 0;
+  margin-left: 0.75rem;
+}
+.faq-details[open] .faq-summary {
+  color: var(--brand);
+}
+.faq-details[open] .faq-summary::after {
+  content: '\2212';
+  color: var(--brand);
+}
+.faq-answer {
   margin: 0;
+  padding: 0 0 0.85rem;
   font-size: 0.84rem;
   color: var(--ink-soft);
   line-height: 1.55;
+}
+.faq-details .settings-legal-body {
+  padding-bottom: 0.85rem;
 }
 
 /* ── Settings: legal body (Terms / Privacy) ───────────────────────── */
