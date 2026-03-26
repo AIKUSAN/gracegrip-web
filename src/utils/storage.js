@@ -55,7 +55,12 @@ const normalizeState = (candidate) => {
     typeof safeCandidate.onboardingComplete === 'boolean'
       ? safeCandidate.onboardingComplete
       : hasExistingUsage
-  const profileName = typeof safeCandidate.profileName === 'string' ? safeCandidate.profileName : ''
+  // Guard: if decryption failed, the sentinel `{"__enc":true,...}` passes typeof check but
+  // must not be displayed. Fall back to empty string so the UI shows 'friend' instead.
+  const profileName =
+    typeof safeCandidate.profileName === 'string' && !safeCandidate.profileName.includes('"__enc"')
+      ? safeCandidate.profileName
+      : ''
   const profileCreatedAt =
     typeof safeCandidate.profileCreatedAt === 'string' ? safeCandidate.profileCreatedAt : ''
 
@@ -149,14 +154,14 @@ export const saveAppState = async (state) => {
   )
 }
 
-const formatDate = (date) => {
+export const formatDate = (date) => {
   const y = date.getFullYear()
   const m = String(date.getMonth() + 1).padStart(2, '0')
   const d = String(date.getDate()).padStart(2, '0')
   return `${y}-${m}-${d}`
 }
 
-const addOneDay = (dateStr) => {
+export const addOneDay = (dateStr) => {
   const [y, m, d] = dateStr.split('-').map(Number)
   return formatDate(new Date(y, m - 1, d + 1))
 }

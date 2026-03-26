@@ -79,7 +79,7 @@ export default function AppShell({ children }) {
             </div>
 
             <p className="footer-copyright">
-              © 2026 GraceGrip. Built for Freedom. Open-source under the MIT License.
+              © 2026 GraceGrip. Built for Freedom.
             </p>
           </footer>
         </div>

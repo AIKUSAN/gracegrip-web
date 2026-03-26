@@ -7,14 +7,18 @@ import { devotionals } from '@/content/loaders'
 export function DevotionalPage({ today, todayDevotional, devotionalCompletedDays, onToggleDevotionalDay }) {
   const todayIso = today.toISOString().slice(0, 10)
   const isCompletedToday = (devotionalCompletedDays || []).includes(todayIso)
-  const totalDays = devotionals.length
-  const completedCount = (devotionalCompletedDays || []).length
+  // Days in the current calendar month (28, 29, 30, or 31 — local time)
+  const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate()
+  const monthDevotionals = devotionals.slice(0, daysInMonth)
+  const totalDays = daysInMonth
+  const currentMonthPrefix = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}`
+  const completedCount = (devotionalCompletedDays || []).filter(d => d.startsWith(currentMonthPrefix)).length
   const progressPct = totalDays > 0 ? Math.round((completedCount / totalDays) * 100) : 0
 
   return (
     <div className="screen-stack legacy-devotional-screen">
       <section className="panel panel-wide legacy-devotional-header">
-        <h2>30-Day Devotional Plan</h2>
+        <h2>{totalDays}-Day Devotional Plan</h2>
         <p className="muted">A grace-paced journey through Scripture, one day at a time.</p>
         <div className="devotional-progress">
           <div className="devotional-progress-meta">
@@ -55,9 +59,9 @@ export function DevotionalPage({ today, todayDevotional, devotionalCompletedDays
       </section>
 
       <section className="panel panel-wide legacy-devotional-list-panel">
-        <h3>All 30 Days</h3>
+        <h3>All {totalDays} Days</h3>
         <ul className="devotional-list">
-          {devotionals.map((d) => {
+          {monthDevotionals.map((d) => {
             const isToday = d.id === todayDevotional.id
             return (
               <li key={d.id} className={`devotional-list-item${isToday ? ' devotional-list-item--today' : ''}`}>

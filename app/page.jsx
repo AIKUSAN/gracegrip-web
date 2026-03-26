@@ -6,7 +6,7 @@ import AppShell from '@/components/AppShell'
 import { HomePage } from '@/components/pages/HomePage'
 
 export default function Page() {
-  const { appState, encouragementOfDay, greeting, verses, onStayedClean, onStumbledToday } = useApp()
+  const { appState, encouragementOfDay, greeting, verses, onStayedClean, onStumbledToday, checkedInToday } = useApp()
 
   return (
     <>
@@ -39,6 +39,7 @@ export default function Page() {
           verses={verses}
           onStayedClean={onStayedClean}
           onStumbledToday={onStumbledToday}
+          checkedInToday={checkedInToday}
         />
       </AppShell>
     </>
