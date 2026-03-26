@@ -351,7 +351,7 @@ export function SettingsPage({
           </details>
           <details className="faq-details">
             <summary className="faq-summary">Can I use GraceGrip offline?</summary>
-            <p className="faq-answer">Yes. GraceGrip works fully offline after the first load. All content — Scripture, devotionals, and your personal data — is stored locally. An internet connection is only needed on first visit or to submit optional feedback.</p>
+            <p className="faq-answer">GraceGrip requires an internet connection to load — refreshing without one will show a blank page. However, all your personal data (journal, streak, favorites) lives entirely on your device in encrypted local storage and is never sent to a server.</p>
           </details>
           <details className="faq-details">
             <summary className="faq-summary">How do I transfer my data to a new phone or browser?</summary>
