@@ -55,7 +55,7 @@ export default function AppShell({ children }) {
               GraceGrip is peer support and spiritual encouragement, not professional mental health
               care. If you are in immediate danger, contact local emergency services.
             </p>
-            <p>v1.0.0 | Walk in Freedom. New insights and features are added regularly.</p>
+            <p>v1.0.1 | Walk in Freedom. New insights and features are added regularly.</p>
 
             <div className="footer-support">
               <p className="footer-support-heading">IF YOU FIND THIS PROJECT MISSION HELPFUL, YOU CAN SUPPORT DOWN BELLOW</p>
