@@ -6,6 +6,7 @@ import {
   User, Bell, HardDrive, Smartphone,
   AlertTriangle, History, MessageSquare,
   ShieldCheck, Star, Medal,
+  Code, HelpCircle, FileText, Lock, ExternalLink,
 } from 'lucide-react'
 import { QRTransfer } from '@/components/QRTransfer'
 
@@ -317,7 +318,7 @@ export function SettingsPage({
           <div className="settings-about-item">
             <p className="settings-about-item-title">Version</p>
             <p className="muted" style={{ margin: 0, fontSize: '0.84rem', lineHeight: 1.5 }}>
-              v1.0.1 — Released March 26, 2026. Walk in Freedom.
+              v1.1.0 — Released April 2026. Walk in Freedom.
             </p>
           </div>
           <div className="settings-about-item">
@@ -331,6 +332,95 @@ export function SettingsPage({
         <p className="settings-about-footer muted">
           GraceGrip stays free and local-first. No tracking pixels. No hidden paywalls.
         </p>
+      </section>
+
+      {/* ── Open Source ───────────────────────────────────────────── */}
+      <section className="panel panel-wide settings-section legacy-settings-panel">
+        <h3 className="settings-section-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem', fontSize: '1rem', fontWeight: 700 }}>
+          <Code size={17} aria-hidden="true" />
+          Open Source
+        </h3>
+        <p className="settings-section-desc">
+          GraceGrip is free and open-source software released under the <strong>MIT License</strong>.
+          You are free to use, copy, modify, and distribute it — with attribution required in all forks.
+        </p>
+        <a
+          href="https://github.com/AIKUSAN/gracegrip-web"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="settings-oss-link"
+        >
+          <ExternalLink size={13} aria-hidden="true" />
+          View source on GitHub
+        </a>
+      </section>
+
+      {/* ── FAQ ───────────────────────────────────────────────────── */}
+      <section className="panel panel-wide settings-section legacy-settings-panel">
+        <h3 className="settings-section-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem', fontSize: '1rem', fontWeight: 700 }}>
+          <HelpCircle size={17} aria-hidden="true" />
+          Frequently Asked Questions
+        </h3>
+        <dl className="faq-list">
+          <div className="faq-item">
+            <dt>What is GraceGrip and who is it for?</dt>
+            <dd>GraceGrip is a free, faith-based recovery support app for anyone seeking spiritual encouragement and practical tools during difficult moments — particularly those in addiction recovery, grief, or spiritual struggle. It offers a streak counter, Scripture library, daily devotionals, a private journal, and a panic button for crisis moments.</dd>
+          </div>
+          <div className="faq-item">
+            <dt>Is my data private and secure?</dt>
+            <dd>Yes. All your data — journal entries, streak history, and profile name — stays entirely on your device. Sensitive fields are encrypted with AES-256 via the Web Crypto API before being written to local storage. Nothing is sent to any server unless you explicitly export your data or submit optional anonymous feedback.</dd>
+          </div>
+          <div className="faq-item">
+            <dt>Does GraceGrip require an account or subscription?</dt>
+            <dd>No. GraceGrip has no accounts, no sign-up, no email, and no subscription. It is free, open-source, and always will be. The only optional external interaction is submitting an anonymous star rating or feedback note.</dd>
+          </div>
+          <div className="faq-item">
+            <dt>What happens when I stumble?</dt>
+            <dd>The streak counter resets to zero — but God&apos;s grace does not. GraceGrip is designed around the truth that every new moment is a fresh start. Tap &ldquo;I stumbled today&rdquo; honestly and begin again. Your streak history is preserved so you can see how far you&apos;ve come.</dd>
+          </div>
+          <div className="faq-item">
+            <dt>How does the streak counter work?</dt>
+            <dd>Tap &ldquo;I stayed clean today&rdquo; once per calendar day to mark that day. If you check in on consecutive days, your count increases. Miss a day, and the counter resets. You can only check in once per day — come back tomorrow to continue your streak.</dd>
+          </div>
+          <div className="faq-item">
+            <dt>Can I use GraceGrip offline?</dt>
+            <dd>Yes. GraceGrip is a progressive web app (PWA) and works fully offline after the first load. All content — Scripture, devotionals, and your personal data — is stored locally. An internet connection is only needed on first visit or to submit optional feedback.</dd>
+          </div>
+          <div className="faq-item">
+            <dt>How do I transfer my data to a new phone or browser?</dt>
+            <dd>Go to Settings &rarr; Data &amp; Backup and tap &ldquo;Export &amp; Download&rdquo; to save a backup file, or use the QR Transfer feature (Settings &rarr; Transfer to Another Device) to move data instantly via QR code — no internet required.</dd>
+          </div>
+        </dl>
+      </section>
+
+      {/* ── Terms of Use ──────────────────────────────────────────── */}
+      <section className="panel panel-wide settings-section legacy-settings-panel">
+        <h3 className="settings-section-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem', fontSize: '1rem', fontWeight: 700 }}>
+          <FileText size={17} aria-hidden="true" />
+          Terms of Use
+        </h3>
+        <div className="settings-legal-body">
+          <p><strong>GraceGrip is peer support and spiritual encouragement — not professional mental health care, crisis intervention, or a substitute for licensed therapy.</strong> If you are in immediate danger, please contact local emergency services or a crisis helpline immediately.</p>
+          <p>GraceGrip is provided free of charge, as-is, without warranties of any kind. The developers make no guarantee of uninterrupted service, fitness for a particular purpose, or medical or psychological effectiveness.</p>
+          <p>GraceGrip is open-source software released under the MIT License. You are free to use, copy, modify, merge, publish, distribute, and sublicense it, provided attribution is retained in all forks and distributions.</p>
+          <p>Scripture quotations are used for encouragement and reflection. GraceGrip does not claim authority over Biblical interpretation or doctrine.</p>
+          <p>By using GraceGrip, you agree that it is a devotional and self-accountability tool and that you take responsibility for your own wellbeing. This app is not a medical device and makes no clinical claims.</p>
+        </div>
+      </section>
+
+      {/* ── Privacy Policy ────────────────────────────────────────── */}
+      <section className="panel panel-wide settings-section legacy-settings-panel">
+        <h3 className="settings-section-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem', fontSize: '1rem', fontWeight: 700 }}>
+          <Lock size={17} aria-hidden="true" />
+          Privacy Policy
+        </h3>
+        <div className="settings-legal-body">
+          <p><strong>Your data stays on your device.</strong> GraceGrip does not have a backend server, does not create user accounts, and does not transmit your personal data anywhere. Your journal entries, profile name, streak history, and settings are stored in your browser&apos;s local storage using AES-256 encryption for sensitive fields.</p>
+          <p><strong>Optional anonymous feedback.</strong> If you choose to submit a star rating or message via the Send Feedback section, that data is sent to Supabase — a third-party database. No name, email, or device identifier is attached. This is entirely optional.</p>
+          <p><strong>No analytics, no tracking, no ads.</strong> GraceGrip does not include any analytics SDK, telemetry library, advertising network, or tracking pixel. There are no third-party scripts loading at runtime.</p>
+          <p><strong>Data export and transfer.</strong> You can export all your data at any time via Settings &rarr; Data &amp; Backup. QR transfer also happens locally — no data is relayed through any server.</p>
+          <p><strong>Changes to this policy.</strong> If the privacy practices of GraceGrip ever change materially, the changelog and release notes will reflect it. The source code is public and auditable at <a href="https://github.com/AIKUSAN/gracegrip-web" target="_blank" rel="noopener noreferrer" className="settings-oss-link" style={{ display: 'inline-flex' }}>github.com/AIKUSAN/gracegrip-web</a>.</p>
+        </div>
       </section>
 
     </div>

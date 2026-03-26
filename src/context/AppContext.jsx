@@ -18,6 +18,8 @@ import {
   toggleDevotionalCompletion,
   addStreakHistory,
   initialState,
+  formatDate,
+  addOneDay,
 } from '../utils/storage'
 import { DAILY_ENCOURAGEMENTS, EMERGENCY_ENCOURAGEMENTS } from '../data/encouragements'
 import { supabase } from '../lib/supabase'
@@ -369,6 +371,7 @@ export function AppProvider({ children }) {
     setSidebarExpanded,
     fileInputRef,
     // Derived / memos
+    checkedInToday: appState.streak.lastCheckIn === formatDate(new Date()),
     todayDevotional,
     encouragementOfDay,
     emergencyEncouragement,
@@ -407,8 +410,13 @@ export function AppProvider({ children }) {
     onQRImport,
     onSubmitFeedback,
     onStayedClean: () => {
+      const today = formatDate(new Date())
+      if (appState.streak.lastCheckIn === today) return
+      const isConsecutive =
+        appState.streak.lastCheckIn && addOneDay(appState.streak.lastCheckIn) === today
+      const newCount = isConsecutive ? appState.streak.count + 1 : 1
       setAppState((current) => updateStreak(current))
-      toast.success('Well done! Keep going.')
+      toast.success(`Day ${newCount} complete! Keep walking in freedom.`)
     },
     onStumbledToday: () => setAppState((current) => resetStreak(current)),
     onToggleDevotionalDay: (todayIso, isCompletedToday) => {

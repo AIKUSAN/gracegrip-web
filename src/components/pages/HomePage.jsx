@@ -2,7 +2,7 @@
 'use client'
 
 import Link from 'next/link'
-import { AlertTriangle, ArrowRight, BookOpen, BookMarked, PenLine, Trophy } from 'lucide-react'
+import { AlertTriangle, ArrowRight, BookOpen, BookMarked, CheckCircle2, PenLine, Trophy } from 'lucide-react'
 import { motion } from 'motion/react'
 import { StreakRing } from '@/components/StreakRing'
 import { DailyVerse } from '@/components/DailyVerse'
@@ -58,6 +58,7 @@ export function HomePage({
   verses,
   onStayedClean,
   onStumbledToday,
+  checkedInToday,
 }) {
   return (
     <motion.div className="legacy-dashboard" variants={stagger} initial="hidden" animate="visible">
@@ -72,14 +73,21 @@ export function HomePage({
           <Trophy size={16} aria-hidden="true" /> Best: <strong>{streak.longest || 0} days</strong>
         </div>
         <div className="actions-row">
-          <button className="btn-primary" onClick={onStayedClean}>I stayed clean today</button>
+          <button className="btn-primary" onClick={onStayedClean} disabled={checkedInToday}>
+            {checkedInToday
+              ? <><CheckCircle2 size={14} aria-hidden="true" /> Checked in today</>
+              : 'I stayed clean today'}
+          </button>
           <button className="btn-ghost" onClick={onStumbledToday}>I stumbled today</button>
         </div>
-        <p className="grace-note">If you stumble, the counter resets. God’s love does not.</p>
+        {checkedInToday && (
+          <p className="streak-tomorrow-note">Come back tomorrow to keep your streak going.</p>
+        )}
+        <p className="grace-note">If you stumble, the counter resets. God&apos;s love does not.</p>
       </motion.section>
 
       <motion.section className="panel legacy-verse-panel" variants={tile}>
-        <h2>Today’s Verse</h2>
+        <h2>Today's Verse</h2>
         <DailyVerse verses={verses} />
       </motion.section>
 
