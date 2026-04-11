@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">Forgiveness category artwork</title>
+  <desc id="desc">A soft dawn sky and gentle layered curves representing washing away and a new beginning.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d4b4cc"/>
+      <stop offset="0.5" stop-color="#e0a3ad"/>
+      <stop offset="1" stop-color="#dbd1aa"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.4" r="0.5">
+      <stop offset="0" stop-color="#fff4e3" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#fff4e3" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#bg)"/>
+  <circle cx="600" cy="200" r="160" fill="url(#sun)"/>
+  <path d="M0 450C150 400 300 380 480 420C650 458 800 480 980 440C1080 418 1150 380 1200 350V600H0Z" fill="#a47b86" fill-opacity="0.5"/>
+  <path d="M0 520C180 470 350 480 500 510C680 545 850 560 1020 530C1090 512 1160 480 1200 450V600H0Z" fill="#805a6e" fill-opacity="0.6"/>
+</svg>

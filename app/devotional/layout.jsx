@@ -1,21 +1,19 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
-
 export const metadata = {
-  title: 'Daily Devotional — GraceGrip',
+  title: 'Daily Devotional — Scripture-Based Habit Change',
   description:
-    'A new devotional every day — Scripture, reflection, and a practical recovery practice. ' +
-    'Faith-based encouragement for your recovery journey.',
+    'A daily Christian devotional journey for addiction recovery. Scripture-based ' +
+    'reflections, prayers, and practical action steps for healing.',
   alternates: {
     canonical: 'https://gracegrip.app/devotional',
   },
   openGraph: {
-    title: 'Daily Devotional — GraceGrip',
-    description:
-      'Daily Scripture-based devotionals with practical recovery practices. Free and private.',
+    title: 'GraceGrip Daily Devotional — Spiritual Recovery',
+    description: 'Grow in your recovery journey with daily grace-first devotionals. Free and private.',
     url: 'https://gracegrip.app/devotional',
   },
 }
 
 export default function DevotionalLayout({ children }) {
-  return children
+  return <>{children}</>
 }

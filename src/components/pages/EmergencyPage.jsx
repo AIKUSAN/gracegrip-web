@@ -40,7 +40,7 @@ export function EmergencyPage({ emergencyEncouragement, emergencyVerses, onCopyV
       animate="visible"
     >
       <motion.section className="panel panel-wide emergency-urgent-card legacy-emergency-header" variants={panelVariants}>
-        <h2 className="emergency-title">You are stronger than this moment</h2>
+        <h1 className="emergency-title">You are stronger than this moment</h1>
         <p className="emergency-quote">"{emergencyEncouragement}"</p>
         <p className="muted emergency-subcopy">
           The urge you feel right now will pass. It always does. Stay here, breathe, and work

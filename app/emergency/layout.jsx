@@ -1,21 +1,19 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
-
 export const metadata = {
-  title: 'Emergency Support — GraceGrip',
+  title: 'Emergency Urge Support — Help Now',
   description:
-    'In-the-moment urge support: guided breathing, grounding exercises, and panic Scripture. ' +
-    'Free, private, no account required.',
+    'Immediate support for addiction urges. Use the GraceGrip emergency flow: ' +
+    'timed breathing, grounding exercises, and Scripture chosen for moments of struggle.',
   alternates: {
     canonical: 'https://gracegrip.app/emergency',
   },
   openGraph: {
-    title: 'Emergency Support — GraceGrip',
-    description:
-      'Guided breathing, grounding exercises, and Scripture for urge moments. Free and private.',
+    title: 'GraceGrip Emergency — Immediate Urge Support',
+    description: 'Ride out the craving with guided tools and Scripture. Private and free.',
     url: 'https://gracegrip.app/emergency',
   },
 }
 
 export default function EmergencyLayout({ children }) {
-  return children
+  return <>{children}</>
 }

@@ -95,6 +95,22 @@ export const metadata = {
       'Free, private recovery support. No account, no tracking. ' +
       'Scripture, devotions, encrypted journal.',
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    // Add your verification codes here once you claim the domain in Webmaster Tools
+    // google: 'your-google-site-verification-code',
+    // yandex: 'your-yandex-verification-code',
+  },
 }
 
 export default function RootLayout({ children }) {
@@ -208,6 +224,48 @@ export default function RootLayout({ children }) {
                     '@type': 'Answer',
                     text: 'GraceGrip is rooted in Christian faith and uses Scripture as its primary source of encouragement. It is designed for people who find strength in their faith. Anyone is welcome to use it.',
                   },
+                },
+              ],
+            }),
+          }}
+        />
+        {/* BreadcrumbList JSON-LD — helps Google understand site hierarchy and generates rich snippets. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Home',
+                  item: 'https://gracegrip.app',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Emergency Help',
+                  item: 'https://gracegrip.app/emergency',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 3,
+                  name: 'Scripture Library',
+                  item: 'https://gracegrip.app/scripture',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 4,
+                  name: 'Daily Devotional',
+                  item: 'https://gracegrip.app/devotional',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 5,
+                  name: 'Encrypted Journal',
+                  item: 'https://gracegrip.app/journal',
                 },
               ],
             }),
