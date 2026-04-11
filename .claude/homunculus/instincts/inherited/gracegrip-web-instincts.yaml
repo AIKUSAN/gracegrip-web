@@ -1,0 +1,320 @@
+# Instincts generated from https://github.com/AIKUSAN/gracegrip-web
+# Generated: 2026-04-11T04:59:51.243Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: gracegrip-web-commit-conventional
+trigger: "when writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Commit Conventional
+
+## Action
+
+Use conventional commit format with prefixes: feat
+
+## Evidence
+
+- 2 commits analyzed
+- Detected conventional commit pattern
+- Examples: feat: auto-updating PROJECT_STATUS.md via pre-push hook, feat(seo): implement dynamic sitemap, schema.org, and accessibility-first headers
+
+---
+id: gracegrip-web-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Commit Length
+
+## Action
+
+Write moderate-length commit messages (~68 characters)
+
+## Evidence
+
+- Average commit message length: 68 chars
+- Based on 2 commits
+
+---
+id: gracegrip-web-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Naming Files
+
+## Action
+
+Use camelCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: camelCase
+
+---
+id: gracegrip-web-import-relative
+trigger: "when importing modules"
+confidence: 0.75
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Import Relative
+
+## Action
+
+Use relative imports for project files
+
+## Evidence
+
+- Import analysis shows relative import pattern
+- Example: import { x } from '../lib/x'
+
+---
+id: gracegrip-web-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Export Style
+
+## Action
+
+Prefer mixed exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: mixed
+
+---
+id: gracegrip-web-arch-type-based
+trigger: "when adding new code"
+confidence: 0.8
+domain: architecture
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Arch Type Based
+
+## Action
+
+Place code in the appropriate type folder (components/, services/, utils/, etc.)
+
+## Evidence
+
+- Type-based module organization detected
+- Folders: components, lib
+
+---
+id: gracegrip-web-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: gracegrip-web-instinct-file-naming
+trigger: "When creating a new file in the repository"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Instinct File Naming
+
+## Action
+
+Name the file using camelCase convention
+
+## Evidence
+
+- Pattern in namingConventions.files: camelCase
+
+---
+id: gracegrip-web-instinct-function-naming
+trigger: "When defining a new function"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Instinct Function Naming
+
+## Action
+
+Name the function using camelCase convention
+
+## Evidence
+
+- Pattern in namingConventions.functions: camelCase
+
+---
+id: gracegrip-web-instinct-class-naming
+trigger: "When defining a new class"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Instinct Class Naming
+
+## Action
+
+Name the class using PascalCase convention
+
+## Evidence
+
+- Pattern in namingConventions.classes: PascalCase
+
+---
+id: gracegrip-web-instinct-constant-naming
+trigger: "When declaring a constant value"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Instinct Constant Naming
+
+## Action
+
+Name the constant using SCREAMING_SNAKE_CASE convention
+
+## Evidence
+
+- Pattern in namingConventions.constants: SCREAMING_SNAKE_CASE
+
+---
+id: gracegrip-web-instinct-import-style
+trigger: "When importing modules in JavaScript files"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Instinct Import Style
+
+## Action
+
+Use relative import paths
+
+## Evidence
+
+- Pattern in importStyle: relative
+
+---
+id: gracegrip-web-instinct-export-style
+trigger: "When exporting modules or components"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Instinct Export Style
+
+## Action
+
+Use both default and named exports as appropriate (mixed export style)
+
+## Evidence
+
+- Pattern in exportStyle: mixed
+
+---
+id: gracegrip-web-instinct-git-commit-format
+trigger: "When writing a git commit message"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Instinct Git Commit Format
+
+## Action
+
+Use the conventional commit format with a 'feat' prefix for new features
+
+## Evidence
+
+- Seen in commit: feat: auto-updating PROJECT_STATUS.md via pre-push hook
+- Seen in commit: feat(seo): implement dynamic sitemap, schema.org, and accessibility-first headers
+- Pattern in commits.prefixes: feat
+
+---
+id: gracegrip-web-instinct-commit-length
+trigger: "When composing a commit message"
+confidence: 0.7
+domain: git
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Instinct Commit Length
+
+## Action
+
+Aim for a commit message length close to the average of 68 characters
+
+## Evidence
+
+- Pattern in commits.averageLength: 68
+
+---
+id: gracegrip-web-instinct-test-location
+trigger: "When adding new tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: AIKUSAN/gracegrip-web
+---
+
+# Gracegrip Web Instinct Test Location
+
+## Action
+
+Place test files in a separate test location outside the main source folders
+
+## Evidence
+
+- Pattern in architecture.folderStructure.testLocation: separate
+
