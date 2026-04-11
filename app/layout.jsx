@@ -107,8 +107,7 @@ export const metadata = {
     },
   },
   verification: {
-    // Add your verification codes here once you claim the domain in Webmaster Tools
-    // google: 'your-google-site-verification-code',
+    google: 'googlec046312a5ae66839',
     // yandex: 'your-yandex-verification-code',
   },
 }
