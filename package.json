@@ -16,7 +16,7 @@
     "update-status": "node scripts/update-project-status.mjs"
   },
   "dependencies": {
-    "@sparticuz/chromium": "^143.0.4",
+    "@sparticuz/chromium": "^147.0.0",
     "@supabase/supabase-js": "^2.101.1",
     "@tabler/icons-react": "^3.41.1",
     "@tailwindcss/postcss": "^4.2.2",
