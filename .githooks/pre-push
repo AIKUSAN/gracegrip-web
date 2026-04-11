@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+set -e
+echo "[pre-push] Updating PROJECT_STATUS.md..."
+node scripts/update-project-status.mjs
+echo "[pre-push] PROJECT_STATUS.md is current. Proceeding with push."

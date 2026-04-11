@@ -18,7 +18,7 @@ export function DevotionalPage({ today, todayDevotional, devotionalCompletedDays
   return (
     <div className="screen-stack legacy-devotional-screen">
       <section className="panel panel-wide legacy-devotional-header">
-        <h2>{totalDays}-Day Devotional Plan</h2>
+        <h1>{totalDays}-Day Devotional Plan</h1>
         <p className="muted">A grace-paced journey through Scripture, one day at a time.</p>
         <div className="devotional-progress">
           <div className="devotional-progress-meta">

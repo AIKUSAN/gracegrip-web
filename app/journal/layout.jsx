@@ -1,21 +1,19 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
-
 export const metadata = {
-  title: 'Private Journal — GraceGrip',
+  title: 'Encrypted Journal — Private Recovery Space',
   description:
-    'An AES-encrypted private journal for your recovery journey. ' +
-    'Your entries never leave your device — no account, no cloud, completely private.',
+    'Private, AES-encrypted journaling for recovery. Safely log your ' +
+    'thoughts and progress without worrying about your data leaving your device.',
   alternates: {
     canonical: 'https://gracegrip.app/journal',
   },
   openGraph: {
-    title: 'Private Journal — GraceGrip',
-    description:
-      'AES-encrypted private journal. Your entries stay on your device — no account, no cloud.',
+    title: 'GraceGrip Journal — Encrypted & Private',
+    description: 'A safe, offline space to process your journey with encryption you can trust.',
     url: 'https://gracegrip.app/journal',
   },
 }
 
 export default function JournalLayout({ children }) {
-  return children
+  return <>{children}</>
 }

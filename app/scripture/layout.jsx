@@ -1,21 +1,19 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
-
 export const metadata = {
-  title: 'Scripture Library — GraceGrip',
+  title: 'Scripture Library — Bible Verses for Addiction Recovery',
   description:
-    'Browse Scripture by emotion: find verses for temptation, shame, fear, identity, peace, and strength. ' +
-    'A free, private Bible reference for recovery.',
+    'Curated Scripture library for addiction recovery. Bible verses for temptation, ' +
+    'shame, identity, and peace — indexed to speak to your recovery journey.',
   alternates: {
     canonical: 'https://gracegrip.app/scripture',
   },
   openGraph: {
-    title: 'Scripture Library — GraceGrip',
-    description:
-      'Find Scripture matched to your emotions — temptation, shame, fear, peace, and more. Free and private.',
+    title: 'GraceGrip Scripture — Biblical Recovery Support',
+    description: 'Find strength in God’s Word with recovery-focused Bible verses. Free and private.',
     url: 'https://gracegrip.app/scripture',
   },
 }
 
 export default function ScriptureLayout({ children }) {
-  return children
+  return <>{children}</>
 }

@@ -31,10 +31,10 @@ export function ScripturePage({
 
       {/* ── Page Header ───────────────────────────────────────────── */}
       <div className="scripture-page-header">
-        <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0, fontSize: '1.5rem', fontWeight: 700 }}>
+        <h1 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0, fontSize: '1.5rem', fontWeight: 700 }}>
           <BookOpen size={22} aria-hidden="true" />
-          Scripture
-        </h2>
+          Scripture Library
+        </h1>
         <p className="muted" style={{ margin: '0.25rem 0 0', fontSize: '0.9rem' }}>
           Browse verses that speak directly into temptation, fear, peace, identity, forgiveness, and freedom.
         </p>
