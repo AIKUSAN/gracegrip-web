@@ -62,6 +62,10 @@ export function HomePage({
 }) {
   return (
     <motion.div className="legacy-dashboard" variants={stagger} initial="hidden" animate="visible">
+      {/* Visually hidden H1 for SEO and screen readers — ensures each page has an <h1>.
+          Using a standard utility class or inline styles for the Calm UI. */}
+      <h1 className="sr-only">GraceGrip — Scripture-Based Addiction Recovery</h1>
+
       <motion.div className="home-greeting-inline" variants={tile}>
         <p className="home-greeting-salutation">{greeting}, {profileName || 'friend'} 👋</p>
         <p className="home-greeting-encouragement">{encouragementOfDay || 'You are not alone in this journey.'}</p>

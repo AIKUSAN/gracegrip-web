@@ -86,6 +86,7 @@ Run this after editing files in `content/` to verify schema and emotion referenc
 | Vercel project | `gracegrip-webapp` (team `aikusans-projects`) |
 | CI gates | `npm audit` + `npm run lint` + `npm run build` (GitHub Actions) |
 | Deploy trigger | Auto-deploy on push to `main` via Vercel Git integration |
+| Search Indexing | Auto-pings Bing, DuckDuckGo, Yandex post-deploy via IndexNow |
 
 ---
 

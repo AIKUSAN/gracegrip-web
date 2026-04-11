@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
-Disallow: /_next/
+# Do not block /_next/static/ or /_next/image/ as search engines need JS/CSS/Images to render the page correctly.
+Disallow: /api/
 
 # Sitemap
 Sitemap: https://gracegrip.app/sitemap.xml

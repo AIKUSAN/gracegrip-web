@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">Freedom category artwork</title>
+  <desc id="desc">Open sky and soaring abstract shapes representing liberation and flight.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d85c6"/>
+      <stop offset="0.5" stop-color="#76a5af"/>
+      <stop offset="1" stop-color="#fce5cd"/>
+    </linearGradient>
+    <linearGradient id="soar" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#bg)"/>
+  <path d="M0 600L1200 300V600Z" fill="#2986cc" fill-opacity="0.3"/>
+  <path d="M0 600L1200 450V600Z" fill="#1c4587" fill-opacity="0.4"/>
+  <path d="M150 600C300 400 600 200 1000 50" fill="none" stroke="url(#soar)" stroke-width="12" stroke-linecap="round"/>
+  <path d="M300 600C450 450 700 280 1100 150" fill="none" stroke="url(#soar)" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="950" cy="180" r="10" fill="#fff" fill-opacity="0.9"/>
+  <circle cx="1020" cy="120" r="15" fill="#fff" fill-opacity="0.9"/>
+</svg>

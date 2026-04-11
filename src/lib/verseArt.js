@@ -3,6 +3,8 @@ const VERSE_ART_BY_CATEGORY = {
   strength: '/verse-art/strength.svg',
   peace: '/verse-art/peace.svg',
   identity: '/verse-art/identity.svg',
+  forgiveness: '/verse-art/forgiveness.svg',
+  freedom: '/verse-art/freedom.svg',
 }
 
 export function getVerseArt(category) {
