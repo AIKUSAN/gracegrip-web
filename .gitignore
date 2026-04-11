@@ -88,6 +88,9 @@ audit-report.json
 # ─── Local AI / MCP Tool Artifacts ──────────────────────────
 .playwright-mcp/
 .mcp-debug-tools/
+.agents/
+.codex/
+.remember/
 
 # ─── Internal Docs (agent notes, audit trails, handovers) ────
 # IRONCLAD: These NEVER enter the public repo under any circumstance.
