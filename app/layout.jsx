@@ -26,7 +26,7 @@ export const metadata = {
   description:
     'GraceGrip is a free, privacy-first recovery app for porn and masturbation addiction. ' +
     'Scripture, daily devotions, urge management tools, and encrypted journaling — ' +
-    'no account required, no data sent to servers.',
+    'no account required. Your recovery data never leaves your device.',
   keywords: [
     'GraceGrip',
     'addiction recovery app',
@@ -74,7 +74,7 @@ export const metadata = {
     title: 'GraceGrip — Scripture-Based Addiction Recovery',
     description:
       'Free, private recovery support through Scripture, daily devotions, ' +
-      'and practical urge-management tools. No account. No tracking.',
+      'and practical urge-management tools. No account. No personal data tracking.',
     url: 'https://gracegrip.app',
     siteName: 'GraceGrip',
     type: 'website',
@@ -92,7 +92,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'GraceGrip — Scripture-Based Addiction Recovery',
     description:
-      'Free, private recovery support. No account, no tracking. ' +
+      'Free, private recovery support. No account, no personal tracking. ' +
       'Scripture, devotions, encrypted journal.',
   },
   robots: {
@@ -139,7 +139,7 @@ export default function RootLayout({ children }) {
               name: 'GraceGrip',
               url: 'https://gracegrip.app',
               description:
-                'A free, privacy-first recovery app helping people overcome porn and masturbation addiction through Scripture, daily devotions, encrypted journaling, and practical urge-management tools. No account required.',
+                'A free, privacy-first recovery app helping people overcome porn and masturbation addiction through Scripture, daily devotions, encrypted journaling, and practical urge-management tools. No account required. Your recovery data never leaves your device.',
               applicationCategory: 'HealthApplication',
               operatingSystem: 'Web',
               browserRequirements: 'Requires a modern web browser with JavaScript enabled.',
