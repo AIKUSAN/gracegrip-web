@@ -303,12 +303,12 @@ export function SettingsPage({
             <div className="about-meta-name-row">
               <ShieldCheck size={16} className="about-meta-icon" aria-hidden="true" />
               <span className="about-meta-name">GraceGrip</span>
-              <span className="about-version-pill">v1.1.0</span>
+              <span className="about-version-pill">v1.2.0</span>
               <span className="about-license-pill">MIT</span>
             </div>
             <p className="about-meta-desc">
-              Faith-based recovery support — Scripture, streak tracking, and grace for difficult moments.
-              No account, no cloud sync, no tracking. Your data stays on this device.
+              Faith-based recovery support for porn and masturbation addiction — Scripture, streak tracking, and grace for difficult moments.
+              No account, no cloud sync, no personal tracking. Your recovery data stays on this device.
             </p>
             <a
               href="https://github.com/AIKUSAN/gracegrip-web"
@@ -331,7 +331,7 @@ export function SettingsPage({
         <div className="faq-list">
           <details className="faq-details">
             <summary className="faq-summary">What is GraceGrip and who is it for?</summary>
-            <p className="faq-answer">GraceGrip is a free, faith-based recovery support app for anyone seeking spiritual encouragement and practical tools during difficult moments — particularly those in addiction recovery, grief, or spiritual struggle. It offers a streak counter, Scripture library, daily devotionals, a private journal, and a panic button for crisis moments.</p>
+            <p className="faq-answer">GraceGrip is a free, privacy-first recovery app built for people fighting porn and masturbation addiction. It offers immediate, dignified support through Scripture, daily devotionals, a clean-streak tracker, an encrypted private journal, a panic button for crisis moments, and tools to back up or transfer your data — all without an account, a subscription, or anything leaving your device.</p>
           </details>
           <details className="faq-details">
             <summary className="faq-summary">Is my data private and secure?</summary>
@@ -381,7 +381,7 @@ export function SettingsPage({
             <div className="settings-legal-body">
               <p><strong>Your data stays on your device.</strong> GraceGrip does not have a backend server, does not create user accounts, and does not transmit your personal data anywhere. Your journal entries, profile name, streak history, and settings are stored in your browser&apos;s local storage using AES-256 encryption for sensitive fields.</p>
               <p><strong>Optional anonymous feedback.</strong> If you choose to submit a star rating or message via the Send Feedback section, that data is sent to Supabase — a third-party database. No name, email, or device identifier is attached. This is entirely optional.</p>
-              <p><strong>No analytics, no tracking, no ads.</strong> GraceGrip does not include any analytics SDK, telemetry library, advertising network, or tracking pixel. There are no third-party scripts loading at runtime.</p>
+              <p><strong>Anonymous page-view analytics only.</strong> GraceGrip uses Vercel Analytics to count page views — no account, no personal information, no recovery-path content is captured. There are no advertising networks, tracking pixels, or crash-reporting SDKs.</p>
               <p><strong>Data export and transfer.</strong> You can export all your data at any time via Settings &rarr; Data &amp; Backup. QR transfer also happens locally — no data is relayed through any server.</p>
               <p><strong>Changes to this policy.</strong> If the privacy practices of GraceGrip ever change materially, the changelog and release notes will reflect it. The source code is public and auditable at <a href="https://github.com/AIKUSAN/gracegrip-web" target="_blank" rel="noopener noreferrer" className="settings-oss-link" style={{ display: 'inline-flex' }}>github.com/AIKUSAN/gracegrip-web</a>.</p>
             </div>

@@ -19,7 +19,7 @@ Some people reach for their phone in a moment of temptation and find nothing tha
 - **No account required** — open the app and it works.
 - **No personal data sent to a server** — progress, journal, and favorites live in your browser only.
 - **Sensitive data is encrypted** — journal entries and profile info are AES-encrypted via the Web Crypto API before being written to `localStorage`.
-- **No tracking, no analytics, no advertising** — ever.
+- **No personal tracking, no advertising** — ever. Anonymous page-view counts are collected via Vercel Analytics (no account, no PII, no recovery-path data captured).
 - The only cloud feature is an **optional, anonymous feedback form** (rating + message). No identity is captured.
 
 ---
