@@ -15,7 +15,12 @@
 
 const KEY_STORAGE_KEY = 'gracegrip_ek_v1'
 
-const toBase64 = (buffer) => btoa(String.fromCharCode(...new Uint8Array(buffer)))
+const toBase64 = (buffer) => {
+  const bytes = new Uint8Array(buffer)
+  let binary = ''
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i])
+  return btoa(binary)
+}
 const fromBase64 = (str) => Uint8Array.from(atob(str), (c) => c.charCodeAt(0))
 
 /**
