@@ -4,7 +4,7 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['.next', 'dist']),
+  globalIgnores(['.next', 'dist', '.claude']),
   {
     files: ['**/*.{js,jsx}'],
     extends: [

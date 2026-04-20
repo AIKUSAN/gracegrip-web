@@ -1,6 +1,6 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
 'use client'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import QRCode from 'qrcode'
 import { strToU8, deflateSync, inflateSync, strFromU8 } from 'fflate'
 import { exportStateAsJson } from '@/utils/storage'
@@ -38,47 +38,43 @@ export function QRTransfer({ appState, onQRImport }) {
   const [selections, setSelections] = useState({
     journal: false, streak: true, favorites: true, settings: true,
   })
-  const [tooBig, setTooBig] = useState(false)
-  const [qrWarning, setQrWarning] = useState(null)
+  const [qrRenderError, setQrRenderError] = useState(null)
   const [scanStatus, setScanStatus] = useState('idle')
   const [scanMsg, setScanMsg] = useState('')
   const canvasRef = useRef(null)
   const scannerRef = useRef(null)
   const onQRImportRef = useRef(onQRImport)
 
+  // Derived — no setState needed
+  const encoded = useMemo(() => {
+    if (tab !== 'generate') return ''
+    return compress(exportStateAsJson(appState, selections))
+  }, [appState, selections, tab])
+  const tooBig = tab === 'generate' && encoded.length > MAX_QR_CHARS
+  const qrWarning = tooBig
+    ? 'Payload too large. Uncheck Journal entries to fit within a QR code.'
+    : qrRenderError
+
   // Keep callback ref up to date without restarting the scanner
   useEffect(() => { onQRImportRef.current = onQRImport }, [onQRImport])
 
-  // Generate QR code whenever selections or tab changes
+  // Render QR canvas whenever the encoded payload changes
   useEffect(() => {
-    if (tab !== 'generate') return
-    const json = exportStateAsJson(appState, selections)
-    const encoded = compress(json)
-
-    if (encoded.length > MAX_QR_CHARS) {
-      setTooBig(true)
-      setQrWarning('Payload too large. Uncheck Journal entries to fit within a QR code.')
-      return
-    }
-
-    setTooBig(false)
-    setQrWarning(null)
-    if (!canvasRef.current) return
+    if (tab !== 'generate' || tooBig || !encoded || !canvasRef.current) return
+    setQrRenderError(null)
     QRCode.toCanvas(canvasRef.current, encoded, {
       width: 280,
       margin: 2,
       errorCorrectionLevel: 'M',
       color: { dark: '#000000', light: '#ffffff' },
-    }).catch(() => setQrWarning('Failed to render QR code.'))
-  }, [appState, selections, tab])
+    }).catch(() => setQrRenderError('Failed to render QR code.'))
+  }, [encoded, tab, tooBig])
 
   // Start / stop camera scanner
   useEffect(() => {
     if (tab !== 'scan') {
       scannerRef.current?.clear().catch(() => {})
       scannerRef.current = null
-      setScanStatus('idle')
-      setScanMsg('')
       return
     }
 
@@ -116,7 +112,10 @@ export function QRTransfer({ appState, onQRImport }) {
   }, [tab])
 
   const toggleSel = (key) => setSelections((prev) => ({ ...prev, [key]: !prev[key] }))
-  const switchTab = (next) => setTab(next)
+  const switchTab = (next) => {
+    if (next !== 'scan') { setScanStatus('idle'); setScanMsg('') }
+    setTab(next)
+  }
 
   return (
     <div className="qr-transfer">
