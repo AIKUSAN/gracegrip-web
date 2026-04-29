@@ -1,0 +1,61 @@
+name: Google Search Console Sync
+
+on:
+  workflow_run:
+    workflows: ["CI / Deploy"]
+    branches: [main]
+    types: [completed]
+  release:
+    types: [published]
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  gsc-sync:
+    name: Submit sitemap + inspect public URLs
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'release' ||
+      github.event.workflow_run.conclusion == 'success'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Wait for production deploy
+        if: github.event_name != 'workflow_dispatch'
+        run: |
+          echo "Sleeping 120s so production deploy is live before inspection..."
+          sleep 120
+
+      - name: Sync Google Search Console
+        env:
+          GSC_CLIENT_EMAIL: ${{ secrets.GSC_CLIENT_EMAIL }}
+          GSC_PRIVATE_KEY: ${{ secrets.GSC_PRIVATE_KEY }}
+          GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
+          GSC_OUTPUT_DIR: seo-report
+        run: node scripts/gsc-sync.mjs
+
+      - name: Upload GSC artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gsc-report
+          path: seo-report
+
+      - name: Publish summary
+        if: always()
+        run: |
+          if [ -f seo-report/gsc-report.md ]; then
+            cat seo-report/gsc-report.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No GSC report generated." >> "$GITHUB_STEP_SUMMARY"
+          fi

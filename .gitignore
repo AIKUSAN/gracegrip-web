@@ -91,6 +91,16 @@ audit-report.json
 .agents/
 .codex/
 .remember/
+!.agents/
+.agents/*
+!.agents/skills/
+.agents/skills/*
+!.agents/skills/gracegrip-web/
+.agents/skills/gracegrip-web/*
+!.agents/skills/gracegrip-web/SKILL.md
+!.codex/
+.codex/*
+!.codex/AGENTS.md
 
 # ─── Internal Docs (agent notes, audit trails, handovers) ────
 # IRONCLAD: These NEVER enter the public repo under any circumstance.
