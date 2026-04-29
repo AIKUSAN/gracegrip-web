@@ -80,7 +80,7 @@ export const metadata = {
     type: 'website',
     images: [
       {
-        url: '/api/og',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: 'GraceGrip — Scripture-Based Addiction Recovery App',
@@ -94,6 +94,7 @@ export const metadata = {
     description:
       'Free, private recovery support. No account, no personal tracking. ' +
       'Scripture, devotions, encrypted journal.',
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,

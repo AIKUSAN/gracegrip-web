@@ -50,6 +50,21 @@ const quickCard = {
   visible: { opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 280, damping: 22 } },
 }
 
+const welcomeValueProps = [
+  {
+    title: 'Privacy-First',
+    description: 'Your data stays on this device. No account, no tracking, no forced cloud sync.',
+  },
+  {
+    title: 'Scripture-Powered',
+    description: 'Curated verses and devotionals to steady your thoughts and strengthen your spirit.',
+  },
+  {
+    title: 'Practical Tools',
+    description: 'Breathing, grounding, and emergency actions designed for hard moments.',
+  },
+]
+
 export function HomePage({
   profileName,
   encouragementOfDay,
@@ -59,12 +74,52 @@ export function HomePage({
   onStayedClean,
   onStumbledToday,
   checkedInToday,
+  showOnboardingPrompt,
+  welcomeName,
+  onWelcomeNameChange,
+  onBeginJourney,
 }) {
   return (
     <motion.div className="legacy-dashboard" variants={stagger} initial="hidden" animate="visible">
-      {/* Visually hidden H1 for SEO and screen readers — ensures each page has an <h1>.
-          Using a standard utility class or inline styles for the Calm UI. */}
-      <h1 className="sr-only">GraceGrip — Scripture-Based Addiction Recovery</h1>
+      {showOnboardingPrompt && (
+        <motion.section className="panel panel-wide" variants={tile}>
+          <h2 style={{ marginTop: 0, marginBottom: '0.5rem' }}>Start your journey in GraceGrip</h2>
+          <p className="muted" style={{ marginTop: 0, marginBottom: '1rem' }}>
+            Begin privately. Add a first name if you want a personal greeting, then step into a grace-first recovery rhythm.
+          </p>
+
+          <div className="welcome-input-wrap" style={{ marginBottom: '1rem' }}>
+            <label htmlFor="welcome-name-inline">What should we call you? (optional)</label>
+            <input
+              id="welcome-name-inline"
+              value={welcomeName}
+              onChange={(event) => onWelcomeNameChange(event.target.value)}
+              placeholder="Your first name"
+              className="welcome-input"
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  onBeginJourney()
+                }
+              }}
+            />
+          </div>
+
+          <div className="actions-row" style={{ marginBottom: '1rem' }}>
+            <button className="btn-primary" onClick={onBeginJourney}>
+              Begin Your Journey
+            </button>
+          </div>
+
+          <div className="welcome-value-grid">
+            {welcomeValueProps.map((prop) => (
+              <article key={prop.title} className="welcome-value-card">
+                <h3>{prop.title}</h3>
+                <p>{prop.description}</p>
+              </article>
+            ))}
+          </div>
+        </motion.section>
+      )}
 
       <motion.div className="home-greeting-inline" variants={tile}>
         <p className="home-greeting-salutation">{greeting}, {profileName || 'friend'} 👋</p>

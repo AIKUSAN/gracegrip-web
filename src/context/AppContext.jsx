@@ -59,6 +59,7 @@ export function AppProvider({ children }) {
   useEffect(() => {
     loadAppState().then((state) => {
       setAppState(state)
+      setProfileNameInput(state.profileName || '')
       setStateLoaded(true)
     })
   }, [])
