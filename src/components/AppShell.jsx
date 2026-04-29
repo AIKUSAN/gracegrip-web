@@ -1,12 +1,16 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
 'use client'
 
+import { Heart } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { AppNavigation } from './AppNavigation'
+import { WelcomeScreen } from './WelcomeScreen'
 import { PanicModal } from './PanicModal'
 
 export default function AppShell({ children }) {
   const {
+    appState,
+    stateLoaded,
     panicActive,
     panicVerse,
     panicMode,
@@ -14,7 +18,29 @@ export default function AppShell({ children }) {
     formatTime,
     setPanicActive,
     setSecondsLeft,
+    currentThemePreference,
+    onThemeChange,
+    cycleThroughThemes,
+    welcomeName,
+    setWelcomeName,
+    onBeginJourney,
   } = useApp()
+
+  // Wait for async localStorage decryption before rendering any user data.
+  if (!stateLoaded) return null
+
+  if (!appState.onboardingComplete) {
+    return (
+      <WelcomeScreen
+        currentThemePreference={currentThemePreference}
+        onThemeChange={onThemeChange}
+        cycleThroughThemes={cycleThroughThemes}
+        welcomeName={welcomeName}
+        onWelcomeNameChange={setWelcomeName}
+        onBeginJourney={onBeginJourney}
+      />
+    )
+  }
 
   return (
     <div className="page-shell">

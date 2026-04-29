@@ -8,7 +8,7 @@ export default function proxy(request) {
   if (requestHost === 'www.gracegrip.app') {
     const canonicalUrl = new URL(request.url)
     canonicalUrl.hostname = 'gracegrip.app'
-    return Response.redirect(canonicalUrl, 301)
+    return NextResponse.redirect(canonicalUrl, 308)
   }
 
   return NextResponse.next()
