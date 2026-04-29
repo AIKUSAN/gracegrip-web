@@ -2,7 +2,7 @@
 
 **Faith Over Temptation.** GraceGrip is a free, privacy-first recovery web app for people fighting porn and masturbation addiction — built on Scripture, grace, and practical tools that work without an account, a subscription, or a server.
 
-> **Status:** v1.2.1 — Live at [gracegrip.app](https://gracegrip.app)
+> **Status:** [![Latest Release](https://img.shields.io/github/v/release/AIKUSAN/gracegrip-web?display_name=tag&label=status&color=2d6a4f)](https://github.com/AIKUSAN/gracegrip-web/releases/latest) — Live at [gracegrip.app](https://gracegrip.app)
 
 ---
 
