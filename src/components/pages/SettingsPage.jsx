@@ -9,6 +9,7 @@ import {
   HelpCircle, Scale, ExternalLink,
 } from 'lucide-react'
 import { QRTransfer } from '@/components/QRTransfer'
+import { APP_VERSION } from '@/lib/appVersion'
 
 export function SettingsPage({
   profileNameInput,
@@ -303,7 +304,7 @@ export function SettingsPage({
             <div className="about-meta-name-row">
               <ShieldCheck size={16} className="about-meta-icon" aria-hidden="true" />
               <span className="about-meta-name">GraceGrip</span>
-              <span className="about-version-pill">v1.2.0</span>
+              <span className="about-version-pill">v{APP_VERSION}</span>
               <span className="about-license-pill">MIT</span>
             </div>
             <p className="about-meta-desc">

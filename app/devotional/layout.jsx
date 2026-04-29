@@ -15,5 +15,32 @@ export const metadata = {
 }
 
 export default function DevotionalLayout({ children }) {
-  return <>{children}</>
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: 'Daily Devotional',
+            url: 'https://gracegrip.app/devotional',
+            description:
+              'Daily Scripture-based devotionals for Christian addiction recovery, reflection, and habit change.',
+            inLanguage: 'en-US',
+            isPartOf: {
+              '@type': 'WebSite',
+              name: 'GraceGrip',
+              url: 'https://gracegrip.app',
+            },
+            about: {
+              '@type': 'Thing',
+              name: 'Christian recovery devotionals',
+            },
+          }),
+        }}
+      />
+      {children}
+    </>
+  )
 }

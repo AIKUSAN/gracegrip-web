@@ -15,5 +15,32 @@ export const metadata = {
 }
 
 export default function EmergencyLayout({ children }) {
-  return <>{children}</>
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebPage',
+            name: 'Emergency Urge Support',
+            url: 'https://gracegrip.app/emergency',
+            description:
+              'Immediate Christian recovery support with guided breathing, grounding, and Scripture for urge moments.',
+            inLanguage: 'en-US',
+            isPartOf: {
+              '@type': 'WebSite',
+              name: 'GraceGrip',
+              url: 'https://gracegrip.app',
+            },
+            about: {
+              '@type': 'Thing',
+              name: 'Addiction recovery support',
+            },
+          }),
+        }}
+      />
+      {children}
+    </>
+  )
 }
