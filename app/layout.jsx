@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { Libre_Baskerville, Manrope } from 'next/font/google'
 import { Toaster } from 'sonner'
 import { AppProvider } from '../src/context/AppContext'
+import { APP_VERSION } from '../src/lib/appVersion'
 import './globals.css'
 
 const libreBaskerville = Libre_Baskerville({
@@ -22,6 +23,7 @@ const manrope = Manrope({
 
 export const metadata = {
   metadataBase: new URL('https://gracegrip.app'),
+  applicationName: 'GraceGrip',
   title: 'GraceGrip — Free Scripture-Based Addiction Recovery App',
   description:
     'GraceGrip is a free, privacy-first recovery app for porn and masturbation addiction. ' +
@@ -39,6 +41,8 @@ export const metadata = {
     'urge management',
     'offline recovery app',
   ],
+  creator: 'AIKUSAN',
+  publisher: 'AIKUSAN',
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -150,6 +154,7 @@ export default function RootLayout({ children }) {
                 price: '0',
                 priceCurrency: 'USD',
               },
+              softwareVersion: APP_VERSION,
               featureList: [
                 'Panic button with guided breathing and Scripture',
                 'Daily devotional reader',
@@ -164,6 +169,34 @@ export default function RootLayout({ children }) {
                 name: 'AIKUSAN',
                 url: 'https://gracegrip.app',
               },
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'GraceGrip',
+              url: 'https://gracegrip.app',
+              description:
+                'Private, Scripture-based recovery support for pornography and masturbation addiction.',
+              inLanguage: 'en-US',
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'GraceGrip',
+              url: 'https://gracegrip.app',
+              logo: 'https://gracegrip.app/favicons/favicon-192x192.png',
+              description:
+                'Privacy-first Christian recovery support through Scripture, devotionals, and practical urge-management tools.',
             }),
           }}
         />

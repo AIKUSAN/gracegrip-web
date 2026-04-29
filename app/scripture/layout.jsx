@@ -15,5 +15,32 @@ export const metadata = {
 }
 
 export default function ScriptureLayout({ children }) {
-  return <>{children}</>
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: 'Scripture Library',
+            url: 'https://gracegrip.app/scripture',
+            description:
+              'Recovery-focused Bible verses organized by temptation, identity, forgiveness, strength, peace, and freedom.',
+            inLanguage: 'en-US',
+            isPartOf: {
+              '@type': 'WebSite',
+              name: 'GraceGrip',
+              url: 'https://gracegrip.app',
+            },
+            about: {
+              '@type': 'Thing',
+              name: 'Bible verses for addiction recovery',
+            },
+          }),
+        }}
+      />
+      {children}
+    </>
+  )
 }
