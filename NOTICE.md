@@ -60,4 +60,4 @@ This attribution requirement is a condition of the MIT license grant for this pr
 © 2026 GraceGrip. Created by IKE / AIKUSAN.  
 Original source: [github.com/AIKUSAN/gracegrip-web](https://github.com/AIKUSAN/gracegrip-web)  
 Live app: [gracegrip.app](https://gracegrip.app)  
-Current version: **v1.2.1** — Released April 2026
+Current release: [Latest on GitHub](https://github.com/AIKUSAN/gracegrip-web/releases/latest)
