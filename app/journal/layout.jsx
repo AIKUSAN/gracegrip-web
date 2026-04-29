@@ -7,6 +7,10 @@ export const metadata = {
   alternates: {
     canonical: 'https://gracegrip.app/journal',
   },
+  robots: {
+    index: false,
+    follow: true,
+  },
   openGraph: {
     title: 'GraceGrip Journal — Encrypted & Private',
     description: 'A safe, offline space to process your journey with encryption you can trust.',

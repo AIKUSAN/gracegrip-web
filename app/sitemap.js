@@ -27,17 +27,5 @@ export default function sitemap() {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
-    {
-      url: `${baseUrl}/journal`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/settings`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.4,
-    },
   ]
 }
