@@ -47,9 +47,11 @@ jobs:
       - name: Validate content
         run: npm run validate:content
 
+      - name: SEO guard
+        run: node scripts/seo-guard.mjs
+
       - name: Build
         run: npm run build
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-

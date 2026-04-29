@@ -9,19 +9,90 @@
  * No external deps — pure Node.js ESM only.
  */
 
-import { spawnSync } from 'child_process'
-import { readFileSync, writeFileSync, readdirSync } from 'fs'
-import { join, dirname } from 'path'
+import { readFileSync, writeFileSync, readdirSync, existsSync } from 'fs'
+import { join, dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
 
-// Use spawnSync with an args array — no shell interpolation, no injection surface.
-function git(args) {
-  const result = spawnSync('git', args, { cwd: ROOT, encoding: 'utf8' })
-  if (result.error || result.status !== 0) return '(unavailable)'
-  return result.stdout.trim()
+function safeRead(path) {
+  try {
+    return readFileSync(path, 'utf8').trim()
+  } catch {
+    return ''
+  }
+}
+
+function parseGitPaths() {
+  const gitPointer = safeRead(join(ROOT, '.git'))
+  if (!gitPointer.startsWith('gitdir: ')) {
+    return { gitDir: '', commonDir: '' }
+  }
+
+  const gitDir = gitPointer.replace(/^gitdir:\s*/, '').trim()
+  const commonDirRaw = safeRead(join(gitDir, 'commondir')) || '.'
+  const commonDir = resolve(gitDir, commonDirRaw)
+
+  return { gitDir, commonDir }
+}
+
+function getHeadInfo() {
+  const { gitDir, commonDir } = parseGitPaths()
+  const head = safeRead(join(gitDir, 'HEAD'))
+
+  if (!head) {
+    return {
+      branch: '(unavailable)',
+      lastCommitHash: '(unavailable)',
+      lastCommitMsg: '(unavailable)',
+      lastCommitDate: '(unavailable)',
+    }
+  }
+
+  if (!head.startsWith('ref: ')) {
+    return {
+      branch: '(detached HEAD)',
+      lastCommitHash: head.slice(0, 7),
+      lastCommitMsg: '(unavailable)',
+      lastCommitDate: '(unavailable)',
+    }
+  }
+
+  const refPath = head.replace(/^ref:\s*/, '').trim()
+  const branch = refPath.replace(/^refs\/heads\//, '')
+  const fullRefPath = existsSync(join(commonDir, refPath))
+    ? join(commonDir, refPath)
+    : join(gitDir, refPath)
+  const fullHash = safeRead(fullRefPath)
+  const lastCommitHash = fullHash ? fullHash.slice(0, 7) : '(unavailable)'
+  const refLogPath = join(commonDir, 'logs', refPath)
+  const refLog = safeRead(refLogPath)
+  const lastLine = refLog ? refLog.split(/\r?\n/).filter(Boolean).at(-1) ?? '' : ''
+
+  if (!lastLine) {
+    return {
+      branch,
+      lastCommitHash,
+      lastCommitMsg: '(unavailable)',
+      lastCommitDate: '(unavailable)',
+    }
+  }
+
+  const [meta, action = ''] = lastLine.split('\t')
+  const metaParts = meta.trim().split(' ')
+  const unixTimestamp = Number(metaParts.at(-2))
+  const commitDate = Number.isFinite(unixTimestamp)
+    ? new Date(unixTimestamp * 1000).toISOString().slice(0, 10)
+    : '(unavailable)'
+  const commitMessage = action.startsWith('commit: ') ? action.replace(/^commit:\s*/, '') : '(unavailable)'
+
+  return {
+    branch,
+    lastCommitHash,
+    lastCommitMsg: commitMessage,
+    lastCommitDate: commitDate,
+  }
 }
 
 // ── Gather facts ──────────────────────────────────────────────────────────────
@@ -29,16 +100,33 @@ function git(args) {
 const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'))
 const version = pkg.version ?? '(unknown)'
 
-const branch = git(['branch', '--show-current']) || git(['rev-parse', '--abbrev-ref', 'HEAD'])
-const lastCommitHash = git(['rev-parse', '--short', 'HEAD'])
-const lastCommitMsg = git(['log', '-1', '--pretty=%s'])
-const lastCommitDate = git(['log', '-1', '--pretty=%ci']).split(' ')[0] // YYYY-MM-DD
+const { branch, lastCommitHash, lastCommitMsg, lastCommitDate } = getHeadInfo()
 
-const recentCommits = git(['log', '--oneline', '-15'])
+const recentCommits = safeRead(join(ROOT, '.claude', 'rules', 'PROJECT_STATUS.md'))
+  .split('## Recent Commits (last 15)')
+  .at(1)
+  ?.match(/```([\s\S]*?)```/)?.[1]
+  ?.trim() || '(unavailable)'
 
 const rulesFiles = readdirSync(join(ROOT, '.claude', 'rules'))
   .filter((f) => f.endsWith('.md'))
   .sort()
+const codexAgentsExists = (() => {
+  try {
+    readFileSync(join(ROOT, '.codex', 'AGENTS.md'), 'utf8')
+    return true
+  } catch {
+    return false
+  }
+})()
+const repoSkillExists = (() => {
+  try {
+    readFileSync(join(ROOT, '.agents', 'skills', 'gracegrip-web', 'SKILL.md'), 'utf8')
+    return true
+  } catch {
+    return false
+  }
+})()
 
 const now = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC'
 
@@ -114,13 +202,22 @@ ${recentCommits}
 
 ---
 
+## Codex / Agent Entry Points
+
+${codexAgentsExists ? '- `.codex/AGENTS.md` — primary repo instruction contract' : '- `.codex/AGENTS.md` — missing'}
+${repoSkillExists ? '- `.agents/skills/gracegrip-web/SKILL.md` — repo support skill' : '- `.agents/skills/gracegrip-web/SKILL.md` — missing'}
+
+> **Read \`.codex/AGENTS.md\` first** in any new session. Use \`PROJECT_STATUS.md\` for current app state only.
+
+---
+
 ## Claude Code Rules Files
 
 The following files in \`.claude/rules/\` are auto-loaded by Claude Code as project instructions:
 
 ${rulesFiles.map((f) => `- \`.claude/rules/${f}\``).join('\n')}
 
-> **Read PROJECT_STATUS.md first** in any new session to understand current app state before making changes.
+> \`PROJECT_STATUS.md\` = state snapshot. \`.codex/AGENTS.md\` = operating rules.
 `
 
 // ── Write output ──────────────────────────────────────────────────────────────

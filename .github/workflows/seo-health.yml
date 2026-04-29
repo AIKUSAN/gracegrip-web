@@ -1,0 +1,44 @@
+name: Weekly SEO Health
+
+on:
+  schedule:
+    - cron: '17 13 * * 1'
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  health:
+    name: Weekly crawl and canonical check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Run SEO health check
+        env:
+          SEO_HEALTH_OUTPUT_DIR: seo-health
+        run: node scripts/seo-health-check.mjs
+
+      - name: Upload SEO health artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-health-report
+          path: seo-health
+
+      - name: Publish summary
+        if: always()
+        run: |
+          if [ -f seo-health/seo-health-report.md ]; then
+            cat seo-health/seo-health-report.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No SEO health report generated." >> "$GITHUB_STEP_SUMMARY"
+          fi

@@ -22,8 +22,6 @@ const URLS = [
   `https://${HOST}/emergency`,
   `https://${HOST}/scripture`,
   `https://${HOST}/devotional`,
-  `https://${HOST}/journal`,
-  `https://${HOST}/settings`,
 ]
 
 const payload = {
