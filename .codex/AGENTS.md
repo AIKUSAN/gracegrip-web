@@ -15,6 +15,18 @@ This file is source of truth for repo-local Codex behavior.
   - load `senior-devops`
 - App state, APIs, storage, validation, data/export/import:
   - load `senior-backend`
+- Frontend UI work, page polish, responsive behavior, interaction details:
+  - load `senior-frontend`
+  - load `frontend-design`
+  - load `ui-ux-pro-max`
+- Component-system work, shadcn patterns, reusable UI primitives:
+  - load `build-web-apps:shadcn`
+- Security-sensitive work, auth, secrets, headers, hardening, safe data flow:
+  - load `senior-security`
+- System design, cross-cutting architecture, repo-wide tradeoffs:
+  - load `senior-architect`
+- End-to-end feature work across frontend + backend + deploy surface:
+  - load `senior-fullstack`
 
 ## SEO Operating Rules
 
@@ -46,6 +58,22 @@ This file is source of truth for repo-local Codex behavior.
 - verify `www -> apex`
 - verify IndexNow payload only includes indexable URLs
 - verify Search Console artifacts/reporting if Google automation changed
+
+## UI / App Rules
+
+- Preserve GraceGrip visual identity unless user asks for redesign
+- For UI/UX work, default to:
+  - `senior-frontend`
+  - `frontend-design`
+  - `ui-ux-pro-max`
+- For component-library or shadcn-style implementation details, also load:
+  - `build-web-apps:shadcn`
+
+## Security / Architecture Rules
+
+- For security-relevant tasks, always load `senior-security`
+- For architecture or repo-wide structure decisions, always load `senior-architect`
+- For full-stack feature, release, or integration work, load `senior-fullstack`
 
 ## Reading Order
 
