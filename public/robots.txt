@@ -1,7 +1,12 @@
 User-agent: *
 Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 # Do not block /_next/static/ or /_next/image/ as search engines need JS/CSS/Images to render the page correctly.
 Disallow: /api/
+
+# AI-readable references
+# llms: https://gracegrip.app/llms.txt
+# llms-full: https://gracegrip.app/llms-full.txt
 
 # Sitemap
 Sitemap: https://gracegrip.app/sitemap.xml
