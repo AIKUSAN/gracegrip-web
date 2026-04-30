@@ -1,4 +1,4 @@
-import { DISCOVERY_PUBLIC_ROUTES, getDiscoveryUrl } from '../src/lib/discoveryMetadata'
+import { DISCOVERY_PUBLIC_ROUTES, getDiscoveryUrl } from '../src/lib/discoveryMetadata.js'
 
 export default function sitemap() {
   const currentDate = new Date().toISOString()
