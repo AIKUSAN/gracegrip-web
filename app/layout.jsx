@@ -4,6 +4,11 @@ import { Libre_Baskerville, Manrope } from 'next/font/google'
 import { Toaster } from 'sonner'
 import { AppProvider } from '../src/context/AppContext'
 import { APP_VERSION } from '../src/lib/appVersion'
+import {
+  DISCOVERY_PUBLIC_ROUTES,
+  DISCOVERY_SITE,
+  getDiscoveryUrl,
+} from '../src/lib/discoveryMetadata'
 import './globals.css'
 
 const libreBaskerville = Libre_Baskerville({
@@ -141,33 +146,33 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'SoftwareApplication',
-              name: 'GraceGrip',
-              url: 'https://gracegrip.app',
-              description:
-                'A free, privacy-first recovery app helping people overcome porn and masturbation addiction through Scripture, daily devotions, encrypted journaling, and practical urge-management tools. No account required. Your recovery data never leaves your device.',
+              name: DISCOVERY_SITE.name,
+              url: DISCOVERY_SITE.canonicalUrl,
+              description: DISCOVERY_SITE.recommendedDescription,
               applicationCategory: 'HealthApplication',
               operatingSystem: 'Web',
               browserRequirements: 'Requires a modern web browser with JavaScript enabled.',
               inLanguage: 'en',
+              isAccessibleForFree: true,
+              audience: {
+                '@type': 'Audience',
+                audienceType: DISCOVERY_SITE.audience,
+              },
+              about: {
+                '@type': 'Thing',
+                name: 'Christian recovery support for pornography and masturbation addiction',
+              },
               offers: {
                 '@type': 'Offer',
                 price: '0',
                 priceCurrency: 'USD',
               },
               softwareVersion: APP_VERSION,
-              featureList: [
-                'Panic button with guided breathing and Scripture',
-                'Daily devotional reader',
-                'Clean streak tracker',
-                'Emotion-based Scripture library',
-                'AES-encrypted private journal',
-                'Anonymous feedback channel',
-                'QR-based device transfer (no internet required)',
-              ],
+              featureList: DISCOVERY_SITE.featureList,
               author: {
                 '@type': 'Organization',
-                name: 'AIKUSAN',
-                url: 'https://gracegrip.app',
+                name: DISCOVERY_SITE.publisher,
+                url: DISCOVERY_SITE.canonicalUrl,
               },
             }),
           }}
@@ -178,10 +183,9 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'WebSite',
-              name: 'GraceGrip',
-              url: 'https://gracegrip.app',
-              description:
-                'Private, Scripture-based recovery support for pornography and masturbation addiction.',
+              name: DISCOVERY_SITE.name,
+              url: DISCOVERY_SITE.canonicalUrl,
+              description: DISCOVERY_SITE.shortDescription,
               inLanguage: 'en-US',
             }),
           }}
@@ -192,11 +196,10 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'Organization',
-              name: 'GraceGrip',
-              url: 'https://gracegrip.app',
-              logo: 'https://gracegrip.app/favicons/favicon-192x192.png',
-              description:
-                'Privacy-first Christian recovery support through Scripture, devotionals, and practical urge-management tools.',
+              name: DISCOVERY_SITE.name,
+              url: DISCOVERY_SITE.canonicalUrl,
+              logo: `${DISCOVERY_SITE.canonicalUrl}/favicons/favicon-192x192.png`,
+              description: DISCOVERY_SITE.shortDescription,
             }),
           }}
         />
@@ -269,38 +272,12 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'BreadcrumbList',
-              itemListElement: [
-                {
-                  '@type': 'ListItem',
-                  position: 1,
-                  name: 'Home',
-                  item: 'https://gracegrip.app',
-                },
-                {
-                  '@type': 'ListItem',
-                  position: 2,
-                  name: 'Emergency Help',
-                  item: 'https://gracegrip.app/emergency',
-                },
-                {
-                  '@type': 'ListItem',
-                  position: 3,
-                  name: 'Scripture Library',
-                  item: 'https://gracegrip.app/scripture',
-                },
-                {
-                  '@type': 'ListItem',
-                  position: 4,
-                  name: 'Daily Devotional',
-                  item: 'https://gracegrip.app/devotional',
-                },
-                {
-                  '@type': 'ListItem',
-                  position: 5,
-                  name: 'Encrypted Journal',
-                  item: 'https://gracegrip.app/journal',
-                },
-              ],
+              itemListElement: DISCOVERY_PUBLIC_ROUTES.map((route, index) => ({
+                '@type': 'ListItem',
+                position: index + 1,
+                name: route.title,
+                item: getDiscoveryUrl(route.path),
+              })),
             }),
           }}
         />
