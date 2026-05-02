@@ -9,10 +9,6 @@ export const metadata = {
   alternates: {
     canonical: 'https://gracegrip.app/settings',
   },
-  robots: {
-    index: false,
-    follow: true,
-  },
 }
 
 export default function SettingsLayout({ children }) {
