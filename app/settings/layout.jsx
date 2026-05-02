@@ -2,6 +2,10 @@
 export const metadata = {
   title: 'Settings — GraceGrip Recovery',
   description: 'Manage your profile, theme, and private data backup for the GraceGrip app.',
+  robots: {
+    index: false,
+    follow: true,
+  },
   alternates: {
     canonical: 'https://gracegrip.app/settings',
   },

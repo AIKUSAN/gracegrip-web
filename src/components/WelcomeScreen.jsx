@@ -1,6 +1,7 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
 'use client'
 
+import Link from 'next/link'
 import { HeroSection } from '@/components/HeroSection'
 
 const WELCOME_VALUE_PROPS = [
@@ -44,6 +45,28 @@ export function WelcomeScreen({
               <p>{prop.description}</p>
             </article>
           ))}
+        </section>
+
+        <section className="welcome-discover" aria-labelledby="welcome-discover-title">
+          <div className="welcome-discover-copy">
+            <h2 id="welcome-discover-title">Explore GraceGrip</h2>
+            <p>
+              Private recovery support through emergency urge help, Scripture, and
+              daily devotionals.
+            </p>
+          </div>
+
+          <nav className="welcome-discover-links" aria-label="Public GraceGrip pages">
+            <Link href="/emergency" className="welcome-discover-link">
+              Emergency Urge Support
+            </Link>
+            <Link href="/scripture" className="welcome-discover-link">
+              Scripture Library
+            </Link>
+            <Link href="/devotional" className="welcome-discover-link">
+              Daily Devotional
+            </Link>
+          </nav>
         </section>
       </main>
     </div>

@@ -1,6 +1,7 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
 'use client'
 
+import Link from 'next/link'
 import { useApp } from '@/context/AppContext'
 import AppShell from '@/components/AppShell'
 import { DevotionalPage } from '@/components/pages/DevotionalPage'
@@ -24,6 +25,17 @@ export default function Page() {
             <li>A grace-first reflection on the passage</li>
             <li>A practical daily practice to carry into your day</li>
             <li>A completion tracker to build consistency</li>
+          </ul>
+          <p>
+            This page is designed for people who want a daily Christian devotional for addiction
+            recovery, with short reflections that connect Scripture to healing, consistency, and
+            the next faithful step.
+          </p>
+          <h2>Related GraceGrip Resources</h2>
+          <ul>
+            <li><Link href="/">Home</Link> for streak tracking and the broader recovery experience.</li>
+            <li><Link href="/emergency">Emergency Urge Support</Link> for immediate help during intense temptation.</li>
+            <li><Link href="/scripture">Scripture Library</Link> to browse recovery-focused verses by need.</li>
           </ul>
           <p>
             Devotionals rotate daily based on the day of year. Free, private, no account required.

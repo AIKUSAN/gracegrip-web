@@ -101,6 +101,7 @@ audit-report.json
 !.codex/
 .codex/*
 !.codex/AGENTS.md
+.seo-cache/
 
 # ─── Internal Docs (agent notes, audit trails, handovers) ────
 # IRONCLAD: These NEVER enter the public repo under any circumstance.

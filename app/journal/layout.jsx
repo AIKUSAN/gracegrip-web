@@ -4,6 +4,10 @@ export const metadata = {
   description:
     'Private, AES-encrypted journaling for recovery. Safely log your ' +
     'thoughts and progress without worrying about your data leaving your device.',
+  robots: {
+    index: false,
+    follow: true,
+  },
   alternates: {
     canonical: 'https://gracegrip.app/journal',
   },

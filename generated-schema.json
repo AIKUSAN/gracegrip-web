@@ -1,0 +1,165 @@
+{
+  "homepage": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://gracegrip.app/#app",
+        "name": "GraceGrip",
+        "url": "https://gracegrip.app/",
+        "description": "GraceGrip is a free, privacy-first Christian recovery web app that helps people fight pornography and masturbation addiction with Scripture, devotionals, urge support, and encrypted journaling.",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web",
+        "browserRequirements": "Requires a modern web browser with JavaScript enabled.",
+        "inLanguage": "en",
+        "isAccessibleForFree": true,
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "featureList": [
+          "Panic button with guided breathing and Scripture",
+          "Daily devotional reader",
+          "Clean streak tracker",
+          "Emotion-based Scripture library",
+          "AES-encrypted private journal",
+          "Anonymous feedback channel",
+          "QR-based device transfer"
+        ],
+        "publisher": {
+          "@id": "https://gracegrip.app/#org"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://gracegrip.app/#org",
+        "name": "GraceGrip",
+        "url": "https://gracegrip.app/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://gracegrip.app/favicons/favicon-192x192.png"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://gracegrip.app/#website",
+        "url": "https://gracegrip.app/",
+        "name": "GraceGrip",
+        "inLanguage": "en-US",
+        "publisher": {
+          "@id": "https://gracegrip.app/#org"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://gracegrip.app/#webpage",
+        "url": "https://gracegrip.app/",
+        "name": "GraceGrip - Free Scripture-Based Addiction Recovery App",
+        "description": "GraceGrip is a free, privacy-first recovery app for pornography and masturbation addiction with Scripture, daily devotions, urge support, and encrypted journaling.",
+        "isPartOf": {
+          "@id": "https://gracegrip.app/#website"
+        },
+        "about": {
+          "@id": "https://gracegrip.app/#app"
+        }
+      }
+    ]
+  },
+  "emergency": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://gracegrip.app/emergency#webpage",
+        "url": "https://gracegrip.app/emergency",
+        "name": "Emergency Urge Support",
+        "description": "Immediate Christian recovery support with guided breathing, grounding, and Scripture for urge moments.",
+        "isPartOf": {
+          "@id": "https://gracegrip.app/#website"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://gracegrip.app/emergency#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://gracegrip.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Emergency Urge Support"
+          }
+        ]
+      }
+    ]
+  },
+  "scripture": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "https://gracegrip.app/scripture#webpage",
+        "url": "https://gracegrip.app/scripture",
+        "name": "Scripture Library",
+        "description": "Recovery-focused Bible verses organized by temptation, identity, forgiveness, strength, peace, and freedom.",
+        "isPartOf": {
+          "@id": "https://gracegrip.app/#website"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://gracegrip.app/scripture#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://gracegrip.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Scripture Library"
+          }
+        ]
+      }
+    ]
+  },
+  "devotional": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "https://gracegrip.app/devotional#webpage",
+        "url": "https://gracegrip.app/devotional",
+        "name": "Daily Devotional",
+        "description": "Daily Scripture-based devotionals for Christian addiction recovery, reflection, and habit change.",
+        "isPartOf": {
+          "@id": "https://gracegrip.app/#website"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://gracegrip.app/devotional#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://gracegrip.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Daily Devotional"
+          }
+        ]
+      }
+    ]
+  }
+}

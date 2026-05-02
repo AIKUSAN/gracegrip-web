@@ -2,13 +2,10 @@
 import { Analytics } from '@vercel/analytics/react'
 import { Libre_Baskerville, Manrope } from 'next/font/google'
 import { Toaster } from 'sonner'
+import { JsonLd } from '@/components/JsonLd'
 import { AppProvider } from '../src/context/AppContext'
 import { APP_VERSION } from '../src/lib/appVersion'
-import {
-  DISCOVERY_PUBLIC_ROUTES,
-  DISCOVERY_SITE,
-  getDiscoveryUrl,
-} from '../src/lib/discoveryMetadata'
+import { DISCOVERY_SITE } from '../src/lib/discoveryMetadata'
 import './globals.css'
 
 const libreBaskerville = Libre_Baskerville({
@@ -138,147 +135,63 @@ export default function RootLayout({ children }) {
           content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co https://va.vercel-scripts.com; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; media-src 'self'; worker-src 'none';"
         />
         <meta name="referrer" content="no-referrer" />
-        {/* Schema.org JSON-LD — helps Google identify GraceGrip as a SoftwareApplication
-            and enables rich results in search (ratings, category, price). */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'SoftwareApplication',
-              name: DISCOVERY_SITE.name,
-              url: DISCOVERY_SITE.canonicalUrl,
-              description: DISCOVERY_SITE.recommendedDescription,
-              applicationCategory: 'HealthApplication',
-              operatingSystem: 'Web',
-              browserRequirements: 'Requires a modern web browser with JavaScript enabled.',
-              inLanguage: 'en',
-              isAccessibleForFree: true,
-              audience: {
-                '@type': 'Audience',
-                audienceType: DISCOVERY_SITE.audience,
-              },
-              about: {
-                '@type': 'Thing',
-                name: 'Christian recovery support for pornography and masturbation addiction',
-              },
-              offers: {
-                '@type': 'Offer',
-                price: '0',
-                priceCurrency: 'USD',
-              },
-              softwareVersion: APP_VERSION,
-              featureList: DISCOVERY_SITE.featureList,
-              author: {
-                '@type': 'Organization',
-                name: DISCOVERY_SITE.publisher,
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@graph': [
+              {
+                '@type': 'SoftwareApplication',
+                '@id': 'https://gracegrip.app/#app',
+                name: DISCOVERY_SITE.name,
                 url: DISCOVERY_SITE.canonicalUrl,
+                description: DISCOVERY_SITE.recommendedDescription,
+                applicationCategory: 'HealthApplication',
+                operatingSystem: 'Web',
+                browserRequirements: 'Requires a modern web browser with JavaScript enabled.',
+                inLanguage: 'en',
+                isAccessibleForFree: true,
+                audience: {
+                  '@type': 'Audience',
+                  audienceType: DISCOVERY_SITE.audience,
+                },
+                about: {
+                  '@type': 'Thing',
+                  name: 'Christian recovery support for pornography and masturbation addiction',
+                },
+                offers: {
+                  '@type': 'Offer',
+                  price: '0',
+                  priceCurrency: 'USD',
+                },
+                softwareVersion: APP_VERSION,
+                featureList: DISCOVERY_SITE.featureList,
+                publisher: {
+                  '@id': 'https://gracegrip.app/#org',
+                },
               },
-            }),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'WebSite',
-              name: DISCOVERY_SITE.name,
-              url: DISCOVERY_SITE.canonicalUrl,
-              description: DISCOVERY_SITE.shortDescription,
-              inLanguage: 'en-US',
-            }),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Organization',
-              name: DISCOVERY_SITE.name,
-              url: DISCOVERY_SITE.canonicalUrl,
-              logo: `${DISCOVERY_SITE.canonicalUrl}/favicons/favicon-192x192.png`,
-              description: DISCOVERY_SITE.shortDescription,
-            }),
-          }}
-        />
-        {/* FAQPage JSON-LD — enables expandable Q&A rich snippets in Google search results.
-            Recovery apps are frequently searched via questions; this schema surfaces answers
-            directly in the SERP without requiring backlinks or domain authority. */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'FAQPage',
-              mainEntity: [
-                {
-                  '@type': 'Question',
-                  name: 'Is GraceGrip free?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'Yes. GraceGrip is completely free — no subscription, no premium tier, no ads. It will always be free.',
-                  },
+              {
+                '@type': 'Organization',
+                '@id': 'https://gracegrip.app/#org',
+                name: DISCOVERY_SITE.name,
+                url: DISCOVERY_SITE.canonicalUrl,
+                description: DISCOVERY_SITE.shortDescription,
+                logo: {
+                  '@type': 'ImageObject',
+                  url: `${DISCOVERY_SITE.canonicalUrl}/favicons/favicon-192x192.png`,
                 },
-                {
-                  '@type': 'Question',
-                  name: 'Do I need to create an account to use GraceGrip?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'No account is required. GraceGrip stores everything on your device. There is no sign-up, no email, and no password.',
-                  },
+              },
+              {
+                '@type': 'WebSite',
+                '@id': 'https://gracegrip.app/#website',
+                name: DISCOVERY_SITE.name,
+                url: DISCOVERY_SITE.canonicalUrl,
+                description: DISCOVERY_SITE.shortDescription,
+                inLanguage: 'en-US',
+                publisher: {
+                  '@id': 'https://gracegrip.app/#org',
                 },
-                {
-                  '@type': 'Question',
-                  name: 'Is my journal private?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'Yes. Journal entries are encrypted with AES via the Web Crypto API before being saved. Your entries never leave your device and are never sent to any server.',
-                  },
-                },
-                {
-                  '@type': 'Question',
-                  name: 'Does GraceGrip work offline?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'Yes. All Scripture, devotionals, and tools are bundled into the app at build time. Once loaded, GraceGrip works fully offline — no internet connection needed.',
-                  },
-                },
-                {
-                  '@type': 'Question',
-                  name: 'What addictions does GraceGrip support?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'GraceGrip is built primarily for pornography and masturbation addiction recovery, with a Scripture-based, grace-first approach. The tools — urge management, journaling, devotionals — can support any habit or addiction recovery journey.',
-                  },
-                },
-                {
-                  '@type': 'Question',
-                  name: 'Is GraceGrip only for Christians?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'GraceGrip is rooted in Christian faith and uses Scripture as its primary source of encouragement. It is designed for people who find strength in their faith. Anyone is welcome to use it.',
-                  },
-                },
-              ],
-            }),
-          }}
-        />
-        {/* BreadcrumbList JSON-LD — helps Google understand site hierarchy and generates rich snippets. */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'BreadcrumbList',
-              itemListElement: DISCOVERY_PUBLIC_ROUTES.map((route, index) => ({
-                '@type': 'ListItem',
-                position: index + 1,
-                name: route.title,
-                item: getDiscoveryUrl(route.path),
-              })),
-            }),
+              },
+            ],
           }}
         />
       </head>

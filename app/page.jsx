@@ -1,6 +1,8 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
 'use client'
 
+import Link from 'next/link'
+import { JsonLd } from '@/components/JsonLd'
 import { useApp } from '@/context/AppContext'
 import AppShell from '@/components/AppShell'
 import { HomePage } from '@/components/pages/HomePage'
@@ -10,6 +12,24 @@ export default function Page() {
 
   return (
     <>
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          '@id': 'https://gracegrip.app/#webpage',
+          url: 'https://gracegrip.app/',
+          name: 'GraceGrip — Free Scripture-Based Addiction Recovery App',
+          description:
+            'GraceGrip is a free, privacy-first recovery app for pornography and masturbation addiction with Scripture, daily devotions, urge support, and encrypted journaling.',
+          inLanguage: 'en-US',
+          isPartOf: {
+            '@id': 'https://gracegrip.app/#website',
+          },
+          about: {
+            '@id': 'https://gracegrip.app/#app',
+          },
+        }}
+      />
       <noscript>
         <main style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '640px', margin: '0 auto' }}>
           <h1>GraceGrip — Free Scripture-Based Addiction Recovery App</h1>
@@ -27,6 +47,18 @@ export default function Page() {
             <li>Emergency urge support: breathing, grounding, panic verse</li>
             <li>AES-encrypted private journal — stays on your device</li>
             <li>No account. No tracking. Completely free.</li>
+          </ul>
+          <h2>Why GraceGrip Helps</h2>
+          <p>
+            GraceGrip is designed for people seeking Christian, Scripture-based support for
+            pornography and masturbation addiction recovery. The experience is built to stay
+            private, calm, and accessible from any modern browser without requiring an account.
+          </p>
+          <h2>Explore GraceGrip</h2>
+          <ul>
+            <li><Link href="/emergency">Emergency Urge Support</Link> for moments of temptation and panic.</li>
+            <li><Link href="/scripture">Scripture Library</Link> organized by temptation, shame, identity, peace, and strength.</li>
+            <li><Link href="/devotional">Daily Devotional</Link> for reflection, encouragement, and practical next steps.</li>
           </ul>
         </main>
       </noscript>

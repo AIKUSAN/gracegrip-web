@@ -356,6 +356,68 @@ textarea:focus-visible {
   line-height: 1.4;
 }
 
+.welcome-discover {
+  border: 1px solid color-mix(in srgb, var(--line) 88%, transparent);
+  border-radius: 0.95rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--card) 97%, white), color-mix(in srgb, var(--card) 92%, transparent));
+  padding: 1rem 1.05rem 1.1rem;
+  box-shadow: 0 16px 26px -24px color-mix(in srgb, var(--ink) 28%, transparent);
+}
+
+.welcome-discover-copy {
+  text-align: center;
+}
+
+.welcome-discover-copy h2 {
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.welcome-discover-copy p {
+  margin: 0.4rem auto 0;
+  max-width: 44rem;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.welcome-discover-links {
+  margin-top: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.welcome-discover-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.65rem;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid color-mix(in srgb, var(--line) 92%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--card) 96%, transparent);
+  color: var(--brand-strong);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: 0 10px 18px -18px color-mix(in srgb, var(--ink) 26%, transparent);
+}
+
+.welcome-discover-link:hover {
+  transform: translateY(-1px);
+  background: color-mix(in srgb, var(--secondary) 68%, white);
+  border-color: color-mix(in srgb, var(--brand) 22%, var(--line));
+  color: var(--brand);
+}
+
+.welcome-discover-link:focus-visible {
+  outline-offset: 3px;
+}
+
 /* ─── Hero / Tailark card ─────────────────────────────────────────────── */
 
 .hero {
@@ -2306,6 +2368,19 @@ textarea:focus-visible {
 
   .welcome-value-grid {
     grid-template-columns: 1fr;
+  }
+
+  .welcome-discover {
+    padding: 0.95rem;
+  }
+
+  .welcome-discover-links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .welcome-discover-link {
+    width: 100%;
   }
 }
 
