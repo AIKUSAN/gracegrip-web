@@ -165,6 +165,9 @@ export default function RootLayout({ children }) {
                 },
                 softwareVersion: APP_VERSION,
                 featureList: DISCOVERY_SITE.featureList,
+                author: {
+                  '@id': 'https://gracegrip.app/#author',
+                },
                 publisher: {
                   '@id': 'https://gracegrip.app/#org',
                 },
@@ -179,6 +182,15 @@ export default function RootLayout({ children }) {
                   '@type': 'ImageObject',
                   url: `${DISCOVERY_SITE.canonicalUrl}/favicons/favicon-192x192.png`,
                 },
+                founder: {
+                  '@id': 'https://gracegrip.app/#author',
+                },
+              },
+              {
+                '@type': 'Person',
+                '@id': 'https://gracegrip.app/#author',
+                name: 'AIKUSAN',
+                url: 'https://github.com/AIKUSAN',
               },
               {
                 '@type': 'WebSite',

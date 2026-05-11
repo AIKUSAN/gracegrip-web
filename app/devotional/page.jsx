@@ -15,32 +15,31 @@ export default function Page() {
         <main style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '640px', margin: '0 auto' }}>
           <h1>Daily Devotional — GraceGrip</h1>
           <p>
-            A new Scripture-based devotional every day of the year — written specifically for
-            people in addiction recovery. Each devotional includes a Bible passage, a reflection
-            on what it means for your recovery journey, and a practical daily practice to apply.
+            GraceGrip&apos;s Daily Devotional is a 31-day Scripture-based devotional plan written
+            specifically for people recovering from pornography and masturbation addiction. Each day
+            provides a Bible passage selected for its relevance to recovery, a grace-first reflection
+            that connects the passage to the practical experience of addiction and healing, and a
+            concrete daily practice to carry into the day. The devotional rotates deterministically
+            by day of year so every user reads the same entry on the same day — creating a shared
+            rhythm without requiring an account or community signup. A completion tracker lets users
+            mark days finished and build consistency over time. All progress is stored locally on
+            the device and is never sent to servers. GraceGrip&apos;s devotional is free, requires
+            no login, and is designed to complement — not replace — professional support.
           </p>
           <h2>What Each Devotional Includes</h2>
           <ul>
             <li>A Scripture passage relevant to recovery and healing</li>
-            <li>A grace-first reflection on the passage</li>
-            <li>A practical daily practice to carry into your day</li>
-            <li>A completion tracker to build consistency</li>
+            <li>A grace-first reflection connecting the passage to addiction recovery</li>
+            <li>A practical daily practice to apply throughout the day</li>
+            <li>A completion tracker to build consistency over time</li>
           </ul>
-          <p>
-            This page is designed for people who want a daily Christian devotional for addiction
-            recovery, with short reflections that connect Scripture to healing, consistency, and
-            the next faithful step.
-          </p>
           <h2>Related GraceGrip Resources</h2>
           <ul>
             <li><Link href="/">Home</Link> for streak tracking and the broader recovery experience.</li>
             <li><Link href="/emergency">Emergency Urge Support</Link> for immediate help during intense temptation.</li>
             <li><Link href="/scripture">Scripture Library</Link> to browse recovery-focused verses by need.</li>
           </ul>
-          <p>
-            Devotionals rotate daily based on the day of year. Free, private, no account required.
-            Your progress stays on your device.
-          </p>
+          <p>Free, private, no account required. Your progress stays on your device.</p>
         </main>
       </noscript>
       <AppShell>
