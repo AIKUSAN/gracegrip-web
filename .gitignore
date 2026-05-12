@@ -90,17 +90,8 @@ audit-report.json
 .mcp-debug-tools/
 .agents/
 .codex/
+.githooks/
 .remember/
-!.agents/
-.agents/*
-!.agents/skills/
-.agents/skills/*
-!.agents/skills/gracegrip-web/
-.agents/skills/gracegrip-web/*
-!.agents/skills/gracegrip-web/SKILL.md
-!.codex/
-.codex/*
-!.codex/AGENTS.md
 .seo-cache/
 
 # ─── Internal Docs (agent notes, audit trails, handovers) ────
