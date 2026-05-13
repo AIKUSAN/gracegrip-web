@@ -164,6 +164,7 @@ const md = `# GraceGrip — Project Status
 | \`/devotional\` | \`app/devotional/page.jsx\` — Daily devotional reader |
 | \`/journal\` | \`app/journal/page.jsx\` — Encrypted private journal |
 | \`/settings\` | \`app/settings/page.jsx\` — Theme, profile, backup, feedback |
+| \`/api/feedback\` | \`app/api/feedback/route.js\` — Anonymous feedback insert via Neon Postgres |
 | \`/api/og\` | \`app/api/og/route.js\` — Serverless OG image (Puppeteer screenshot + fallback card) |
 
 ### Key Dependencies
@@ -174,7 +175,7 @@ const md = `# GraceGrip — Project Status
 | react | \`${pkg.dependencies?.react ?? '?'}\` |
 | tailwindcss | \`${pkg.dependencies?.tailwindcss ?? '?'}\` |
 | motion | \`${pkg.dependencies?.motion ?? '?'}\` |
-| @supabase/supabase-js | \`${pkg.dependencies?.['@supabase/supabase-js'] ?? '?'}\` |
+| @neondatabase/serverless | \`${pkg.dependencies?.['@neondatabase/serverless'] ?? '?'}\` |
 | puppeteer-core | \`${pkg.dependencies?.['puppeteer-core'] ?? '?'}\` |
 | @sparticuz/chromium | \`${pkg.dependencies?.['@sparticuz/chromium'] ?? '?'}\` |
 
@@ -190,7 +191,7 @@ const md = `# GraceGrip — Project Status
 - **Backup / restore** — JSON export + import, QR-based device transfer
 - **Dark mode** — light / dark / system, persisted to localStorage
 - **OG image** — Puppeteer screenshot at \`/api/og\`, branded fallback card via \`next/og\`
-- **Anonymous feedback** — optional Supabase channel (only external network call)
+- **Anonymous feedback** — optional Neon Postgres channel through a Vercel serverless route
 
 ---
 

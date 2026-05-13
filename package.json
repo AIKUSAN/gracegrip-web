@@ -16,8 +16,8 @@
     "update-status": "node scripts/update-project-status.mjs"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
     "@sparticuz/chromium": "148.0.0",
-    "@supabase/supabase-js": "^2.105.3",
     "@tabler/icons-react": "^3.42.0",
     "@tailwindcss/postcss": "^4.3.0",
     "@vercel/analytics": "^2.0.0",

@@ -22,7 +22,6 @@ import {
   addOneDay,
 } from '../utils/storage'
 import { DAILY_ENCOURAGEMENTS, EMERGENCY_ENCOURAGEMENTS } from '../data/encouragements'
-import { supabase } from '../lib/supabase'
 
 const AppContext = createContext(null)
 
@@ -320,10 +319,16 @@ export function AppProvider({ children }) {
   }
 
   const onSubmitFeedback = async (rating, message) => {
-    if (!supabase) return { ok: false, error: 'Feedback not configured.' }
     try {
-      const { error } = await supabase.from('user_feedback').insert({ rating, message })
-      if (error) return { ok: false, error: error.message }
+      const response = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ rating, message }),
+      })
+      const payload = await response.json().catch(() => null)
+      if (!response.ok) {
+        return { ok: false, error: payload?.error || 'Feedback unavailable.' }
+      }
       return { ok: true }
     } catch (err) {
       return { ok: false, error: String(err) }

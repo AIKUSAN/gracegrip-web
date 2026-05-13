@@ -1,6 +1,6 @@
 # GraceGrip
 
-**Faith Over Temptation.** GraceGrip is a free, privacy-first recovery web app for people fighting porn and masturbation addiction — built on Scripture, grace, and practical tools that work without an account, a subscription, or a server.
+**Faith Over Temptation.** GraceGrip is a free, privacy-first recovery web app for people fighting porn and masturbation addiction — built on Scripture, grace, and practical tools that work without an account, a subscription, or cloud sync.
 
 [![Latest Release](https://img.shields.io/github/v/release/AIKUSAN/gracegrip-web?display_name=tag&label=release&color=2d6a4f&logo=github)](https://github.com/AIKUSAN/gracegrip-web/releases/latest)
 [![Live Site](https://img.shields.io/website?url=https%3A%2F%2Fgracegrip.app&up_message=gracegrip.app&down_message=offline&label=live&color=1d4ed8)](https://gracegrip.app)
@@ -49,7 +49,7 @@ Some people reach for their phone in a moment of temptation and find nothing tha
 | Animation | Motion (Framer Motion v12) |
 | Fonts | Libre Baskerville + Manrope (self-hosted, no CDN) |
 | Storage | `localStorage` (sensitive fields AES-encrypted) |
-| Feedback | Supabase (insert-only, no auth, graceful offline degradation) |
+| Feedback | Neon Postgres via Vercel serverless route (anonymous, no auth, graceful degradation) |
 | Deployment | Vercel (`gracegrip.app`) |
 
 ---
@@ -59,6 +59,12 @@ Some people reach for their phone in a moment of temptation and find nothing tha
 ```bash
 npm install
 npm run dev
+```
+
+For local feedback testing after the Vercel-managed Neon integration is connected:
+
+```bash
+vercel env pull .env.local
 ```
 
 ## Production Build

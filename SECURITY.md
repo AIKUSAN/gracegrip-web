@@ -26,7 +26,7 @@ To report a vulnerability, open a [GitHub Security Advisory](https://github.com/
 
 ## Scope
 
-GraceGrip is a **privacy-first, offline-capable static web app**. There is no backend server, no user accounts, and no personal data stored remotely. The only external data surface is anonymous feedback submission (rating + optional message) stored in Supabase.
+GraceGrip is a **privacy-first, offline-capable static web app**. There are no user accounts and no personal recovery data stored remotely. The only external data surface is anonymous feedback submission (rating + optional message) stored in Neon Postgres through a Vercel serverless route.
 
 In-scope for this repo:
 
@@ -96,7 +96,7 @@ We use a simplified severity scale based on real-world impact to users:
 | Severity | Example |
 |----------|---------|
 | **Critical** | User data exfiltration; CSP bypass enabling remote code execution |
-| **High** | XSS that can read encrypted localStorage keys; Supabase RLS bypass enabling unauthorized reads |
+| **High** | XSS that can read encrypted localStorage keys; feedback database exposure enabling unauthorized reads |
 | **Medium** | Logic flaw in the panic/recovery flow; clickjacking (despite `frame-ancestors: none`) |
 | **Low** | Missing security header; informational disclosure |
 
@@ -104,7 +104,7 @@ We use a simplified severity scale based on real-world impact to users:
 
 - **Do not** open a public GitHub issue for security vulnerabilities.
 - **Do not** disclose the issue publicly before we have had a reasonable opportunity to fix it.
-- **Do not** access data belonging to other users (there are no user accounts, but Supabase feedback rows belong to the service).
+- **Do not** access data belonging to other users (there are no user accounts, but Neon feedback rows belong to the service).
 
 ### Acknowledgements
 
