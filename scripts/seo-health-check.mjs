@@ -1,8 +1,9 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License */
 import { mkdir, writeFile } from 'fs/promises'
 
-const USER_AGENT = 'GraceGripSEOHealth/1.0 (+https://gracegrip.app)'
+const USER_AGENT = 'Mozilla/5.0 (compatible; GraceGripSEOHealth/1.0; +https://gracegrip.app/robots.txt)'
 const OUTPUT_DIR = process.env.SEO_HEALTH_OUTPUT_DIR || 'seo-health'
+const BYPASS_SECRET = process.env.VERCEL_AUTOMATION_BYPASS_SECRET || ''
 const INDEXABLE_URLS = [
   'https://gracegrip.app/',
   'https://gracegrip.app/emergency',
@@ -14,9 +15,20 @@ function statusLine(ok, label, detail) {
   return `${ok ? 'PASS' : 'FAIL'} ${label}${detail ? ` — ${detail}` : ''}`
 }
 
+function buildHeaders(extra = {}) {
+  const headers = {
+    'User-Agent': USER_AGENT,
+    Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'en-US,en;q=0.5',
+    ...extra,
+  }
+  if (BYPASS_SECRET) headers['x-vercel-automation-bypass-secret'] = BYPASS_SECRET
+  return headers
+}
+
 async function fetchText(url) {
   const response = await fetch(url, {
-    headers: { 'User-Agent': USER_AGENT },
+    headers: buildHeaders(),
     redirect: 'follow',
   })
   const text = await response.text()
@@ -26,7 +38,7 @@ async function fetchText(url) {
 async function fetchNoRedirect(url) {
   try {
     const response = await fetch(url, {
-      headers: { 'User-Agent': USER_AGENT },
+      headers: buildHeaders(),
       redirect: 'manual',
     })
     return response
@@ -45,7 +57,7 @@ const checks = []
 
 try {
   const { response, text } = await fetchText('https://gracegrip.app/robots.txt')
-  assert(response.status === 200, 'robots.txt not 200')
+  assert(response.status === 200, `robots.txt returned ${response.status}`)
   assert(text.includes('Sitemap: https://gracegrip.app/sitemap.xml'), 'robots.txt missing sitemap line')
   checks.push(statusLine(true, 'robots.txt', '200 + sitemap reference'))
 } catch (error) {
@@ -54,7 +66,7 @@ try {
 
 try {
   const { response, text } = await fetchText('https://gracegrip.app/sitemap.xml')
-  assert(response.status === 200, 'sitemap.xml not 200')
+  assert(response.status === 200, `sitemap.xml returned ${response.status}`)
   for (const url of INDEXABLE_URLS) {
     assert(text.includes(url), `sitemap missing ${url}`)
   }
@@ -77,7 +89,7 @@ try {
 for (const url of INDEXABLE_URLS) {
   try {
     const { response, text } = await fetchText(url)
-    assert(response.status === 200, `${url} not 200`)
+    assert(response.status === 200, `${url} returned ${response.status}`)
     assert(text.includes('https://gracegrip.app'), `${url} missing canonical host reference`)
     assert(text.includes('"@context":"https://schema.org"'), `${url} missing JSON-LD`)
     checks.push(statusLine(true, url, '200 + canonical/schema present'))
@@ -89,7 +101,7 @@ for (const url of INDEXABLE_URLS) {
 for (const url of ['https://gracegrip.app/journal', 'https://gracegrip.app/settings']) {
   try {
     const { response, text } = await fetchText(url)
-    assert(response.status === 200, `${url} not 200`)
+    assert(response.status === 200, `${url} returned ${response.status}`)
     assert(text.toLowerCase().includes('noindex'), `${url} missing noindex`)
     checks.push(statusLine(true, url, '200 + noindex present'))
   } catch (error) {

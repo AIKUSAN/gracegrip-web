@@ -25,6 +25,7 @@ jobs:
       - name: Run SEO health check
         env:
           SEO_HEALTH_OUTPUT_DIR: seo-health
+          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
         run: node scripts/seo-health-check.mjs
 
       - name: Upload SEO health artifact
