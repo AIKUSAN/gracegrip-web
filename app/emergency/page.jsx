@@ -2,6 +2,7 @@
 'use client'
 
 import Link from 'next/link'
+import { JsonLd } from '@/components/JsonLd'
 import { useApp } from '@/context/AppContext'
 import AppShell from '@/components/AppShell'
 import { EmergencyPage } from '@/components/pages/EmergencyPage'
@@ -11,6 +12,18 @@ export default function Page() {
 
   return (
     <>
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          '@id': 'https://gracegrip.app/emergency#page',
+          url: 'https://gracegrip.app/emergency',
+          name: 'Emergency Urge Support — GraceGrip',
+          description:
+            'Immediate help for pornography urges: urge timer, guided breathing, grounding exercises, and panic Scripture verse.',
+          isPartOf: { '@id': 'https://gracegrip.app/#app' },
+        }}
+      />
       <noscript>
         <main style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '640px', margin: '0 auto' }}>
           <h1>Emergency Urge Support — GraceGrip</h1>

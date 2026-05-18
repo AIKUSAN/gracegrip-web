@@ -2,6 +2,7 @@
 'use client'
 
 import Link from 'next/link'
+import { JsonLd } from '@/components/JsonLd'
 import { useApp } from '@/context/AppContext'
 import AppShell from '@/components/AppShell'
 import { ScripturePage } from '@/components/pages/ScripturePage'
@@ -18,6 +19,18 @@ export default function Page() {
 
   return (
     <>
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          '@id': 'https://gracegrip.app/scripture#page',
+          url: 'https://gracegrip.app/scripture',
+          name: 'Scripture Library — GraceGrip',
+          description:
+            'Curated Bible verses organized by recovery emotion: temptation, shame, identity, peace, strength, forgiveness, and favorites.',
+          isPartOf: { '@id': 'https://gracegrip.app/#app' },
+        }}
+      />
       <noscript>
         <main style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '640px', margin: '0 auto' }}>
           <h1>Scripture Library — GraceGrip</h1>

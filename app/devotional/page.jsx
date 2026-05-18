@@ -2,6 +2,7 @@
 'use client'
 
 import Link from 'next/link'
+import { JsonLd } from '@/components/JsonLd'
 import { useApp } from '@/context/AppContext'
 import AppShell from '@/components/AppShell'
 import { DevotionalPage } from '@/components/pages/DevotionalPage'
@@ -11,6 +12,18 @@ export default function Page() {
 
   return (
     <>
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          '@id': 'https://gracegrip.app/devotional#page',
+          url: 'https://gracegrip.app/devotional',
+          name: 'Daily Devotional — GraceGrip',
+          description:
+            '31-day Scripture-based devotional plan for addiction recovery. Each day includes a passage, reflection, and daily practice.',
+          isPartOf: { '@id': 'https://gracegrip.app/#app' },
+        }}
+      />
       <noscript>
         <main style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '640px', margin: '0 auto' }}>
           <h1>Daily Devotional — GraceGrip</h1>
