@@ -22,7 +22,7 @@ function buildHeaders(extra = {}) {
     'Accept-Language': 'en-US,en;q=0.5',
     ...extra,
   }
-  if (BYPASS_SECRET) headers['x-vercel-automation-bypass-secret'] = BYPASS_SECRET
+  if (BYPASS_SECRET) headers['x-vercel-protection-bypass'] = BYPASS_SECRET
   return headers
 }
 
