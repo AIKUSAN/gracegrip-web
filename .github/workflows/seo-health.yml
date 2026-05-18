@@ -22,12 +22,6 @@ jobs:
         with:
           node-version: 24
 
-      - name: Debug — curl homepage headers
-        run: |
-          curl -sI -A "GraceGripSEOHealth/1.0" https://gracegrip.app/ | head -20
-          echo "---"
-          curl -sI -A "GraceGripSEOHealth/1.0" -H "x-vercel-protection-bypass: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}" https://gracegrip.app/ | head -20
-
       - name: Run SEO health check
         env:
           SEO_HEALTH_OUTPUT_DIR: seo-health
