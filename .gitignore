@@ -84,6 +84,7 @@ temp/
 *.heapsnapshot
 *.cpuprofile
 audit-report.json
+seo-health/
 
 # ─── Local AI / MCP Tool Artifacts ──────────────────────────
 .playwright-mcp/
@@ -122,6 +123,10 @@ audit-report.json
 /LIVE_SECURITY_CERTIFICATE.md
 *.plan
 *.agent.md
+
+# Agent-generated analysis and audit reports
+/GEO-ANALYSIS.md
+/SEO-ANALYSIS.md
 
 # Favycon source package (compiled outputs are in public/favicons/)
 /favicons/
