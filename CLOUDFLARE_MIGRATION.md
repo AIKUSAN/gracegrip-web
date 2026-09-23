@@ -1,6 +1,14 @@
 # GraceGrip Cloudflare migration runbook
 
-This branch builds a Next.js static export for Cloudflare Pages. Only `POST /api/feedback` runs in a Pages Function. Vercel continues to serve `gracegrip.app` until the protected preview, both D1 databases, and final data check are verified. **Do not merge this branch to `main` while Vercel's Git integration can deploy it**: Vercel cannot run the Pages Function, so that would interrupt feedback on the live site.
+This release builds a Next.js static export for Cloudflare Pages. Only `POST /api/feedback` runs in a Pages Function. The migration was merged after the protected preview, both D1 databases, and the final data check passed. Vercel's Git integration was disconnected before merging so it could not deploy a static export without the Pages Function.
+
+## Release record — 2026-09-23
+
+- Canonical `gracegrip.app` was attached to the Git-integrated Cloudflare Pages project `gracegrip-webapp`. The `www` host uses a Cloudflare Bulk Redirect to the apex, preserving path and query. Pages production branch is `main`; preview URLs are protected by Cloudflare Access.
+- The Neon-to-production-D1 import was repeated immediately before and after the domain switch. Both checks found one historical Neon row with the same stable ID and content hash in D1, and no D1-only rows. This count is a cutover snapshot; live feedback may increase it.
+- Cloudflare Web Analytics uses manual installation on the homepage with SPA tracking disabled. No analytics token is set for preview builds.
+- Retain the last working Vercel production deployment `dpl_B2Npxjc9MwxmREV4MULo1GFtPnk3` (`gracegrip-webapp-a3voo2fj8-aikusans-projects.vercel.app`) and the Neon database through at least **2026-10-23**. Keep D1 as the live feedback store. Before any planned rollback, reconcile D1-only feedback to Neon and verify hashes; repeat after routing settles. The rollback command is in the cutover gate below.
+- GitHub `main` requires successful `build` and `Cloudflare Pages` checks from their respective GitHub Apps, with strict up-to-date checks. The obsolete Vercel check was removed when its Git integration was disconnected.
 
 ## Local checks
 
