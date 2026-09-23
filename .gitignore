@@ -36,7 +36,6 @@ playwright-report/
 # ─── Deployment Platforms ────────────────────────────────────
 .vercel
 .wrangler/
-/wrangler.jsonc
 .netlify
 .azure/
 

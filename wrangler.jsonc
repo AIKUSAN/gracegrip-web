@@ -1,0 +1,29 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "gracegrip-webapp",
+  "pages_build_output_dir": "./out",
+  "compatibility_date": "2026-09-23",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "d1_databases": [
+    {
+      "binding": "FEEDBACK_DB",
+      "database_name": "gracegrip-feedback-production",
+      "database_id": "6682fbb5-1d24-4ced-b443-0aa6ca253857",
+      "migrations_dir": "d1/migrations"
+    }
+  ],
+  "env": {
+    "preview": {
+      "d1_databases": [
+        {
+          "binding": "FEEDBACK_DB",
+          "database_name": "gracegrip-feedback-preview",
+          "database_id": "eadf0da8-20f2-4fd4-a55f-00119682a6c2",
+          "migrations_dir": "d1/migrations"
+        }
+      ]
+    }
+  }
+}
