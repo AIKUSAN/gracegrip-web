@@ -1,14 +1,20 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License */
 // Run only from a trusted terminal. Feedback stays in memory and is never written to a file.
-import { createHash } from 'node:crypto'
 import { neon } from '@neondatabase/serverless'
+import { fingerprintRow, validateD1Count } from './lib/feedback-reconciliation.mjs'
 
 const args = new Set(process.argv.slice(2))
-const target = args.has('--target=production') ? 'production' : args.has('--target=preview') ? 'preview' : null
+const selectedTargets = ['production', 'preview'].filter((name) => args.has(`--target=${name}`))
+const target = selectedTargets[0] ?? null
 const inspectSource = args.has('--inspect-source')
 const verifyOnly = args.has('--verify-only')
+const allowD1Only = args.has('--allow-d1-only')
 const pageSize = 100
 
+if (selectedTargets.length > 1 || (inspectSource && target)) {
+  console.error('Choose one target or --inspect-source, not both.')
+  process.exit(1)
+}
 if (!inspectSource && !target) {
   console.error('Choose --target=preview or --target=production (or --inspect-source).')
   process.exit(1)
@@ -31,6 +37,18 @@ if (!sourceUrl) missing.unshift('NEON_DATABASE_URL or DATABASE_URL')
 if (missing.length) {
   console.error(`Migration needs: ${missing.join(', ')}`)
   process.exit(1)
+}
+if (!inspectSource) {
+  const accountId = process.env.CLOUDFLARE_ACCOUNT_ID
+  const databaseId = process.env[target === 'production' ? 'D1_PRODUCTION_DATABASE_ID' : 'D1_PREVIEW_DATABASE_ID']
+  if (!/^[a-f0-9]{32}$/i.test(accountId) || !/^[a-f0-9]{8}(-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i.test(databaseId)) {
+    console.error('Cloudflare account or D1 database ID is malformed.')
+    process.exit(1)
+  }
+  if (process.env.D1_PREVIEW_DATABASE_ID && process.env.D1_PREVIEW_DATABASE_ID === process.env.D1_PRODUCTION_DATABASE_ID) {
+    console.error('Preview and production D1 IDs must differ.')
+    process.exit(1)
+  }
 }
 
 const sql = neon(sourceUrl)
@@ -110,12 +128,6 @@ async function importAll() {
   console.log(`Examined ${examined} Neon rows for idempotent ${target} import.`)
 }
 
-function rowDigest(row) {
-  return createHash('sha256')
-    .update(JSON.stringify([row.id, row.created_at, Number(row.rating), row.message ?? null]))
-    .digest('hex')
-}
-
 async function verifySourceRows() {
   let count = 0
   for await (const source of sourceRows()) {
@@ -127,7 +139,7 @@ async function verifySourceRows() {
     const destination = result.results ?? []
     if (destination.length !== source.length) throw new Error('D1 is missing Neon feedback rows.')
     for (let index = 0; index < source.length; index += 1) {
-      if (rowDigest(source[index]) !== rowDigest(destination[index])) {
+      if (fingerprintRow(source[index]) !== fingerprintRow(destination[index])) {
         throw new Error('A D1 row differs from its Neon source.')
       }
     }
@@ -143,7 +155,10 @@ async function main() {
   }
   if (!verifyOnly) await importAll()
   const count = await verifySourceRows()
-  console.log(`Verified ${count} Neon rows in ${target} D1; IDs, timestamps, ratings, and message bytes match.`)
+  const [result] = await d1Query({ sql: 'SELECT count(*) AS row_count FROM user_feedback' })
+  const d1Count = Number(result.results?.[0]?.row_count)
+  const additional = validateD1Count(count, d1Count, allowD1Only)
+  console.log(`Verified ${count} Neon rows in ${target} D1 by stable ID and content hash. D1 total: ${d1Count}; D1-only: ${additional}.`)
 }
 
 main().catch(() => {

@@ -7,7 +7,7 @@ import { AppNavigation } from './AppNavigation'
 import { WelcomeScreen } from './WelcomeScreen'
 import { PanicModal } from './PanicModal'
 
-export default function AppShell({ children }) {
+export default function AppShell({ children, allowBeforeOnboarding = false }) {
   const {
     appState,
     stateLoaded,
@@ -29,7 +29,7 @@ export default function AppShell({ children }) {
   // Wait for async localStorage decryption before rendering any user data.
   if (!stateLoaded) return null
 
-  if (!appState.onboardingComplete) {
+  if (!appState.onboardingComplete && !allowBeforeOnboarding) {
     return (
       <WelcomeScreen
         currentThemePreference={currentThemePreference}

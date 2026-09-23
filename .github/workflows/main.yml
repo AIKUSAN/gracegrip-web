@@ -47,8 +47,8 @@ jobs:
       - name: Validate content
         run: npm run validate:content
 
-      - name: Test feedback Function
-        run: npm run test:feedback
+      - name: Test feedback and data handling
+        run: npm test
 
       - name: SEO guard
         run: node scripts/seo-guard.mjs

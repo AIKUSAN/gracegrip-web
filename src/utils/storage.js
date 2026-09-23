@@ -1,5 +1,5 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
-import { encryptString, decryptString, encryptJson, decryptJson } from './crypto'
+import { encryptString, decryptString, encryptJson, decryptJson } from './crypto.js'
 
 const STORAGE_KEY = 'gracegrip_v1'
 

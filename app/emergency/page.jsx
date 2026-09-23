@@ -55,7 +55,7 @@ export default function Page() {
           <p>Free, private, no account required. Your journal and progress stay on your device.</p>
         </main>
       </noscript>
-      <AppShell>
+      <AppShell allowBeforeOnboarding>
         <EmergencyPage
           emergencyEncouragement={emergencyEncouragement}
           emergencyVerses={emergencyVerses}

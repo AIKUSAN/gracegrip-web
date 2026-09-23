@@ -129,6 +129,7 @@ export function SettingsPage({
         </h3>
         <p className="settings-section-desc">
           Your journal and recovery progress live on this device. Export regularly to keep them safe.
+          Backup files are readable JSON and include only the categories selected below; store or share them carefully.
         </p>
 
         {daysSinceBackup !== null && daysSinceBackup >= 7 && (

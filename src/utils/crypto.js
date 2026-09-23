@@ -7,8 +7,8 @@
  *   under a separate key (gracegrip_ek_v1), distinct from the user data key.
  * - Sensitive fields (journal entries, profile name, streak history) are encrypted
  *   before being written to localStorage and decrypted on load.
- * - Exported backup files contain ciphertext, protecting them from being read
- *   on other devices without the original device key.
+ * - Device-local storage uses ciphertext. User-requested JSON backups export
+ *   the selected decrypted fields in a portable format and must be stored safely.
  * - All crypto operations fall back to plaintext if Web Crypto is unavailable
  *   (no modern browser lacks it, but graceful degradation is always safer).
  */

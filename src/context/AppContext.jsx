@@ -206,12 +206,12 @@ export function AppProvider({ children }) {
     }
   }
 
-  const onExportData = () => {
+  const onExportData = (selections) => {
     toast.warning(
       'Your backup contains personal recovery data. Store it securely and never share it.',
       { duration: 6000 },
     )
-    const payload = exportStateAsJson(appState)
+    const payload = exportStateAsJson(appState, selections)
     const blob = new Blob([payload], { type: 'application/json' })
     const blobUrl = window.URL.createObjectURL(blob)
     const link = document.createElement('a')
