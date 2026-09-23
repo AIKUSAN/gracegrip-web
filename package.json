@@ -1,6 +1,7 @@
 {
   "name": "gracegrip-webapp",
   "private": true,
+  "type": "module",
   "version": "1.2.3",
   "engines": {
     "node": "^24.0.0"
@@ -8,7 +9,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "verify:export": "node scripts/verify-export.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:feedback": "node --test tests/feedback.test.mjs",
+    "start": "wrangler pages dev out",
     "lint": "eslint .",
     "validate:content": "node scripts/validate-content.mjs",
     "ping:indexnow": "node scripts/ping-indexnow.mjs",
@@ -16,11 +20,8 @@
     "update-status": "node scripts/update-project-status.mjs"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.1.0",
-    "@sparticuz/chromium": "148.0.0",
     "@tabler/icons-react": "^3.42.0",
     "@tailwindcss/postcss": "^4.3.0",
-    "@vercel/analytics": "^2.0.0",
     "autoprefixer": "^10.5.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -29,7 +30,6 @@
     "lucide-react": "^1.16.0",
     "motion": "^12.38.0",
     "next": "^16.2.6",
-    "puppeteer-core": "^25.0.2",
     "qrcode": "^1.5.4",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
@@ -40,16 +40,19 @@
   },
   "overrides": {
     "next": {
-      "postcss": "8.5.14"
+      "postcss": "8.5.28"
     }
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@neondatabase/serverless": "^1.1.0",
+    "@resvg/resvg-js": "^2.6.2",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "eslint": "10.4.0",
     "eslint-config-next": "^16.2.4",
     "eslint-plugin-react-hooks": "7.1.1",
-    "globals": "^17.6.0"
+    "globals": "^17.6.0",
+    "wrangler": "^4.137.0"
   }
 }

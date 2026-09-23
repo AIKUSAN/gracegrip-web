@@ -3,16 +3,16 @@ import { mkdir, writeFile } from 'fs/promises'
 
 const USER_AGENT = 'Mozilla/5.0 (compatible; GraceGripSEOHealth/1.0; +https://gracegrip.app/robots.txt)'
 const OUTPUT_DIR = process.env.SEO_HEALTH_OUTPUT_DIR || 'seo-health'
-const BYPASS_SECRET = process.env.VERCEL_AUTOMATION_BYPASS_SECRET || ''
+const ACCESS_CLIENT_ID = process.env.CF_ACCESS_CLIENT_ID || ''
+const ACCESS_CLIENT_SECRET = process.env.CF_ACCESS_CLIENT_SECRET || ''
 
 // Public canonical URLs (checked via gracegrip.app for robots/redirect tests)
 const INDEXABLE_PATHS = ['/', '/emergency', '/scripture', '/devotional']
 const PRIVATE_PATHS = ['/journal', '/settings']
 const CANONICAL_BASE = 'https://gracegrip.app'
 
-// Vercel branch URL bypasses Cloudflare Bot Fight Mode on the custom domain.
-// Content is identical; canonical tags still reference gracegrip.app.
-const VERCEL_BASE = 'https://gracegrip-webapp-git-main-aikusans-projects.vercel.app'
+// Use a protected Pages preview URL for release checks, or the live apex for weekly checks.
+const TEST_BASE = (process.env.SEO_HEALTH_BASE_URL || CANONICAL_BASE).replace(/\/$/, '')
 
 function statusLine(ok, label, detail) {
   return `${ok ? 'PASS' : 'FAIL'} ${label}${detail ? ` — ${detail}` : ''}`
@@ -25,7 +25,10 @@ function buildHeaders(extra = {}) {
     'Accept-Language': 'en-US,en;q=0.5',
     ...extra,
   }
-  if (BYPASS_SECRET) headers['x-vercel-protection-bypass'] = BYPASS_SECRET
+  if (ACCESS_CLIENT_ID && ACCESS_CLIENT_SECRET) {
+    headers['CF-Access-Client-Id'] = ACCESS_CLIENT_ID
+    headers['CF-Access-Client-Secret'] = ACCESS_CLIENT_SECRET
+  }
   return headers
 }
 
@@ -59,7 +62,7 @@ await mkdir(OUTPUT_DIR, { recursive: true })
 const checks = []
 
 try {
-  const { response, text } = await fetchText(`${CANONICAL_BASE}/robots.txt`)
+  const { response, text } = await fetchText(`${TEST_BASE}/robots.txt`)
   assert(response.status === 200, `robots.txt returned ${response.status}`)
   assert(text.includes('Sitemap: https://gracegrip.app/sitemap.xml'), 'robots.txt missing sitemap line')
   checks.push(statusLine(true, 'robots.txt', '200 + sitemap reference'))
@@ -67,9 +70,8 @@ try {
   checks.push(statusLine(false, 'robots.txt', error.message))
 }
 
-// Sitemap and page content fetched via Vercel URL to bypass Cloudflare Bot Fight Mode.
 try {
-  const { response, text } = await fetchText(`${VERCEL_BASE}/sitemap.xml`)
+  const { response, text } = await fetchText(`${TEST_BASE}/sitemap.xml`)
   assert(response.status === 200, `sitemap.xml returned ${response.status}`)
   for (const path of INDEXABLE_PATHS) {
     assert(text.includes(`${CANONICAL_BASE}${path}`), `sitemap missing ${CANONICAL_BASE}${path}`)
@@ -81,19 +83,21 @@ try {
   checks.push(statusLine(false, 'sitemap.xml', error.message))
 }
 
-try {
-  const response = await fetchNoRedirect('https://www.gracegrip.app/')
-  assert(response.status === 308, `expected 308, got ${response.status}`)
-  assert(response.headers.get('location') === `${CANONICAL_BASE}/`, 'wrong apex redirect target')
-  checks.push(statusLine(true, 'www redirect', '308 -> apex'))
-} catch (error) {
-  checks.push(statusLine(false, 'www redirect', error.message))
+if (TEST_BASE === CANONICAL_BASE) {
+  try {
+    const response = await fetchNoRedirect('https://www.gracegrip.app/')
+    assert([301, 308].includes(response.status), `expected permanent redirect, got ${response.status}`)
+    assert(response.headers.get('location') === `${CANONICAL_BASE}/`, 'wrong apex redirect target')
+    checks.push(statusLine(true, 'www redirect', 'permanent -> apex'))
+  } catch (error) {
+    checks.push(statusLine(false, 'www redirect', error.message))
+  }
 }
 
 for (const path of INDEXABLE_PATHS) {
   const label = `${CANONICAL_BASE}${path}`
   try {
-    const { response, text } = await fetchText(`${VERCEL_BASE}${path}`)
+    const { response, text } = await fetchText(`${TEST_BASE}${path}`)
     assert(response.status === 200, `${label} returned ${response.status}`)
     assert(text.includes(CANONICAL_BASE), `${label} missing canonical host reference`)
     assert(text.includes('"@context":"https://schema.org"'), `${label} missing JSON-LD`)
@@ -106,7 +110,7 @@ for (const path of INDEXABLE_PATHS) {
 for (const path of PRIVATE_PATHS) {
   const label = `${CANONICAL_BASE}${path}`
   try {
-    const { response, text } = await fetchText(`${VERCEL_BASE}${path}`)
+    const { response, text } = await fetchText(`${TEST_BASE}${path}`)
     assert(response.status === 200, `${label} returned ${response.status}`)
     assert(text.toLowerCase().includes('noindex'), `${label} missing noindex`)
     checks.push(statusLine(true, label, '200 + noindex present'))

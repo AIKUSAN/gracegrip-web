@@ -39,6 +39,7 @@ export function SettingsPage({
   const [feedbackMessage, setFeedbackMessage] = useState('')
   const [feedbackSubmitting, setFeedbackSubmitting] = useState(false)
   const [feedbackSent, setFeedbackSent] = useState(false)
+  const homeAnalyticsEnabled = Boolean(process.env.NEXT_PUBLIC_CF_WEB_ANALYTICS_TOKEN)
 
   const handleFeedbackSubmit = async () => {
     if (!feedbackRating) return
@@ -127,7 +128,8 @@ export function SettingsPage({
           Data &amp; Backup
         </h3>
         <p className="settings-section-desc">
-          Your data lives entirely on this device. Export regularly to keep it safe.
+          Your journal and recovery progress live on this device. Export regularly to keep them safe.
+          Backup files are readable JSON and include only the categories selected below; store or share them carefully.
         </p>
 
         {daysSinceBackup !== null && daysSinceBackup >= 7 && (
@@ -246,7 +248,7 @@ export function SettingsPage({
           Send Feedback
         </h3>
         <p className="settings-section-desc">
-          Completely anonymous — no account needed. Help shape GraceGrip&apos;s future.
+          No account needed. Your rating and optional note are sent to GraceGrip without a name or email. Please do not include identifying details.
         </p>
         {feedbackSent ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', alignItems: 'flex-start' }}>
@@ -309,7 +311,7 @@ export function SettingsPage({
             </div>
             <p className="about-meta-desc">
               Faith-based recovery support for porn and masturbation addiction — Scripture, streak tracking, and grace for difficult moments.
-              No account, no cloud sync, no personal tracking. Your recovery data stays on this device.
+              No account, no cloud sync, no ads. Your journal and progress stay on this device.
             </p>
             <a
               href="https://github.com/AIKUSAN/gracegrip-web"
@@ -332,15 +334,15 @@ export function SettingsPage({
         <div className="faq-list">
           <details className="faq-details">
             <summary className="faq-summary">What is GraceGrip and who is it for?</summary>
-            <p className="faq-answer">GraceGrip is a free, privacy-first recovery app built for people fighting porn and masturbation addiction. It offers immediate, dignified support through Scripture, daily devotionals, a clean-streak tracker, an encrypted private journal, a panic button for crisis moments, and tools to back up or transfer your data — all without an account, a subscription, or anything leaving your device.</p>
+            <p className="faq-answer">GraceGrip is a free, privacy-first recovery app built for people fighting porn and masturbation addiction. It offers immediate, dignified support through Scripture, daily devotionals, a clean-streak tracker, an encrypted private journal, a panic button for crisis moments, and tools to back up or transfer your data — all without an account or subscription.</p>
           </details>
           <details className="faq-details">
             <summary className="faq-summary">Is my data private and secure?</summary>
-            <p className="faq-answer">Yes. All your data — journal entries, streak history, and profile name — stays entirely on your device. Sensitive fields are encrypted with AES-256 via the Web Crypto API before being written to local storage. Nothing is sent to any server unless you explicitly export your data or submit optional anonymous feedback.</p>
+            <p className="faq-answer">Your journal entries, streak history, profile name, and app progress stay on your device. Journal entries, streak history, and profile name are encrypted before local storage; other app preferences and progress are stored locally. Optional feedback is sent to GraceGrip only when you submit it.</p>
           </details>
           <details className="faq-details">
             <summary className="faq-summary">Does GraceGrip require an account or subscription?</summary>
-            <p className="faq-answer">No. GraceGrip has no accounts, no sign-up, no email, and no subscription. It is free, open-source, and always will be. The only optional external interaction is submitting an anonymous star rating or feedback note.</p>
+            <p className="faq-answer">No. GraceGrip has no accounts, no sign-up, no email, and no subscription. It is free and open-source. You can optionally send a rating or feedback note.</p>
           </details>
           <details className="faq-details">
             <summary className="faq-summary">What happens when I stumble?</summary>
@@ -352,7 +354,7 @@ export function SettingsPage({
           </details>
           <details className="faq-details">
             <summary className="faq-summary">Can I use GraceGrip offline?</summary>
-            <p className="faq-answer">GraceGrip requires an internet connection to load — refreshing without one will show a blank page. However, all your personal data (journal, streak, favorites) lives entirely on your device in encrypted local storage and is never sent to a server.</p>
+            <p className="faq-answer">GraceGrip requires an internet connection to load — refreshing without one will show a blank page. Your journal, streak, and favorites stay in this browser. The journal and streak history are encrypted in local storage; favorites and some progress fields are stored locally without encryption.</p>
           </details>
           <details className="faq-details">
             <summary className="faq-summary">How do I transfer my data to a new phone or browser?</summary>
@@ -380,9 +382,13 @@ export function SettingsPage({
           <details className="faq-details">
             <summary className="faq-summary">Privacy Policy</summary>
             <div className="settings-legal-body">
-              <p><strong>Your data stays on your device.</strong> GraceGrip does not create user accounts and does not transmit your personal recovery data anywhere. Your journal entries, profile name, streak history, and settings are stored in your browser&apos;s local storage using AES-256 encryption for sensitive fields.</p>
-              <p><strong>Optional anonymous feedback.</strong> If you choose to submit a star rating or message via the Send Feedback section, that data is stored in Neon Postgres through a Vercel serverless route. No name, email, or device identifier is attached. This is entirely optional.</p>
-              <p><strong>Anonymous page-view analytics only.</strong> GraceGrip uses Vercel Analytics to count page views — no account, no personal information, no recovery-path content is captured. There are no advertising networks, tracking pixels, or crash-reporting SDKs.</p>
+              <p><strong>Your recovery records stay on your device.</strong> GraceGrip does not create user accounts. Journal entries, profile name, and streak history are encrypted in local storage. Other settings and progress also stay in your browser. Optional feedback is handled separately below.</p>
+              <p><strong>Optional feedback.</strong> If you submit a rating or message, it is stored in Cloudflare D1. The form does not request your name, email, or device identifier. Please avoid including identifying information in your note. Network requests may still expose technical information such as an IP address to the hosting provider.</p>
+              {homeAnalyticsEnabled ? (
+                <p><strong>Homepage analytics.</strong> Cloudflare Web Analytics is loaded manually on the homepage only to measure visits and performance. SPA tracking is disabled. The analytics beacon is not loaded on emergency, journal, settings, scripture, or devotional pages. There are no advertising networks or crash-reporting SDKs.</p>
+              ) : (
+                <p><strong>Analytics in this build.</strong> No Web Analytics beacon is loaded. There are no advertising networks or crash-reporting SDKs.</p>
+              )}
               <p><strong>Data export and transfer.</strong> You can export all your data at any time via Settings &rarr; Data &amp; Backup. QR transfer also happens locally — no data is relayed through any server.</p>
               <p><strong>Changes to this policy.</strong> If the privacy practices of GraceGrip ever change materially, the changelog and release notes will reflect it. The source code is public and auditable at <a href="https://github.com/AIKUSAN/gracegrip-web" target="_blank" rel="noopener noreferrer" className="settings-oss-link" style={{ display: 'inline-flex' }}>github.com/AIKUSAN/gracegrip-web</a>.</p>
             </div>

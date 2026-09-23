@@ -25,7 +25,7 @@ export const DISCOVERY_SITE = {
     'Clean streak tracker',
     'Emotion-based Scripture library',
     'AES-encrypted private journal',
-    'Anonymous feedback channel',
+    'Optional feedback channel',
     'QR-based device transfer (no internet required)',
   ],
 }

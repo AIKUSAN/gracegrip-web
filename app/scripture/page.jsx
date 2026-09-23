@@ -63,7 +63,7 @@ export default function Page() {
             <li><Link href="/emergency">Emergency Urge Support</Link> for immediate guided help during cravings.</li>
             <li><Link href="/devotional">Daily Devotional</Link> for reflection and practice rooted in Scripture.</li>
           </ul>
-          <p>Free, private Scripture library. No account. No tracking.</p>
+          <p>Free, private Scripture library. No account. No ads.</p>
         </main>
       </noscript>
       <AppShell>

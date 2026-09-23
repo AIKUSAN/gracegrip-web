@@ -1,6 +1,6 @@
 # GraceGrip
 
-**Faith Over Temptation.** GraceGrip is a free, privacy-first recovery web app for people fighting porn and masturbation addiction — built on Scripture, grace, and practical tools that work without an account, a subscription, or cloud sync.
+**Faith Over Temptation.** GraceGrip is a free, privacy-first recovery web app for people fighting porn and masturbation addiction — built on Scripture, grace, and practical tools that work without an account, a subscription, or recovery-data cloud sync.
 
 [![Latest Release](https://img.shields.io/github/v/release/AIKUSAN/gracegrip-web?display_name=tag&label=release&color=2d6a4f&logo=github)](https://github.com/AIKUSAN/gracegrip-web/releases/latest)
 [![Live Site](https://img.shields.io/website?url=https%3A%2F%2Fgracegrip.app&up_message=gracegrip.app&down_message=offline&label=live&color=1d4ed8)](https://gracegrip.app)
@@ -9,7 +9,7 @@
 
 ## Mission
 
-Some people reach for their phone in a moment of temptation and find nothing that respects their privacy or their faith. GraceGrip exists to fill that gap — offering immediate, dignified support through Scripture, breathing exercises, devotionals, and encrypted journaling, with zero tracking and zero gatekeeping.
+Some people reach for their phone in a moment of temptation and find nothing that respects their privacy or their faith. GraceGrip exists to fill that gap — offering immediate, dignified support through Scripture, breathing exercises, devotionals, and encrypted journaling, without accounts or gatekeeping.
 
 **We believe shame does not produce lasting change. Grace does.**
 
@@ -18,10 +18,10 @@ Some people reach for their phone in a moment of temptation and find nothing tha
 ## Privacy Promise
 
 - **No account required** — open the app and it works.
-- **No personal data sent to a server** — progress, journal, and favorites live in your browser only.
+- **Recovery data stays on your device** — progress, journal, and favorites live in your browser only.
 - **Sensitive data is encrypted** — journal entries and profile info are AES-encrypted via the Web Crypto API before being written to `localStorage`.
-- **No personal tracking, no advertising** — ever. Anonymous page-view counts are collected via Vercel Analytics (no account, no PII, no recovery-path data captured).
-- The only cloud feature is an **optional, anonymous feedback form** (rating + message). No identity is captured.
+- **No advertising.** Cloudflare Web Analytics is loaded manually on the homepage only, with SPA tracking disabled. The beacon is absent from emergency, journal, and all other inner pages.
+- **Optional feedback** sends a rating and optional message to Cloudflare D1. The form does not ask for identity; avoid adding identifying information to a note.
 
 ---
 
@@ -36,7 +36,7 @@ Some people reach for their phone in a moment of temptation and find nothing tha
 | **Encrypted Journal** | Private notes — AES-encrypted, never leaves your device |
 | **QR Device Transfer** | Move your app state to another device via QR code — no internet required |
 | **Selective Backup** | Export only the data you choose; import on any device |
-| **Anonymous Feedback** | One-tap star rating to help us improve — completely anonymous |
+| **Optional Feedback** | Send a rating or note without creating an account |
 
 ---
 
@@ -49,8 +49,8 @@ Some people reach for their phone in a moment of temptation and find nothing tha
 | Animation | Motion (Framer Motion v12) |
 | Fonts | Libre Baskerville + Manrope (self-hosted, no CDN) |
 | Storage | `localStorage` (sensitive fields AES-encrypted) |
-| Feedback | Neon Postgres via Vercel serverless route (anonymous, no auth, graceful degradation) |
-| Deployment | Vercel (`gracegrip.app`) |
+| Feedback | Cloudflare Pages Function + D1; Neon is retained during migration and rollback |
+| Deployment | Cloudflare Pages static export (migration branch); Vercel serves the live domain until approved cutover |
 
 ---
 
@@ -61,11 +61,7 @@ npm install
 npm run dev
 ```
 
-For local feedback testing after the Vercel-managed Neon integration is connected:
-
-```bash
-vercel env pull .env.local
-```
+The feedback Function runs under Cloudflare Pages, not `next dev`. See [Cloudflare migration runbook](CLOUDFLARE_MIGRATION.md) for local D1 testing and the protected preview sequence.
 
 ## Production Build
 
@@ -73,7 +69,7 @@ vercel env pull .env.local
 npm run build
 ```
 
-Static output is written to `dist/` and deployed automatically by Vercel on every push to `main`.
+Static output is written to `out/`. Do not merge this branch to `main` while Vercel still deploys the live site. The current Vercel deployment remains the rollback source for 30 days after cutover.
 
 ## Content Validation
 
@@ -90,10 +86,9 @@ Run this after editing files in `content/` to verify schema and emotion referenc
 | Setting | Value |
 |---------|-------|
 | Live URL | https://gracegrip.app |
-| Vercel project | `gracegrip-webapp` (team `aikusans-projects`) |
-| CI gates | `npm audit` + `npm run lint` + `npm run build` (GitHub Actions) |
-| Deploy trigger | Auto-deploy on push to `main` via Vercel Git integration |
-| Search Indexing | Auto-pings Bing, DuckDuckGo, Yandex post-deploy via IndexNow |
+| Cloudflare Pages | Protected preview first; bind separate preview and production D1 databases |
+| CI gates | `npm audit` + lint + content + SEO + feedback tests + static build/export verification |
+| Search Indexing | IndexNow and Search Console workflows run manually after verified cutover |
 
 ---
 

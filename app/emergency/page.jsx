@@ -52,10 +52,10 @@ export default function Page() {
             <li><Link href="/scripture">Scripture Library</Link> for recovery-focused Bible verses by category.</li>
             <li><Link href="/devotional">Daily Devotional</Link> for ongoing reflection and habit change.</li>
           </ul>
-          <p>Free, private, no account required. Your data never leaves your device.</p>
+          <p>Free, private, no account required. Your journal and progress stay on your device.</p>
         </main>
       </noscript>
-      <AppShell>
+      <AppShell allowBeforeOnboarding>
         <EmergencyPage
           emergencyEncouragement={emergencyEncouragement}
           emergencyVerses={emergencyVerses}

@@ -150,7 +150,7 @@ const md = `# GraceGrip — Project Status
 ## Architecture Snapshot
 
 **Stack:** Next.js 16 App Router + React 19 + Tailwind CSS v4
-**Deploy:** Vercel hybrid mode — static pages + Node.js serverless functions
+**Deploy:** Cloudflare Pages static export + one Pages Function backed by D1
 **Live URL:** https://gracegrip.app
 **State:** Single React Context (\`src/context/AppContext.jsx\`), persisted to localStorage key \`gracegrip_v1\`
 
@@ -164,8 +164,7 @@ const md = `# GraceGrip — Project Status
 | \`/devotional\` | \`app/devotional/page.jsx\` — Daily devotional reader |
 | \`/journal\` | \`app/journal/page.jsx\` — Encrypted private journal |
 | \`/settings\` | \`app/settings/page.jsx\` — Theme, profile, backup, feedback |
-| \`/api/feedback\` | \`app/api/feedback/route.js\` — Anonymous feedback insert via Neon Postgres |
-| \`/api/og\` | \`app/api/og/route.js\` — Serverless OG image (Puppeteer screenshot + fallback card) |
+| \`/api/feedback\` | \`functions/api/feedback.js\` — Optional feedback insert via D1 |
 
 ### Key Dependencies
 
@@ -175,9 +174,8 @@ const md = `# GraceGrip — Project Status
 | react | \`${pkg.dependencies?.react ?? '?'}\` |
 | tailwindcss | \`${pkg.dependencies?.tailwindcss ?? '?'}\` |
 | motion | \`${pkg.dependencies?.motion ?? '?'}\` |
-| @neondatabase/serverless | \`${pkg.dependencies?.['@neondatabase/serverless'] ?? '?'}\` |
-| puppeteer-core | \`${pkg.dependencies?.['puppeteer-core'] ?? '?'}\` |
-| @sparticuz/chromium | \`${pkg.dependencies?.['@sparticuz/chromium'] ?? '?'}\` |
+| wrangler | \`${pkg.devDependencies?.wrangler ?? '?'}\` |
+| @neondatabase/serverless (migration only) | \`${pkg.devDependencies?.['@neondatabase/serverless'] ?? '?'}\` |
 
 ---
 
@@ -190,8 +188,8 @@ const md = `# GraceGrip — Project Status
 - **Encrypted journal** — AES via Web Crypto API, entries never leave device
 - **Backup / restore** — JSON export + import, QR-based device transfer
 - **Dark mode** — light / dark / system, persisted to localStorage
-- **OG image** — Puppeteer screenshot at \`/api/og\`, branded fallback card via \`next/og\`
-- **Anonymous feedback** — optional Neon Postgres channel through a Vercel serverless route
+- **OG image** — static \`public/og-image.png\`
+- **Optional feedback** — D1 insert through one Cloudflare Pages Function
 
 ---
 

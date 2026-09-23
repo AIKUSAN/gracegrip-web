@@ -26,7 +26,7 @@ To report a vulnerability, open a [GitHub Security Advisory](https://github.com/
 
 ## Scope
 
-GraceGrip is a **privacy-first, offline-capable static web app**. There are no user accounts and no personal recovery data stored remotely. The only external data surface is anonymous feedback submission (rating + optional message) stored in Neon Postgres through a Vercel serverless route.
+GraceGrip is a **privacy-first, offline-capable static web app**. There are no user accounts; journal entries, progress, and profile data stay on the device. Optional feedback (rating + note) is sent to a Cloudflare Pages Function and stored in D1 after migration. The homepage alone loads Cloudflare Web Analytics; SPA tracking is disabled. Neon and the last Vercel deployment remain rollback sources for 30 days after cutover.
 
 In-scope for this repo:
 
@@ -104,7 +104,7 @@ We use a simplified severity scale based on real-world impact to users:
 
 - **Do not** open a public GitHub issue for security vulnerabilities.
 - **Do not** disclose the issue publicly before we have had a reasonable opportunity to fix it.
-- **Do not** access data belonging to other users (there are no user accounts, but Neon feedback rows belong to the service).
+- **Do not** access data belonging to other users (there are no user accounts, but D1 feedback rows belong to the service).
 
 ### Acknowledgements
 

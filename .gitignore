@@ -35,6 +35,7 @@ playwright-report/
 
 # ─── Deployment Platforms ────────────────────────────────────
 .vercel
+.wrangler/
 .netlify
 .azure/
 
@@ -94,6 +95,7 @@ seo-health/
 .githooks/
 .remember/
 .seo-cache/
+/graphify-out/
 
 # ─── Internal Docs (agent notes, audit trails, handovers) ────
 # IRONCLAD: These NEVER enter the public repo under any circumstance.
