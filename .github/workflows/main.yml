@@ -58,3 +58,9 @@ jobs:
 
       - name: Verify static export
         run: npm run verify:export
+
+      - name: Verify production feedback retention Worker
+        run: npx wrangler deploy --config wrangler.feedback-retention.jsonc --dry-run --env=''
+
+      - name: Verify preview feedback retention Worker
+        run: npx wrangler deploy --config wrangler.feedback-retention.jsonc --dry-run --env=preview

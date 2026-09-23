@@ -1,7 +1,7 @@
 {
   "name": "GraceGrip",
   "short_name": "GraceGrip",
-  "description": "Free, private Scripture-based addiction recovery app. No account. No tracking.",
+  "description": "Free Scripture-based recovery support. No account; recovery data stays on your device.",
   "icons": [
     { "src": "/favicons/favicon-72x72.png", "type": "image/png", "sizes": "72x72", "purpose": "any maskable" },
     { "src": "/favicons/favicon-96x96.png", "type": "image/png", "sizes": "96x96", "purpose": "any maskable" },
