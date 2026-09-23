@@ -248,7 +248,7 @@ export function SettingsPage({
           Send Feedback
         </h3>
         <p className="settings-section-desc">
-          No account needed. Your rating and optional note are sent to GraceGrip without a name or email. Please do not include identifying details.
+          No account needed. Your rating and optional note are sent without a name or email. This form cannot receive a reply. Please do not include identifying details. Daily cleanup clears notes once they are older than 90 days; ratings remain.
         </p>
         {feedbackSent ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', alignItems: 'flex-start' }}>
@@ -297,6 +297,20 @@ export function SettingsPage({
         )}
       </section>
 
+      {/* ── Contact ──────────────────────────────────────────────── */}
+      <section className="panel panel-wide settings-section legacy-settings-panel">
+        <h3 className="settings-section-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem', fontSize: '1rem', fontWeight: 700 }}>
+          <MessageSquare size={17} aria-hidden="true" />
+          Contact GraceGrip
+        </h3>
+        <p className="settings-section-desc">
+          For a product question or feedback that needs a reply, email <a href="mailto:contact@gracegrip.app">contact@gracegrip.app</a>.
+          Email is separate from the anonymous form. It reveals your email address to us and the mail providers, and our reply may come from a different address.
+          This inbox is not monitored for urgent help. Use <a href="/emergency">Help Now</a> for the app&apos;s immediate tools;
+          if you are in danger, contact local emergency services.
+        </p>
+      </section>
+
       {/* ── About, FAQ & Legal ────────────────────────────────────── */}
       <section className="panel panel-wide settings-section legacy-settings-about">
 
@@ -342,7 +356,7 @@ export function SettingsPage({
           </details>
           <details className="faq-details">
             <summary className="faq-summary">Does GraceGrip require an account or subscription?</summary>
-            <p className="faq-answer">No. GraceGrip has no accounts, no sign-up, no email, and no subscription. It is free and open-source. You can optionally send a rating or feedback note.</p>
+            <p className="faq-answer">No. GraceGrip has no accounts or subscription, and you do not need to provide an email address to use it. It is free and open-source. You can optionally send a rating or feedback note.</p>
           </details>
           <details className="faq-details">
             <summary className="faq-summary">What happens when I stumble?</summary>
@@ -372,7 +386,7 @@ export function SettingsPage({
           <details className="faq-details">
             <summary className="faq-summary">Terms of Use</summary>
             <div className="settings-legal-body">
-              <p><strong>GraceGrip is peer support and spiritual encouragement — not professional mental health care, crisis intervention, or a substitute for licensed therapy.</strong> If you are in immediate danger, please contact local emergency services or a crisis helpline immediately.</p>
+              <p><strong>GraceGrip offers self-guided spiritual encouragement — not professional mental health care, crisis intervention, or a substitute for licensed therapy.</strong> If you are in immediate danger, please contact local emergency services or a crisis helpline immediately.</p>
               <p>GraceGrip is provided free of charge, as-is, without warranties of any kind. The developers make no guarantee of uninterrupted service, fitness for a particular purpose, or medical or psychological effectiveness.</p>
               <p>GraceGrip is open-source software released under the MIT License. You are free to use, copy, modify, merge, publish, distribute, and sublicense it, provided attribution is retained in all forks and distributions.</p>
               <p>Scripture quotations are used for encouragement and reflection. GraceGrip does not claim authority over Biblical interpretation or doctrine.</p>
@@ -383,7 +397,8 @@ export function SettingsPage({
             <summary className="faq-summary">Privacy Policy</summary>
             <div className="settings-legal-body">
               <p><strong>Your recovery records stay on your device.</strong> GraceGrip does not create user accounts. Journal entries, profile name, and streak history are encrypted in local storage. Other settings and progress also stay in your browser. Optional feedback is handled separately below.</p>
-              <p><strong>Optional feedback.</strong> If you submit a rating or message, it is stored in Cloudflare D1. The form does not request your name, email, or device identifier. Please avoid including identifying information in your note. Network requests may still expose technical information such as an IP address to the hosting provider.</p>
+              <p><strong>Optional anonymous feedback.</strong> If you submit a rating or message, it is stored in Cloudflare D1. The form does not request your name, email, or device identifier and cannot be used for a reply. Please avoid including identifying information. Daily cleanup removes written notes from the active database once they are older than 90 days; ratings remain. Cloudflare&apos;s database recovery history may retain an earlier copy for up to 30 more days. The temporary Neon rollback database follows the same daily cutoff and is retained through October 23, 2026. Network requests may still expose technical information such as an IP address to the hosting provider.</p>
+              <p><strong>Contact email.</strong> Mail sent to contact@gracegrip.app is forwarded by Cloudflare to a private inbox. Unlike the feedback form, email includes your address and is handled by the mail providers. Replies may come from that private inbox&apos;s address. The inbox is for product contact and feedback; it is not an urgent support channel.</p>
               {homeAnalyticsEnabled ? (
                 <p><strong>Homepage analytics.</strong> Cloudflare Web Analytics is loaded manually on the homepage only to measure visits and performance. SPA tracking is disabled. The analytics beacon is not loaded on emergency, journal, settings, scripture, or devotional pages. There are no advertising networks or crash-reporting SDKs.</p>
               ) : (

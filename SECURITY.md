@@ -4,7 +4,7 @@
 
 | Version | Supported |
 |---------|-----------|
-| v1.1.0 (`main`) | ✅ Actively maintained |
+| v1.3.0 (`main`) | ✅ Actively maintained |
 | Any prior release | ❌ Not supported |
 
 GraceGrip is a continuously deployed static web app. Only the current `main` branch receives security fixes.
@@ -26,7 +26,7 @@ To report a vulnerability, open a [GitHub Security Advisory](https://github.com/
 
 ## Scope
 
-GraceGrip is a **privacy-first, offline-capable static web app**. There are no user accounts; journal entries, progress, and profile data stay on the device. Optional feedback (rating + note) is sent to a Cloudflare Pages Function and stored in D1 after migration. The homepage alone loads Cloudflare Web Analytics; SPA tracking is disabled. Neon and the last Vercel deployment remain rollback sources for 30 days after cutover.
+GraceGrip is a **privacy-first, offline-capable static web app**. There are no user accounts; journal entries, progress, and profile data stay on the device. Optional feedback (rating + note) is sent to a Cloudflare Pages Function and stored in D1. A daily scheduled Worker clears note text after 90 days. The homepage alone loads Cloudflare Web Analytics; SPA tracking is disabled. Neon and the last Vercel deployment remain rollback sources through October 23, 2026.
 
 In-scope for this repo:
 
@@ -35,10 +35,11 @@ In-scope for this repo:
 - Insecure localStorage handling
 - Dependency vulnerabilities with client-side impact
 - Logic flaws in the panic/recovery flows that could cause harm
+- Abuse of the public feedback endpoint that could expose data or disrupt service
 
 Out-of-scope:
 
-- Brute-force, rate limiting, or DDoS (no auth surface)
+- Credential brute-force (there is no account or sign-in surface)
 - Self-XSS requiring the user to run code in their own browser
 - Vulnerabilities requiring physical device access
 

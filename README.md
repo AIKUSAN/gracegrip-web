@@ -21,7 +21,8 @@ Some people reach for their phone in a moment of temptation and find nothing tha
 - **Recovery data stays on your device** — progress, journal, and favorites live in your browser only.
 - **Sensitive data is encrypted** — journal entries and profile info are AES-encrypted via the Web Crypto API before being written to `localStorage`.
 - **No advertising.** Cloudflare Web Analytics is loaded manually on the homepage only, with SPA tracking disabled. The beacon is absent from emergency, journal, and all other inner pages.
-- **Optional feedback** sends a rating and optional message to Cloudflare D1. The form does not ask for identity; avoid adding identifying information to a note.
+- **Optional anonymous feedback** sends a rating and optional message to Cloudflare D1. The form cannot receive a reply. Daily cleanup clears notes once they are older than 90 days; ratings remain. Avoid adding identifying information.
+- **Contact email** is separate from the form. `contact@gracegrip.app` forwards through Cloudflare to a private inbox for product questions and feedback. Replies may come from that inbox's address. It is not an urgent help channel.
 
 ---
 
@@ -49,8 +50,8 @@ Some people reach for their phone in a moment of temptation and find nothing tha
 | Animation | Motion (Framer Motion v12) |
 | Fonts | Libre Baskerville + Manrope (self-hosted, no CDN) |
 | Storage | `localStorage` (sensitive fields AES-encrypted) |
-| Feedback | Cloudflare Pages Function + D1; Neon is retained during migration and rollback |
-| Deployment | Cloudflare Pages static export (migration branch); Vercel serves the live domain until approved cutover |
+| Feedback | Cloudflare Pages Function + D1; a scheduled Worker clears note text after 90 days |
+| Deployment | Cloudflare Pages static export from `main`; Vercel and Neon are retained only for rollback through October 23, 2026 |
 
 ---
 
@@ -69,7 +70,7 @@ The feedback Function runs under Cloudflare Pages, not `next dev`. See [Cloudfla
 npm run build
 ```
 
-Static output is written to `out/`. Do not merge this branch to `main` while Vercel still deploys the live site. The current Vercel deployment remains the rollback source for 30 days after cutover.
+Static output is written to `out/`. Cloudflare Pages deploys protected `main`. The last Vercel deployment remains a rollback source through October 23, 2026; its Git deployment is disconnected.
 
 ## Content Validation
 
@@ -86,7 +87,9 @@ Run this after editing files in `content/` to verify schema and emotion referenc
 | Setting | Value |
 |---------|-------|
 | Live URL | https://gracegrip.app |
-| Cloudflare Pages | Protected preview first; bind separate preview and production D1 databases |
+| Cloudflare Pages | `main` is production; protected preview uses a separate D1 database |
+| Feedback retention | Daily scheduled Worker clears D1 note text older than 90 days; review notes weekly |
+| Contact | Cloudflare Email Routing forwards `contact@gracegrip.app` to a verified private inbox |
 | CI gates | `npm audit` + lint + content + SEO + feedback tests + static build/export verification |
 | Search Indexing | IndexNow and Search Console workflows run manually after verified cutover |
 
@@ -124,5 +127,5 @@ See [NOTICE.md](NOTICE.md) for the full attribution and forking policy.
 
 ## Disclaimer
 
-GraceGrip provides spiritual and peer support content. It is **not** professional mental health care.
+GraceGrip provides self-guided spiritual encouragement. It is **not** professional mental health care or a monitored crisis service.
 If you are in crisis, contact your local emergency services or a trusted crisis hotline in your region.
