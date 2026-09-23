@@ -1,9 +1,13 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "gracegrip-feedback-retention",
+  "account_id": "ab8306e92557d6b7fcfd56774bb9c2e5",
   "main": "./workers/feedback-retention.js",
   "compatibility_date": "2026-09-23",
   "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "preview_urls": false,
+  "secrets": { "required": ["NEON_DATABASE_URL"] },
   "vars": { "NEON_RETENTION_REQUIRED": "true" },
   "triggers": {
     "crons": ["0 3 * * *"]
@@ -18,6 +22,9 @@
   "env": {
     "preview": {
       "name": "gracegrip-feedback-retention-preview",
+      "workers_dev": false,
+      "preview_urls": false,
+      "secrets": { "required": [] },
       "triggers": { "crons": [] },
       "vars": { "NEON_RETENTION_REQUIRED": "false" },
       "d1_databases": [
