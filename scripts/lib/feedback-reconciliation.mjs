@@ -1,6 +1,16 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License */
 import { createHash } from 'node:crypto'
 
+export function d1FeedbackPageRequest(cursor, pageSize) {
+  if (typeof cursor !== 'string' || !Number.isSafeInteger(pageSize) || pageSize < 1) {
+    throw new Error('Invalid D1 feedback page request.')
+  }
+  return {
+    sql: 'SELECT id, created_at, rating, message FROM user_feedback WHERE id > ? ORDER BY id LIMIT ?',
+    params: [cursor, String(pageSize)],
+  }
+}
+
 export function normalizeCreatedAt(value) {
   const match = typeof value === 'string'
     ? /^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d)(?:\.(\d{1,6}))?Z$/.exec(value)

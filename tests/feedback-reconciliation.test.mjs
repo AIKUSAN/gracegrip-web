@@ -1,7 +1,7 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License */
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { fingerprintRow, reconcileRows, validateD1Count } from '../scripts/lib/feedback-reconciliation.mjs'
+import { d1FeedbackPageRequest, fingerprintRow, reconcileRows, validateD1Count } from '../scripts/lib/feedback-reconciliation.mjs'
 
 const example = {
   id: '11111111-1111-4111-8111-111111111111',
@@ -9,6 +9,16 @@ const example = {
   rating: 4,
   message: null,
 }
+
+test('D1 pagination request serializes every API parameter as a string', () => {
+  const requestBody = JSON.parse(JSON.stringify(d1FeedbackPageRequest(example.id, 100)))
+  assert.deepEqual(requestBody, {
+    sql: 'SELECT id, created_at, rating, message FROM user_feedback WHERE id > ? ORDER BY id LIMIT ?',
+    params: [example.id, '100'],
+  })
+  assert.ok(requestBody.params.every((param) => typeof param === 'string'))
+  assert.throws(() => d1FeedbackPageRequest('', 0), /Invalid D1 feedback page request/)
+})
 
 test('reconciliation is idempotent and normalizes D1 millisecond timestamps', async () => {
   const rows = new Map()

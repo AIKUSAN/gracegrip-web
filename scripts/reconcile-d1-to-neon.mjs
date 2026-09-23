@@ -1,8 +1,8 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License */
-// Use after an emergency route-back to Vercel; rerun after DNS propagation.
+// Use before a planned rollback or after an emergency route-back; rerun after DNS propagation.
 // Feedback text stays in memory and never enters command arguments or logs.
 import { neon } from '@neondatabase/serverless'
-import { reconcileRows } from './lib/feedback-reconciliation.mjs'
+import { d1FeedbackPageRequest, reconcileRows } from './lib/feedback-reconciliation.mjs'
 
 const args = new Set(process.argv.slice(2))
 const verifyOnly = args.has('--verify-only')
@@ -36,7 +36,7 @@ if (process.env.D1_PREVIEW_DATABASE_ID === process.env.D1_PRODUCTION_DATABASE_ID
 const sql = neon(neonUrl)
 const pageSize = 100
 
-async function d1Query(query, params) {
+async function d1Query(query) {
   const response = await fetch(
     `https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCOUNT_ID}/d1/database/${process.env.D1_PRODUCTION_DATABASE_ID}/query`,
     {
@@ -45,7 +45,7 @@ async function d1Query(query, params) {
         Authorization: `Bearer ${process.env.CLOUDFLARE_API_TOKEN}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ sql: query, params }),
+      body: JSON.stringify(query),
       signal: AbortSignal.timeout(30000),
     },
   )
@@ -81,10 +81,7 @@ async function main() {
   let cursor = ''
   let verified = 0
   while (true) {
-    const rows = await d1Query(
-      'SELECT id, created_at, rating, message FROM user_feedback WHERE id > ? ORDER BY id LIMIT ?',
-      [cursor, pageSize],
-    )
+    const rows = await d1Query(d1FeedbackPageRequest(cursor, pageSize))
     if (!rows.length) break
     verified += await reconcileRows(rows, {
       insert: verifyOnly ? async () => {} : insertIntoNeon,
@@ -92,7 +89,7 @@ async function main() {
     })
     cursor = rows.at(-1).id
   }
-  const totals = await d1Query('SELECT count(*) AS row_count FROM user_feedback', [])
+  const totals = await d1Query({ sql: 'SELECT count(*) AS row_count FROM user_feedback', params: [] })
   const d1Count = Number(totals[0]?.row_count)
   if (!Number.isSafeInteger(d1Count) || d1Count !== verified) {
     throw new Error('D1 row count changed or pagination missed rows; rerun reconciliation.')
