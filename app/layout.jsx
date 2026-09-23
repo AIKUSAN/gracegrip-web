@@ -1,5 +1,4 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
-import { Analytics } from '@vercel/analytics/react'
 import { Libre_Baskerville, Manrope } from 'next/font/google'
 import { Toaster } from 'sonner'
 import { JsonLd } from '@/components/JsonLd'
@@ -30,7 +29,7 @@ export const metadata = {
   description:
     'GraceGrip is a free, privacy-first recovery app for porn and masturbation addiction. ' +
     'Scripture, daily devotions, urge management tools, and encrypted journaling — ' +
-    'no account required. Your recovery data never leaves your device.',
+    'no account required. Your journal and progress stay on your device.',
   keywords: [
     'GraceGrip',
     'addiction recovery app',
@@ -80,7 +79,7 @@ export const metadata = {
     title: 'GraceGrip — Scripture-Based Addiction Recovery',
     description:
       'Free, private recovery support through Scripture, daily devotions, ' +
-      'and practical urge-management tools. No account. No personal data tracking.',
+      'and practical urge-management tools. No account or advertising.',
     url: 'https://gracegrip.app',
     siteName: 'GraceGrip',
     type: 'website',
@@ -98,7 +97,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'GraceGrip — Scripture-Based Addiction Recovery',
     description:
-      'Free, private recovery support. No account, no personal tracking. ' +
+      'Free, private recovery support. No account or advertising. ' +
       'Scripture, devotions, encrypted journal.',
     images: ['/og-image.png'],
   },
@@ -127,13 +126,6 @@ export default function RootLayout({ children }) {
       className={`${libreBaskerville.variable} ${manrope.variable}`}
     >
       <head>
-        {/* Content Security Policy — enforced via meta tag for static export.
-            frame-ancestors is additionally enforced as an HTTP header via vercel.json
-            because meta CSP cannot enforce frame-ancestors per W3C spec. */}
-        <meta
-          httpEquiv="Content-Security-Policy"
-          content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://va.vercel-scripts.com; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; media-src 'self'; worker-src 'none';"
-        />
         <meta name="referrer" content="no-referrer" />
         <JsonLd
           data={{
@@ -211,7 +203,6 @@ export default function RootLayout({ children }) {
         <AppProvider>
           {children}
           <Toaster position="bottom-center" richColors />
-          <Analytics />
         </AppProvider>
       </body>
     </html>

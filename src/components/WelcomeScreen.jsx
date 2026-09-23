@@ -6,7 +6,7 @@ import { HeroSection } from '@/components/HeroSection'
 const WELCOME_VALUE_PROPS = [
   {
     title: 'Privacy-First',
-    description: 'Your data stays on this device. No account, no tracking, no forced cloud sync.',
+    description: 'Your recovery data stays on this device. No account, no ads, no forced cloud sync.',
   },
   {
     title: 'Scripture-Powered',

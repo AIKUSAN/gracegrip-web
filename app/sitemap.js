@@ -1,5 +1,7 @@
 import { DISCOVERY_PUBLIC_ROUTES, getDiscoveryUrl } from '../src/lib/discoveryMetadata.js'
 
+export const dynamic = 'force-static'
+
 export default function sitemap() {
   const currentDate = new Date().toISOString()
   const routeSettings = {

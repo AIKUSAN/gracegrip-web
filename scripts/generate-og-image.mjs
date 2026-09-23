@@ -9,8 +9,8 @@
  *      with a near-black color filter matching the website's logo rendering
  *   3. Rendering the combined SVG to a 1200×630 PNG via @resvg/resvg-js
  *
- * Run automatically as part of `npm run build` (see package.json).
- * Can also be run standalone: node scripts/generate-og-image.mjs
+ * Run explicitly when the social preview copy changes:
+ * node scripts/generate-og-image.mjs
  *
  * Logo geometry notes:
  *   logo.svg viewBox = "939 140 938 1025"

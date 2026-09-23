@@ -2,6 +2,7 @@
 'use client'
 
 import Link from 'next/link'
+import Script from 'next/script'
 import { JsonLd } from '@/components/JsonLd'
 import { useApp } from '@/context/AppContext'
 import AppShell from '@/components/AppShell'
@@ -9,9 +10,17 @@ import { HomePage } from '@/components/pages/HomePage'
 
 export default function Page() {
   const { appState, encouragementOfDay, greeting, verses, onStayedClean, onStumbledToday, checkedInToday } = useApp()
+  const analyticsToken = process.env.NEXT_PUBLIC_CF_WEB_ANALYTICS_TOKEN
 
   return (
     <>
+      {analyticsToken && (
+        <Script
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          strategy="afterInteractive"
+          data-cf-beacon={JSON.stringify({ token: analyticsToken, spa: false })}
+        />
+      )}
       <JsonLd
         data={{
           '@context': 'https://schema.org',
@@ -37,7 +46,7 @@ export default function Page() {
             GraceGrip is a free, private recovery app for porn and masturbation addiction.
             Track your clean streak, read daily Scripture and devotionals, manage urges with guided
             breathing and grounding tools, and write in an AES-encrypted private journal — no account
-            required, no data ever sent to servers.
+            required. Your journal and progress stay on your device.
           </p>
           <h2>Features</h2>
           <ul>
@@ -46,7 +55,7 @@ export default function Page() {
             <li>Daily devotional reader with reflection and practice</li>
             <li>Emergency urge support: breathing, grounding, panic verse</li>
             <li>AES-encrypted private journal — stays on your device</li>
-            <li>No account. No tracking. Completely free.</li>
+              <li>No account or advertising. Completely free.</li>
           </ul>
           <h2>Why GraceGrip Helps</h2>
           <p>

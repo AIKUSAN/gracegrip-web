@@ -1,14 +1,9 @@
 # © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License
 name: Ping IndexNow
 
-# Fires automatically after every successful production deploy.
-# workflow_run waits for "CI / Deploy" to complete before triggering —
-# ensuring we only ping when CI passes AND only on the main branch.
+# Run manually after the Cloudflare cutover is verified.
 on:
-  workflow_run:
-    workflows: ["CI / Deploy"]
-    branches: [main]
-    types: [completed]
+  workflow_dispatch:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -17,8 +12,6 @@ jobs:
   ping:
     name: Notify search engines (Bing / DuckDuckGo / Ecosia / Yandex)
     runs-on: ubuntu-latest
-    # Gate: only run when the CI/Deploy workflow succeeded — never on failed builds
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
       - name: Checkout
@@ -29,11 +22,6 @@ jobs:
         with:
           node-version: 24
           # No npm ci needed — ping-indexnow.mjs has zero npm dependencies
-
-      - name: Wait for Vercel deployment to go live
-        run: |
-          echo "Sleeping 120s to allow Vercel to finish deploying gracegrip.app..."
-          sleep 120
 
       - name: Ping IndexNow
         run: node scripts/ping-indexnow.mjs

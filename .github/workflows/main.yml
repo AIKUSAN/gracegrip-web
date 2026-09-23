@@ -1,4 +1,4 @@
-name: CI / Deploy
+name: CI
 
 on:
   push:
@@ -47,8 +47,14 @@ jobs:
       - name: Validate content
         run: npm run validate:content
 
+      - name: Test feedback Function
+        run: npm run test:feedback
+
       - name: SEO guard
         run: node scripts/seo-guard.mjs
 
       - name: Build
         run: npm run build
+
+      - name: Verify static export
+        run: npm run verify:export
