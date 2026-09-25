@@ -1,7 +1,7 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License */
 import { readFile } from 'fs/promises'
 import { DISCOVERY_PUBLIC_ROUTES } from '../src/lib/discoveryMetadata.js'
-import publishedArticles from '../src/content/publishedArticles.json' with { type: 'json' }
+import publishedArticles from '../src/content/publishedArticles.js'
 import { RESOURCE_ARTICLES } from '../src/content/resources.js'
 
 const CANONICAL_HOST = 'https://gracegrip.app'

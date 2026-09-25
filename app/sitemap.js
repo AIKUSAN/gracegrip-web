@@ -1,5 +1,5 @@
 import { DISCOVERY_PUBLIC_ROUTES, getDiscoveryUrl } from '../src/lib/discoveryMetadata.js'
-import publishedArticles from '../src/content/publishedArticles.json' with { type: 'json' }
+import publishedArticles from '../src/content/publishedArticles.js'
 import { RESOURCE_ARTICLES } from '../src/content/resources.js'
 
 export const dynamic = 'force-static'

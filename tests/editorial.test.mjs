@@ -3,6 +3,7 @@ import { test } from 'node:test'
 import { readFileSync } from 'node:fs'
 import { DatabaseSync } from 'node:sqlite'
 import { handleEditorialRequest } from '../functions/lib/editorial.js'
+import { readPublishedRegistry } from '../functions/lib/githubPublish.js'
 import { parseChatGPTDraft } from '../src/lib/editorialDraft.js'
 
 function d1(db) {
@@ -92,4 +93,10 @@ test('editorial requests reject cross-site mutations and fail closed without a s
 test('ChatGPT import fills only a valid Markdown draft', () => {
   assert.deepEqual(parseChatGPTDraft('# Title\n## Part\nDraft content'), { title: 'Title', sections: [{ heading: 'Part', body: 'Draft content' }] })
   assert.equal(parseChatGPTDraft('No headings'), null)
+})
+
+test('publishing registry parses a data-only JavaScript module for Pages Functions', () => {
+  assert.deepEqual(readPublishedRegistry('export default [{"slug":"guide-alcohol"}]\n'), [{ slug: 'guide-alcohol' }])
+  assert.throws(() => readPublishedRegistry('export default (() => [])()'), SyntaxError)
+  assert.throws(() => readPublishedRegistry('const articles = []'), /registry is invalid/)
 })

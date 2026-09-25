@@ -59,6 +59,9 @@ jobs:
       - name: Verify static export
         run: npm run verify:export
 
+      - name: Verify Pages Functions with the Pages build compiler
+        run: npx --yes wrangler@3.114.17 pages functions build --outdir /tmp/gracegrip-pages-functions
+
       - name: Require GraceGrip 2.0 release evidence
         run: npm run verify:v2-release
 

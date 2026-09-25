@@ -1,4 +1,4 @@
-import approvedArticles from '../src/content/publishedArticles.json' with { type: 'json' }
+import approvedArticles from '../src/content/publishedArticles.js'
 import { sendArticleEmail, unsubscribeToken } from '../functions/lib/transactionalEmail.js'
 
 export async function runArticleEmail(env, articles = approvedArticles, sender = sendArticleEmail) {

@@ -7,7 +7,7 @@ import {
 import { readJsonLimited, validateSyncPayload } from './accountSafety.js'
 import { eraseCommunityMember } from './communityDeletion.js'
 import { emailIsConfigured, sendAccountEmail, unsubscribeToken } from './transactionalEmail.js'
-import approvedArticles from '../../src/content/publishedArticles.json' with { type: 'json' }
+import approvedArticles from '../../src/content/publishedArticles.js'
 
 const SESSION_SECONDS = 14 * 24 * 60 * 60
 const CHALLENGE_SECONDS = 5 * 60

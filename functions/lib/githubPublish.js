@@ -3,7 +3,7 @@ import { validateArticleDraft } from '../../src/lib/editorialDraft.js'
 
 const OWNER = 'AIKUSAN'
 const REPO = 'gracegrip-web'
-const FILE = 'src/content/publishedArticles.json'
+const FILE = 'src/content/publishedArticles.js'
 const API = `https://api.github.com/repos/${OWNER}/${REPO}`
 
 async function githubJson(fetcher, url, token, options = {}) {
@@ -49,6 +49,14 @@ function encodeUtf8(value) {
 }
 const decodeUtf8 = (value) => new TextDecoder().decode(Uint8Array.from(atob(value.replaceAll('\n', '')), (char) => char.charCodeAt(0)))
 
+export function readPublishedRegistry(source) {
+  const header = 'export default '
+  if (!source.startsWith(header)) throw new Error('Published article registry is invalid')
+  const articles = JSON.parse(source.slice(header.length).trim().replace(/;$/, ''))
+  if (!Array.isArray(articles)) throw new Error('Published article registry is invalid')
+  return articles
+}
+
 export function toPublishedArticle(draft) {
   const parsed = validateArticleDraft({
     slug: draft.slug, title: draft.title, description: draft.description,
@@ -79,13 +87,12 @@ export async function createPublishingPullRequest(draft, env, fetcher = fetch) {
     if (!String(error.message).includes('(422)')) throw error
   }
   const file = await githubJson(fetcher, `${API}/contents/${FILE}?ref=${encodeURIComponent(branch)}`, token)
-  const articles = JSON.parse(decodeUtf8(file.content))
-  if (!Array.isArray(articles)) throw new Error('Published article registry is invalid')
+  const articles = readPublishedRegistry(decodeUtf8(file.content))
   const updated = [...articles.filter((item) => item.slug !== article.slug), article]
   if (JSON.stringify(articles) !== JSON.stringify(updated)) {
     await githubJson(fetcher, `${API}/contents/${FILE}`, token, {
       method: 'PUT',
-      body: JSON.stringify({ message: `docs: prepare reviewed GraceGrip resource ${article.slug}`, content: encodeUtf8(`${JSON.stringify(updated, null, 2)}\n`), sha: file.sha, branch }),
+      body: JSON.stringify({ message: `docs: prepare reviewed GraceGrip resource ${article.slug}`, content: encodeUtf8(`export default ${JSON.stringify(updated, null, 2)}\n`), sha: file.sha, branch }),
     })
   }
   const pull = await githubJson(fetcher, `${API}/pulls`, token, {

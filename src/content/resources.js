@@ -1,5 +1,5 @@
 import { FOCUS_AREAS } from './focusAreas.js'
-import publishedArticles from './publishedArticles.json' with { type: 'json' }
+import publishedArticles from './publishedArticles.js'
 
 // Editorial drafts for protected preview. Human owner and qualified reviewers must
 // approve health and safeguarding claims before these pages become indexable.
