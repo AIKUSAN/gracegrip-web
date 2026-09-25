@@ -22,6 +22,24 @@
           "database_name": "gracegrip-feedback-preview",
           "database_id": "eadf0da8-20f2-4fd4-a55f-00119682a6c2",
           "migrations_dir": "d1/migrations"
+        },
+        {
+          "binding": "ACCOUNT_DB",
+          "database_name": "gracegrip-account-preview",
+          "database_id": "081ddf78-03ae-4411-96b5-504bc4a79122",
+          "migrations_dir": "d1/accounts/migrations"
+        },
+        {
+          "binding": "COMMUNITY_DB",
+          "database_name": "gracegrip-community-preview",
+          "database_id": "9f448efe-0e61-454c-b290-8f59bfefac13",
+          "migrations_dir": "d1/community/migrations"
+        },
+        {
+          "binding": "EDITORIAL_DB",
+          "database_name": "gracegrip-editorial-preview",
+          "database_id": "56353a88-0218-4edf-94e4-6df6cdafa7f5",
+          "migrations_dir": "d1/editorial/migrations"
         }
       ]
     }
