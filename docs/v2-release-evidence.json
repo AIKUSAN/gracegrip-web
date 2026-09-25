@@ -12,5 +12,8 @@
   "androidClosedTestAndPlayApproval": false,
   "webAndAndroidAccessibilityVerified": false,
   "ownerReleaseApproval": false,
-  "evidence": ["2026-09-25: Cloudflare dashboard account contains the gracegrip.app zone and gracegrip-webapp Pages project connected to AIKUSAN/gracegrip-web. Wrangler and the connector still require authentication to this account."]
+  "evidence": [
+    "2026-09-25: Cloudflare dashboard account contains the gracegrip.app zone and gracegrip-webapp Pages project connected to AIKUSAN/gracegrip-web. Wrangler and the connector still require authentication to this account.",
+    "2026-09-25: Three separate preview D1 databases were created in the GraceGrip account, matching schemas applied and table lists verified. Cloudflare Pages passed commit 63fc6da and Preview Settings lists all three bindings plus separate FEEDBACK_DB. The protected application flows remain unverified."
+  ]
 }
