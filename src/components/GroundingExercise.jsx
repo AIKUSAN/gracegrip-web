@@ -4,6 +4,7 @@
 import { useState } from 'react'
 import { ArrowRight, RotateCcw, CheckCircle2, Leaf } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
+import { useApp } from '@/context/AppContext'
 
 const STEPS = [
   { count: 5, sense: 'things you can see', icon: '👁️' },
@@ -20,6 +21,7 @@ const stepVariants = {
 }
 
 export function GroundingExercise() {
+  const { onAwardPracticeEmblem } = useApp()
   const [stepIndex, setStepIndex] = useState(0)
   const [done, setDone] = useState(false)
 
@@ -30,6 +32,7 @@ export function GroundingExercise() {
       setStepIndex((i) => i + 1)
     } else {
       setDone(true)
+      onAwardPracticeEmblem('grounding')
     }
   }
 

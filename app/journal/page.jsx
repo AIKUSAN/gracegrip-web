@@ -24,16 +24,16 @@ export default function Page() {
         <main style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '640px', margin: '0 auto' }}>
           <h1>Private Journal — GraceGrip</h1>
           <p>
-            GraceGrip includes a private, encrypted journal for your recovery journey.
-            Write freely — your entries are encrypted with AES via the Web Crypto API and
-            stored only on your device. Nothing is ever sent to a server or synced to the cloud.
+            GraceGrip includes a private journal for the thoughts you choose to record.
+            Entries are encrypted before device-local storage when Web Crypto is available.
+            They are not included in optional progress sync and are never read by an AI helper automatically.
           </p>
           <h2>Journal Features</h2>
           <ul>
-            <li>AES encryption — entries are encrypted before saving</li>
+            <li>Device encryption when Web Crypto is available</li>
             <li>Mood tracking — log how you are feeling with each entry</li>
             <li>Filter by mood — review entries by emotional state</li>
-            <li>100% private — no account, no sync, no server</li>
+            <li>Device-local storage and a readable JSON backup you can export</li>
           </ul>
           <p>Your journal belongs to you. Free, encrypted, private.</p>
         </main>

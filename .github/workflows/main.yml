@@ -59,6 +59,9 @@ jobs:
       - name: Verify static export
         run: npm run verify:export
 
+      - name: Require GraceGrip 2.0 release evidence
+        run: npm run verify:v2-release
+
       - name: Verify production feedback retention Worker
         run: npx wrangler deploy --config wrangler.feedback-retention.jsonc --dry-run --env=''
 

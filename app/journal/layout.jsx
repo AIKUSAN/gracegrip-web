@@ -2,8 +2,7 @@
 export const metadata = {
   title: 'Encrypted Journal — Private Recovery Space',
   description:
-    'Private, AES-encrypted journaling for recovery. Safely log your ' +
-    'thoughts and progress without worrying about your data leaving your device.',
+    'A private device-local journal. Entries are encrypted before local storage when Web Crypto is available.',
   robots: {
     index: false,
     follow: true,
@@ -13,7 +12,7 @@ export const metadata = {
   },
   openGraph: {
     title: 'GraceGrip Journal — Encrypted & Private',
-    description: 'A safe, offline space to process your journey with encryption you can trust.',
+    description: 'A private space for reflection with device-local entries and portable backups.',
     url: 'https://gracegrip.app/journal',
   },
 }

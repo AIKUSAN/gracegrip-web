@@ -96,6 +96,7 @@ seo-health/
 .remember/
 .seo-cache/
 /graphify-out/
+/progress.md
 
 # ─── Internal Docs (agent notes, audit trails, handovers) ────
 # IRONCLAD: These NEVER enter the public repo under any circumstance.

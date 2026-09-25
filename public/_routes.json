@@ -1,5 +1,5 @@
 {
   "version": 1,
-  "include": ["/api/feedback"],
+  "include": ["/api/feedback", "/api/account/*", "/api/community/*", "/api/editor/*", "/api/helper/*"],
   "exclude": []
 }

@@ -3,8 +3,8 @@ import { access, readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
 const output = 'out'
-const publicRoutes = ['/', '/emergency', '/scripture', '/devotional']
-const privateRoutes = ['/journal', '/settings']
+const publicRoutes = ['/', '/emergency', '/scripture', '/devotional', '/focus', ...['alcohol', 'sexual-habits', 'anger', 'nicotine', 'gambling', 'digital-habits', 'drugs'].map((slug) => `/focus/${slug}`)]
+const privateRoutes = ['/journal', '/settings', '/progress', '/puzzle', '/account', '/community', '/community/host', '/editor', '/helper', '/unsubscribe', '/resources', '/resources/one-small-step']
 
 async function routeHtml(path) {
   const slug = path === '/' ? 'index' : path.slice(1)
@@ -39,8 +39,8 @@ for (const file of ['_headers', '_routes.json', 'robots.txt', 'sitemap.xml', 'll
   await access(join(output, file))
 }
 const routes = JSON.parse(await readFile(join(output, '_routes.json'), 'utf8'))
-if (JSON.stringify(routes.include) !== JSON.stringify(['/api/feedback'])) {
+if (JSON.stringify(routes.include) !== JSON.stringify(['/api/feedback', '/api/account/*', '/api/community/*', '/api/editor/*', '/api/helper/*'])) {
   throw new Error('Pages Functions invocation scope drifted')
 }
 
-console.log('Static export verified: six routes, discovery files, privacy metadata, and feedback-only Function routing.')
+console.log('Static export verified: public guides, private routes, discovery files, analytics boundary, and bounded Function routing.')

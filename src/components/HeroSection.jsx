@@ -52,7 +52,7 @@ export function HeroSection({
       <div className="hero-top-row">
         {!isWelcome && (
           <div className="hero-pill-row">
-            <p className="privacy-pill">No account. No subscription. No ads.</p>
+            <p className="privacy-pill">Free public help. No ads.</p>
           </div>
         )}
         <button
@@ -92,7 +92,7 @@ export function HeroSection({
             delay={0.24}
             className="hero-copy"
           >
-            GraceGrip helps men and women break free from pornography and masturbation through the power of Christ, Scripture, and grace-filled accountability tools. No shame. No judgment. Just freedom.
+            GraceGrip offers a private place to choose one next step with a habit or substance use. We are a Christian mission, and prayer and Scripture are always your choice.
           </TextEffect>
 
           <div className="welcome-input-wrap">

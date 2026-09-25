@@ -54,12 +54,12 @@ export function SettingsPage({
   }
 
   return (
-    <div className="screen-stack legacy-settings-screen">
+    <div className="screen-stack legacy-settings-screen v2-support-route">
 
       {/* ── Page Header ───────────────────────────────────────────── */}
       <div className="settings-page-header">
-        <h2 className="settings-page-title">Settings</h2>
-        <p className="settings-page-subtitle">Manage your profile, data, and privacy.</p>
+        <h1 className="settings-page-title">Settings</h1>
+        <p className="settings-page-subtitle">Your data, your choices, and a way to reach GraceGrip.</p>
       </div>
 
       {/* ── Profile ───────────────────────────────────────────────── */}
@@ -146,7 +146,7 @@ export function SettingsPage({
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
           {[
             { key: 'journal',   label: 'Journal entries' },
-            { key: 'streak',    label: 'Streak & devotional progress' },
+            { key: 'streak',    label: 'Progress, emblems & devotional history' },
             { key: 'favorites', label: 'Favorite verses' },
             { key: 'settings',  label: 'Settings & profile' },
           ].map(({ key, label }) => (
@@ -324,8 +324,8 @@ export function SettingsPage({
               <span className="about-license-pill">MIT</span>
             </div>
             <p className="about-meta-desc">
-              Faith-based recovery support for porn and masturbation addiction — Scripture, streak tracking, and grace for difficult moments.
-              No account, no cloud sync, no ads. Your journal and progress stay on this device.
+              Free, private support across self-chosen focus areas, with immediate tools and optional Christian encouragement.
+              Public help needs no account. Selected goal progress can be synced only after you create an optional account and choose what to upload; the journal stays on this device.
             </p>
             <a
               href="https://github.com/AIKUSAN/gracegrip-web"
@@ -348,27 +348,27 @@ export function SettingsPage({
         <div className="faq-list">
           <details className="faq-details">
             <summary className="faq-summary">What is GraceGrip and who is it for?</summary>
-            <p className="faq-answer">GraceGrip is a free, privacy-first recovery app built for people fighting porn and masturbation addiction. It offers immediate, dignified support through Scripture, daily devotionals, a clean-streak tracker, an encrypted private journal, a panic button for crisis moments, and tools to back up or transfer your data — all without an account or subscription.</p>
+            <p className="faq-answer">GraceGrip is a free, Christian self-help app for adults who choose to change a habit or seek support around substance use. It offers Help Now tools, seven focus paths, an optional devotional, private check-ins, a journal, and portable backups. Choosing a path does not assign a diagnosis, and faith tools are optional.</p>
           </details>
           <details className="faq-details">
             <summary className="faq-summary">Is my data private and secure?</summary>
-            <p className="faq-answer">Your journal entries, streak history, profile name, and app progress stay on your device. Journal entries, streak history, and profile name are encrypted before local storage; other app preferences and progress are stored locally. Optional feedback is sent to GraceGrip only when you submit it.</p>
+            <p className="faq-answer">Your journal, profile name, and legacy streak history stay on this device. Goal plans and check-ins begin here too; only goals, check-ins, and emblems you explicitly select can be uploaded to an optional account. Sensitive local fields are encrypted before storage when Web Crypto is available. A backup you export is readable JSON, so store it carefully.</p>
           </details>
           <details className="faq-details">
             <summary className="faq-summary">Does GraceGrip require an account or subscription?</summary>
-            <p className="faq-answer">No. GraceGrip has no accounts or subscription, and you do not need to provide an email address to use it. It is free and open-source. You can optionally send a rating or feedback note.</p>
+            <p className="faq-answer">Public guidance, Help Now, and Resources are free without an account or subscription. Membership, when enabled, is optional for selected progress sync and hosted community sessions. All core support stays free.</p>
           </details>
           <details className="faq-details">
             <summary className="faq-summary">What happens when I stumble?</summary>
-            <p className="faq-answer">The streak counter resets to zero — but God&apos;s grace does not. GraceGrip is designed around the truth that every new moment is a fresh start. Tap &ldquo;I stumbled today&rdquo; honestly and begin again. Your streak history is preserved so you can see how far you&apos;ve come.</p>
+            <p className="faq-answer">Your chosen goal can record a setback without erasing earlier check-ins or permanent emblems. The old GraceGrip streak stays separate as legacy progress. You can return to a helpful step whenever you are ready.</p>
           </details>
           <details className="faq-details">
             <summary className="faq-summary">How does the streak counter work?</summary>
-            <p className="faq-answer">Tap &ldquo;I stayed clean today&rdquo; once per calendar day to mark that day. If you check in on consecutive days, your count increases. Miss a day, and the counter resets. You can only check in once per day — come back tomorrow to continue your streak.</p>
+            <p className="faq-answer">The earlier consecutive-day streak is preserved as legacy progress. New goals have their own private check-ins. On paths where days make sense, you may choose to track them and earn permanent botanical emblems; missing a day does not remove an emblem.</p>
           </details>
           <details className="faq-details">
             <summary className="faq-summary">Can I use GraceGrip offline?</summary>
-            <p className="faq-answer">GraceGrip requires an internet connection to load — refreshing without one will show a blank page. Your journal, streak, and favorites stay in this browser. The journal and streak history are encrypted in local storage; favorites and some progress fields are stored locally without encryption.</p>
+            <p className="faq-answer">GraceGrip can be installed as a web app, but this preview still requires a network connection to load its pages. Saved journal and progress data remain on this device. Export a backup before changing browsers or devices.</p>
           </details>
           <details className="faq-details">
             <summary className="faq-summary">How do I transfer my data to a new phone or browser?</summary>
@@ -386,17 +386,20 @@ export function SettingsPage({
           <details className="faq-details">
             <summary className="faq-summary">Terms of Use</summary>
             <div className="settings-legal-body">
-              <p><strong>GraceGrip offers self-guided spiritual encouragement — not professional mental health care, crisis intervention, or a substitute for licensed therapy.</strong> If you are in immediate danger, please contact local emergency services or a crisis helpline immediately.</p>
+              <p><strong>GraceGrip offers nonclinical self-help and optional spiritual encouragement, not diagnosis, medical treatment, detox, or crisis intervention.</strong> If you are in immediate danger, contact local emergency services. For substance dependence or withdrawal concerns, seek qualified medical care.</p>
               <p>GraceGrip is provided free of charge, as-is, without warranties of any kind. The developers make no guarantee of uninterrupted service, fitness for a particular purpose, or medical or psychological effectiveness.</p>
               <p>GraceGrip is open-source software released under the MIT License. You are free to use, copy, modify, merge, publish, distribute, and sublicense it, provided attribution is retained in all forks and distributions.</p>
               <p>Scripture quotations are used for encouragement and reflection. GraceGrip does not claim authority over Biblical interpretation or doctrine.</p>
-              <p>By using GraceGrip, you agree that it is a devotional and self-accountability tool and that you take responsibility for your own wellbeing. This app is not a medical device and makes no clinical claims.</p>
+              <p>You may choose practical tools without prayer or Scripture. This app is not a medical device and makes no clinical claims.</p>
             </div>
           </details>
           <details className="faq-details">
             <summary className="faq-summary">Privacy Policy</summary>
             <div className="settings-legal-body">
-              <p><strong>Your recovery records stay on your device.</strong> GraceGrip does not create user accounts. Journal entries, profile name, and streak history are encrypted in local storage. Other settings and progress also stay in your browser. Optional feedback is handled separately below.</p>
+              <p><strong>Device records and optional sync.</strong> The journal, profile name, legacy streak, and puzzle personal best stay on your device. Goals, plans, check-ins, and emblems also begin locally. If you create an optional passkey account, you may explicitly choose goals, check-ins, and emblems to copy to a separate Cloudflare D1 account store. Existing data is never uploaded automatically. Sensitive local fields are encrypted when Web Crypto is available. Exported backups are readable JSON.</p>
+              <p><strong>Membership and email.</strong> A passkey and one-use recovery codes can access your optional account. If you add and verify a private email, a capped outbound provider processes verification and recovery messages; the address is not shown in the community. Article notices require a separate unchecked opt-in and can be unsubscribed from independently. Account deletion removes the synced account copy and community profile, while device-local data remains until you clear it on that device.</p>
+              <p><strong>Hosted community.</strong> Members show an alias and avatar, not their account email or goals. The owner reviews text posts before other members see them. Ordinary chat posts are deleted after 30 days; separately retained incident evidence is deleted after 90 days. The room is read-only unless a human owner is hosting and is not monitored for urgent help.</p>
+              <p><strong>Optional AI reflection.</strong> An explicitly downloaded on-device model runs on compatible hardware and keeps your reflection in the browser. The separate Workers AI fallback sends the one prompt to Cloudflare for inference and has daily limits. GraceGrip does not save prompts or AI response text. Reports store only a category and inference route. AI is not a crisis service, clinician, or substitute for the fixed Help Now guidance.</p>
               <p><strong>Optional anonymous feedback.</strong> If you submit a rating or message, it is stored in Cloudflare D1. The form does not request your name, email, or device identifier and cannot be used for a reply. Please avoid including identifying information. Daily cleanup removes written notes from the active database once they are older than 90 days; ratings remain. Cloudflare&apos;s database recovery history may retain an earlier copy for up to 30 more days. The temporary Neon rollback database follows the same daily cutoff and is retained through October 23, 2026. Network requests may still expose technical information such as an IP address to the hosting provider.</p>
               <p><strong>Contact email.</strong> Mail sent to contact@gracegrip.app is forwarded by Cloudflare to a private inbox. Unlike the feedback form, email includes your address and is handled by the mail providers. Replies may come from that private inbox&apos;s address. The inbox is for product contact and feedback; it is not an urgent support channel.</p>
               {homeAnalyticsEnabled ? (

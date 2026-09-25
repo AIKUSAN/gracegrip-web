@@ -25,11 +25,10 @@ const manrope = Manrope({
 export const metadata = {
   metadataBase: new URL('https://gracegrip.app'),
   applicationName: 'GraceGrip',
-  title: 'GraceGrip — Free Scripture-Based Addiction Recovery App',
+  title: 'GraceGrip — Private Support for the Change You Choose',
   description:
-    'GraceGrip is a free, privacy-first recovery app for porn and masturbation addiction. ' +
-    'Scripture, daily devotions, urge management tools, and encrypted journaling — ' +
-    'no account required. Your journal and progress stay on your device.',
+    'Free, private support for adults changing a habit or substance use. ' +
+    'Help Now tools, self-chosen focus guides, and optional Christian encouragement.',
   keywords: [
     'GraceGrip',
     'addiction recovery app',
@@ -37,10 +36,10 @@ export const metadata = {
     'privacy-focused recovery',
     'free recovery app',
     'Christian sobriety',
-    'porn addiction help',
+    'private habit change support',
     'faith-based habit tools',
     'urge management',
-    'offline recovery app',
+    'nonclinical self-help',
   ],
   creator: 'AIKUSAN',
   publisher: 'AIKUSAN',
@@ -76,10 +75,9 @@ export const metadata = {
     canonical: 'https://gracegrip.app',
   },
   openGraph: {
-    title: 'GraceGrip — Scripture-Based Addiction Recovery',
+    title: 'GraceGrip — Private Support for the Change You Choose',
     description:
-      'Free, private recovery support through Scripture, daily devotions, ' +
-      'and practical urge-management tools. No account or advertising.',
+      'Free, private self-help across seven focus areas, with immediate tools and optional Christian encouragement.',
     url: 'https://gracegrip.app',
     siteName: 'GraceGrip',
     type: 'website',
@@ -88,17 +86,16 @@ export const metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'GraceGrip — Scripture-Based Addiction Recovery App',
+        alt: 'GraceGrip — Private Support for the Change You Choose',
         type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'GraceGrip — Scripture-Based Addiction Recovery',
+    title: 'GraceGrip — Private Support for the Change You Choose',
     description:
-      'Free, private recovery support. No account or advertising. ' +
-      'Scripture, devotions, encrypted journal.',
+      'Free, private support with Help Now tools and optional Scripture.',
     images: ['/og-image.png'],
   },
   robots: {
@@ -148,7 +145,7 @@ export default function RootLayout({ children }) {
                 },
                 about: {
                   '@type': 'Thing',
-                  name: 'Christian recovery support for pornography and masturbation addiction',
+                  name: 'Private support for self-chosen habit and substance-use change',
                 },
                 offers: {
                   '@type': 'Offer',

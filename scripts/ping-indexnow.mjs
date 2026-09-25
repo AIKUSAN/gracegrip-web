@@ -17,12 +17,8 @@ const API_KEY = '1a497fa5-7965-4791-b2a9-46aa47c55114'
 const HOST = 'gracegrip.app'
 const KEY_LOCATION = `https://${HOST}/${API_KEY}.txt`
 
-const URLS = [
-  `https://${HOST}/`,
-  `https://${HOST}/emergency`,
-  `https://${HOST}/scripture`,
-  `https://${HOST}/devotional`,
-]
+const { default: sitemap } = await import('../app/sitemap.js')
+const URLS = sitemap().map((entry) => entry.url)
 
 const payload = {
   host: HOST,

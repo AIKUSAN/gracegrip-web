@@ -1,5 +1,6 @@
 /* © 2026 GraceGrip | Created by IKE/AIKUSAN | MIT License. Attribution is required in all forks. */
 import { encryptString, decryptString, encryptJson, decryptJson } from './crypto.js'
+import { normalizeProgress } from './progress.js'
 
 const STORAGE_KEY = 'gracegrip_v1'
 
@@ -22,6 +23,10 @@ export const initialState = {
   profileName: '',
   profileCreatedAt: '',
   lastExportDate: '',
+  goals: [],
+  goalCheckins: [],
+  emblems: [],
+  puzzleBest: 0,
 }
 
 const normalizeState = (candidate) => {
@@ -101,6 +106,7 @@ const normalizeState = (candidate) => {
     profileName,
     profileCreatedAt,
     lastExportDate,
+    ...normalizeProgress(safeCandidate),
   }
 }
 
@@ -119,10 +125,12 @@ export const loadAppState = async () => {
 
     // Decrypt the three sensitive fields in parallel.
     // decryptJson / decryptString pass through legacy plaintext arrays / strings unchanged.
-    const [journalEntries, profileName, streakHistory] = await Promise.all([
+    const [journalEntries, profileName, streakHistory, goals, goalCheckins] = await Promise.all([
       decryptJson(parsed.journalEntries),
       decryptString(parsed.profileName ?? ''),
       decryptJson(parsed.streakHistory),
+      decryptJson(parsed.goals),
+      decryptJson(parsed.goalCheckins),
     ])
 
     return normalizeState({
@@ -130,6 +138,8 @@ export const loadAppState = async () => {
       journalEntries: journalEntries ?? [],
       profileName: profileName ?? '',
       streakHistory: streakHistory ?? [],
+      goals: goals ?? [],
+      goalCheckins: goalCheckins ?? [],
     })
   } catch {
     return initialState
@@ -143,14 +153,16 @@ export const loadAppState = async () => {
  * @returns {Promise<void>}
  */
 export const saveAppState = async (state) => {
-  const [journalEntries, profileName, streakHistory] = await Promise.all([
+  const [journalEntries, profileName, streakHistory, goals, goalCheckins] = await Promise.all([
     encryptJson(state.journalEntries),
     encryptString(state.profileName),
     encryptJson(state.streakHistory),
+    encryptJson(state.goals),
+    encryptJson(state.goalCheckins),
   ])
   window.localStorage.setItem(
     STORAGE_KEY,
-    JSON.stringify({ ...state, journalEntries, profileName, streakHistory }),
+    JSON.stringify({ ...state, journalEntries, profileName, streakHistory, goals, goalCheckins }),
   )
 }
 
@@ -241,6 +253,10 @@ export const exportStateAsJson = (
     data.streak = state.streak
     data.streakHistory = state.streakHistory
     data.devotionalCompletedDays = state.devotionalCompletedDays
+    data.goals = state.goals
+    data.goalCheckins = state.goalCheckins
+    data.emblems = state.emblems
+    data.puzzleBest = state.puzzleBest
   }
   if (selections.favorites) data.favoriteVerseIds = state.favoriteVerseIds
   if (selections.settings) {

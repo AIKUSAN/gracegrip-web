@@ -27,7 +27,7 @@ export default function Page() {
           url: 'https://gracegrip.app/scripture',
           name: 'Scripture Library — GraceGrip',
           description:
-            'Curated Bible verses organized by recovery emotion: temptation, shame, identity, peace, strength, forgiveness, and favorites.',
+            'Optional Bible verses for temptation, identity, peace, strength, forgiveness, and freedom.',
           isPartOf: { '@id': 'https://gracegrip.app/#app' },
         }}
       />
@@ -35,22 +35,13 @@ export default function Page() {
         <main style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '640px', margin: '0 auto' }}>
           <h1>Scripture Library — GraceGrip</h1>
           <p>
-            GraceGrip&apos;s Scripture Library is a curated collection of Bible verses organized
-            by the emotional landscape of addiction recovery. Every verse is selected for its direct
-            relevance to pornography and masturbation addiction — not generic devotional content.
-            Categories cover the full recovery experience: temptation (verses for moments of urge and
-            craving), shame (grace-first Scripture that addresses guilt without condemnation), identity
-            (reminders of who you are in Christ apart from your struggle), peace (verses for anxiety
-            and restlessness), strength (encouragement for hard days), and forgiveness (Scripture on
-            grace, restoration, and starting again). Users can save individual verses as favorites for
-            quick access during difficult moments. The full library is available offline once loaded,
-            requires no account, and stores no browsing history. It is the same verse set used in
-            GraceGrip&apos;s emergency panic flow.
+            GraceGrip&apos;s Scripture Library offers optional Christian reflection across temptation,
+            identity, forgiveness, strength, peace, and freedom. You can save a verse on this device.
+            Prayer and Scripture are not required to use Help Now or any practical focus guide.
           </p>
           <h2>Scripture Categories</h2>
           <ul>
             <li>Temptation — verses for moments of urge and craving</li>
-            <li>Shame — grace-first Scripture to combat shame and guilt</li>
             <li>Identity — who you are in Christ, not what you have done</li>
             <li>Peace — verses for anxiety, racing thoughts, and restlessness</li>
             <li>Strength — encouragement for the hard days of recovery</li>
@@ -60,10 +51,10 @@ export default function Page() {
           <h2>Related GraceGrip Resources</h2>
           <ul>
             <li><Link href="/">Home</Link> for daily progress and the main recovery tools.</li>
-            <li><Link href="/emergency">Emergency Urge Support</Link> for immediate guided help during cravings.</li>
+            <li><Link href="/emergency">Help Now</Link> for a safety choice and immediate tools.</li>
             <li><Link href="/devotional">Daily Devotional</Link> for reflection and practice rooted in Scripture.</li>
           </ul>
-          <p>Free, private Scripture library. No account. No ads.</p>
+          <p>Free, private Scripture library. No account required.</p>
         </main>
       </noscript>
       <AppShell>

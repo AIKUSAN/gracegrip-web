@@ -2,16 +2,15 @@
 import { JsonLd } from '@/components/JsonLd'
 
 export const metadata = {
-  title: 'Daily Devotional — Scripture-Based Habit Change',
+  title: 'Daily Devotional — Optional Christian Reflection',
   description:
-    'A daily Christian devotional journey for addiction recovery. Scripture-based ' +
-    'reflections, prayers, and practical action steps for healing.',
+    'Optional daily Scripture reflection, prayer, and a practical next step.',
   alternates: {
     canonical: 'https://gracegrip.app/devotional',
   },
   openGraph: {
     title: 'GraceGrip Daily Devotional — Spiritual Recovery',
-    description: 'Grow in your recovery journey with daily grace-first devotionals. Free and private.',
+    description: 'A free daily Scripture reflection with an optional prayer and action step.',
     url: 'https://gracegrip.app/devotional',
     images: [
       {
@@ -40,7 +39,7 @@ export default function DevotionalLayout({ children }) {
               url: 'https://gracegrip.app/devotional',
               name: 'Daily Devotional',
               description:
-                'Daily Scripture-based devotionals for Christian addiction recovery, reflection, and habit change.',
+                'Daily Scripture-based reflections with optional prayer and a practical step.',
               inLanguage: 'en-US',
               isPartOf: {
                 '@type': 'WebSite',

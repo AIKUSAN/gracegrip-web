@@ -16,13 +16,13 @@ export function DevotionalPage({ today, todayDevotional, devotionalCompletedDays
   const progressPct = totalDays > 0 ? Math.round((completedCount / totalDays) * 100) : 0
 
   return (
-    <div className="screen-stack legacy-devotional-screen">
+    <div className="screen-stack legacy-devotional-screen v2-support-route">
       <section className="panel panel-wide legacy-devotional-header">
-        <h1>{totalDays}-Day Devotional Plan</h1>
-        <p className="muted">A grace-paced journey through Scripture, one day at a time.</p>
+        <h1>Today&apos;s devotional</h1>
+        <p className="muted">An optional daily pause with Scripture, prayer, and one action. Missing a day is not a failure.</p>
         <div className="devotional-progress">
           <div className="devotional-progress-meta">
-            <span>{completedCount} of {totalDays} days complete</span>
+            <span>{completedCount} of {totalDays} days opened this month</span>
             <span>{progressPct}%</span>
           </div>
           <div
@@ -59,7 +59,7 @@ export function DevotionalPage({ today, todayDevotional, devotionalCompletedDays
       </section>
 
       <section className="panel panel-wide legacy-devotional-list-panel">
-        <h3>All {totalDays} Days</h3>
+        <h3>This month&apos;s reflections</h3>
         <ul className="devotional-list">
           {monthDevotionals.map((d) => {
             const isToday = d.id === todayDevotional.id

@@ -4,12 +4,10 @@
 import { Heart } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { AppNavigation } from './AppNavigation'
-import { WelcomeScreen } from './WelcomeScreen'
 import { PanicModal } from './PanicModal'
 
-export default function AppShell({ children, allowBeforeOnboarding = false }) {
+export default function AppShell({ children }) {
   const {
-    appState,
     stateLoaded,
     panicActive,
     panicVerse,
@@ -18,29 +16,10 @@ export default function AppShell({ children, allowBeforeOnboarding = false }) {
     formatTime,
     setPanicActive,
     setSecondsLeft,
-    currentThemePreference,
-    onThemeChange,
-    cycleThroughThemes,
-    welcomeName,
-    setWelcomeName,
-    onBeginJourney,
   } = useApp()
 
   // Wait for async localStorage decryption before rendering any user data.
   if (!stateLoaded) return null
-
-  if (!appState.onboardingComplete && !allowBeforeOnboarding) {
-    return (
-      <WelcomeScreen
-        currentThemePreference={currentThemePreference}
-        onThemeChange={onThemeChange}
-        cycleThroughThemes={cycleThroughThemes}
-        welcomeName={welcomeName}
-        onWelcomeNameChange={setWelcomeName}
-        onBeginJourney={onBeginJourney}
-      />
-    )
-  }
 
   return (
     <div className="page-shell">
@@ -52,8 +31,8 @@ export default function AppShell({ children, allowBeforeOnboarding = false }) {
 
           <footer className="footer">
             <p className="footer-legal">
-              Peer support &amp; spiritual encouragement only — not professional mental health care.
-              In immediate danger? Contact local emergency services.
+              Self-guided support with optional spiritual encouragement, not medical care.
+              In immediate danger, contact local emergency services.
             </p>
 
             <div className="footer-support">

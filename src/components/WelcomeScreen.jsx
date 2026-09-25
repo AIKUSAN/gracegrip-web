@@ -6,11 +6,11 @@ import { HeroSection } from '@/components/HeroSection'
 const WELCOME_VALUE_PROPS = [
   {
     title: 'Privacy-First',
-    description: 'Your recovery data stays on this device. No account, no ads, no forced cloud sync.',
+    description: 'Public tools work without an account. Your journal stays on this device.',
   },
   {
-    title: 'Scripture-Powered',
-    description: 'Curated verses and devotionals to steady your thoughts and strengthen your spirit.',
+    title: 'Faith by choice',
+    description: 'Prayer and Scripture are available when you want them.',
   },
   {
     title: 'Practical Tools',

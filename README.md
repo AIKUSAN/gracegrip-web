@@ -1,6 +1,6 @@
 # GraceGrip
 
-**Faith Over Temptation.** GraceGrip is a free, privacy-first recovery web app for people fighting porn and masturbation addiction — built on Scripture, grace, and practical tools that work without an account, a subscription, or recovery-data cloud sync.
+**Faith Over Temptation.** GraceGrip is a free Christian self-help app. The live 1.2.3 release serves people seeking support with pornography and sexual habits. The 1.3.0 maintenance changes are in a preview branch. GraceGrip 2.0 is being built for adults worldwide who choose to change a habit or seek help around substance use, with practical tools and prayer or Scripture by choice.
 
 [![Latest Release](https://img.shields.io/github/v/release/AIKUSAN/gracegrip-web?display_name=tag&label=release&color=2d6a4f&logo=github)](https://github.com/AIKUSAN/gracegrip-web/releases/latest)
 [![Live Site](https://img.shields.io/website?url=https%3A%2F%2Fgracegrip.app&up_message=gracegrip.app&down_message=offline&label=live&color=1d4ed8)](https://gracegrip.app)
@@ -9,7 +9,7 @@
 
 ## Mission
 
-Some people reach for their phone in a moment of temptation and find nothing that respects their privacy or their faith. GraceGrip exists to fill that gap — offering immediate, dignified support through Scripture, breathing exercises, devotionals, and encrypted journaling, without accounts or gatekeeping.
+Some people reach for their phone in a difficult moment and need a private, useful next step. GraceGrip offers immediate support without an account or gatekeeping. The 2.0 direction adds seven self-chosen paths: alcohol, pornography and sexual habits, anger and conflict, nicotine and vaping, gambling, gaming and digital habits, and other drug use. Choosing a path does not label someone with an addiction. Stress, loneliness, grief, and relationship pressure are related support topics.
 
 **We believe shame does not produce lasting change. Grace does.**
 
@@ -17,8 +17,8 @@ Some people reach for their phone in a moment of temptation and find nothing tha
 
 ## Privacy Promise
 
-- **No account required** — open the app and it works.
-- **Recovery data stays on your device** — progress, journal, and favorites live in your browser only.
+- **No account required for public help** — Help Now and public guidance work without signing in.
+- **The journal stays on your device** — 2.0 membership may sync only goals, check-ins, and emblems that you explicitly choose.
 - **Sensitive data is encrypted** — journal entries and profile info are AES-encrypted via the Web Crypto API before being written to `localStorage`.
 - **No advertising.** Cloudflare Web Analytics is loaded manually on the homepage only, with SPA tracking disabled. The beacon is absent from emergency, journal, and all other inner pages.
 - **Optional anonymous feedback** sends a rating and optional message to Cloudflare D1. The form cannot receive a reply. Daily cleanup clears notes once they are older than 90 days; ratings remain. Avoid adding identifying information.
@@ -26,7 +26,7 @@ Some people reach for their phone in a moment of temptation and find nothing tha
 
 ---
 
-## Features
+## Live 1.3 features
 
 | Feature | Description |
 |---------|-------------|
@@ -39,6 +39,12 @@ Some people reach for their phone in a moment of temptation and find nothing tha
 | **Selective Backup** | Export only the data you choose; import on any device |
 | **Optional Feedback** | Send a rating or note without creating an account |
 
+## GraceGrip 2.0 development branch
+
+This branch prepares the Clear Current redesign, seven focus guides, an optional daily plan, private progress and botanical emblems, a Help Now puzzle, static Resources drafts, passkey membership, hosted community controls, a limited AI reflection pilot, and a private article editor. **These are not live features.** The seven guides and nine article pages are drafts awaiting qualified and owner review. Account, community, email, AI, and editorial services fail closed until their separate Cloudflare bindings and secrets are verified. The Android Trusted Web Activity still needs a Play developer account, signing identity, Digital Asset Links, and closed testing.
+
+`npm run verify:v2-release` is intentionally failing until the evidence in `docs/v2-release-evidence.json` is complete. The protected `main` build must pass it before a 2.0 merge. The current Cloudflare 1.3 app remains public throughout this work.
+
 ---
 
 ## Tech Stack
@@ -49,8 +55,9 @@ Some people reach for their phone in a moment of temptation and find nothing tha
 | Runtime | React 19 + Tailwind CSS v4 |
 | Animation | Motion (Framer Motion v12) |
 | Fonts | Libre Baskerville + Manrope (self-hosted, no CDN) |
-| Storage | `localStorage` (sensitive fields AES-encrypted) |
+| Live storage | `localStorage` (sensitive fields AES-encrypted) |
 | Feedback | Cloudflare Pages Function + D1; a scheduled Worker clears note text after 90 days |
+| 2.0 private services | Separate account, community, and editorial D1 stores; a hosted-session Durable Object; Workers AI fallback; model artifacts on R2 after verification |
 | Deployment | Cloudflare Pages static export from `main`; Vercel and Neon are retained only for rollback through October 23, 2026 |
 
 ---
@@ -62,7 +69,7 @@ npm install
 npm run dev
 ```
 
-The feedback Function runs under Cloudflare Pages, not `next dev`. See [Cloudflare migration runbook](CLOUDFLARE_MIGRATION.md) for local D1 testing and the protected preview sequence.
+Pages Functions do not run under `next dev`. See [Cloudflare migration runbook](CLOUDFLARE_MIGRATION.md) for the live feedback Function and [2.0 release runbook](docs/V2_RELEASE_RUNBOOK.md) for the private services and protected preview gates.
 
 ## Production Build
 

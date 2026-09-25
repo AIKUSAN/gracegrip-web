@@ -1,7 +1,7 @@
 {
   "name": "GraceGrip",
   "short_name": "GraceGrip",
-  "description": "Free Scripture-based recovery support. No account; recovery data stays on your device.",
+  "description": "Free, private support for self-chosen change, with Help Now tools and optional Christian encouragement.",
   "icons": [
     { "src": "/favicons/favicon-72x72.png", "type": "image/png", "sizes": "72x72", "purpose": "any maskable" },
     { "src": "/favicons/favicon-96x96.png", "type": "image/png", "sizes": "96x96", "purpose": "any maskable" },
@@ -15,6 +15,6 @@
   "scope": "/",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#305f4f",
-  "background_color": "#f6f1e9"
+  "theme_color": "#066b60",
+  "background_color": "#f5fbf9"
 }

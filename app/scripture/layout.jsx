@@ -2,16 +2,15 @@
 import { JsonLd } from '@/components/JsonLd'
 
 export const metadata = {
-  title: 'Scripture Library — Bible Verses for Addiction Recovery',
+  title: 'Scripture Library — Optional Christian Encouragement',
   description:
-    'Curated Scripture library for addiction recovery. Bible verses for temptation, ' +
-    'shame, identity, and peace — indexed to speak to your recovery journey.',
+    'Curated Bible verses for temptation, identity, forgiveness, strength, peace, and freedom. Available by choice.',
   alternates: {
     canonical: 'https://gracegrip.app/scripture',
   },
   openGraph: {
     title: 'GraceGrip Scripture — Biblical Recovery Support',
-    description: 'Find strength in God’s Word with recovery-focused Bible verses. Free and private.',
+    description: 'Bible verses for reflection and encouragement, available by choice. Free and private.',
     url: 'https://gracegrip.app/scripture',
     images: [
       {
@@ -40,7 +39,7 @@ export default function ScriptureLayout({ children }) {
               url: 'https://gracegrip.app/scripture',
               name: 'Scripture Library',
               description:
-                'Recovery-focused Bible verses organized by temptation, identity, forgiveness, strength, peace, and freedom.',
+                'Bible verses organized by temptation, identity, forgiveness, strength, peace, and freedom.',
               inLanguage: 'en-US',
               isPartOf: {
                 '@type': 'WebSite',

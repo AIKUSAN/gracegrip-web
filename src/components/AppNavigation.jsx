@@ -2,7 +2,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { DynamicLogo } from '@/components/ui/DynamicLogo'
 import { usePathname } from 'next/navigation'
 import {
@@ -15,12 +15,13 @@ import {
   PenLine,
   Settings,
   Sun,
+  Compass,
 } from 'lucide-react'
 import { useApp } from '@/context/AppContext'
 
 const NAV_ITEMS = [
   { path: '/', label: 'Home', icon: Home },
-  { path: '/emergency', label: 'Emergency', icon: AlertTriangle, emergency: true },
+  { path: '/emergency', label: 'Help Now', icon: AlertTriangle, emergency: true },
   { path: '/scripture', label: 'Scripture', icon: BookOpen },
   { path: '/devotional', label: 'Devotional', icon: BookMarked },
   { path: '/journal', label: 'Journal', icon: PenLine },
@@ -49,6 +50,7 @@ function NavLinks({ mobile = false, compact = false }) {
 }
 
 export function AppNavigation() {
+  const [pagesOpen, setPagesOpen] = useState(false)
   const { currentThemePreference, cycleThroughThemes } = useApp()
   const ThemeIcon = { light: Sun, dark: Moon, system: Monitor }[currentThemePreference] ?? Monitor
   const nextThemeLabel = useMemo(() => {
@@ -103,6 +105,17 @@ export function AppNavigation() {
       <nav className="mobile-nav" aria-label="Mobile Primary">
         <NavLinks mobile />
       </nav>
+      <div className="v2-pages-control">
+        {pagesOpen && <nav id="v2-pages-menu" className="v2-pages-menu" aria-label="More pages">
+          <Link href="/focus" onClick={() => setPagesOpen(false)}>Choose a focus</Link>
+          <Link href="/progress" onClick={() => setPagesOpen(false)}>My progress</Link>
+          <Link href="/resources" onClick={() => setPagesOpen(false)}>Resources</Link>
+          <Link href="/account" onClick={() => setPagesOpen(false)}>Private membership</Link>
+          <Link href="/community" onClick={() => setPagesOpen(false)}>Community sessions</Link>
+          <Link href="/helper" onClick={() => setPagesOpen(false)}>Reflection helper</Link>
+        </nav>}
+        <button type="button" className="v2-pages-button" aria-expanded={pagesOpen} aria-controls="v2-pages-menu" onClick={() => setPagesOpen((open) => !open)}><Compass size={18} aria-hidden="true" /> Pages</button>
+      </div>
     </>
   )
 }

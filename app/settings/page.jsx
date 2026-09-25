@@ -43,11 +43,11 @@ export default function Page() {
             <li>Profile name — personalize your experience</li>
             <li>Theme — light, dark, or follow system preference</li>
             <li>Daily reminder — set a notification time for check-ins</li>
-            <li>Backup &amp; restore — export or import your encrypted data</li>
+            <li>Backup &amp; restore — export or import readable JSON containing your chosen data</li>
             <li>QR transfer — move your data between devices without internet</li>
             <li>Reset &amp; clear — manage your recovery data privately</li>
           </ul>
-          <p>All settings and data stay on your device. Free, private, no account required.</p>
+          <p>Current device data stays local unless you explicitly choose to export or sync selected progress. Public tools need no account.</p>
         </main>
       </noscript>
       <AppShell>

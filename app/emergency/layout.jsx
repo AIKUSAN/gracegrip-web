@@ -2,23 +2,22 @@
 import { JsonLd } from '@/components/JsonLd'
 
 export const metadata = {
-  title: 'Emergency Urge Support — Help Now',
+  title: 'Help Now — Choose a Safe Next Step',
   description:
-    'Immediate support for addiction urges. Use the GraceGrip emergency flow: ' +
-    'timed breathing, grounding exercises, and Scripture chosen for moments of struggle.',
+    'Choose a safety route first, then use private breathing, grounding, and optional Scripture tools when appropriate.',
   alternates: {
     canonical: 'https://gracegrip.app/emergency',
   },
   openGraph: {
-    title: 'GraceGrip Emergency — Immediate Urge Support',
-    description: 'Ride out the craving with guided tools and Scripture. Private and free.',
+    title: 'GraceGrip Help Now — A Safe Next Step',
+    description: 'Immediate safety guidance and optional private support tools. Free and open without an account.',
     url: 'https://gracegrip.app/emergency',
     images: [
       {
         url: 'https://gracegrip.app/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'GraceGrip Emergency — Immediate Urge Support',
+        alt: 'GraceGrip Help Now — A Safe Next Step',
       },
     ],
   },
@@ -38,9 +37,9 @@ export default function EmergencyLayout({ children }) {
               '@type': 'WebPage',
               '@id': 'https://gracegrip.app/emergency#webpage',
               url: 'https://gracegrip.app/emergency',
-              name: 'Emergency Urge Support',
+              name: 'Help Now',
               description:
-                'Immediate Christian recovery support with guided breathing, grounding, and Scripture for urge moments.',
+                'Safety choice followed by private breathing, grounding, and optional Scripture tools.',
               inLanguage: 'en-US',
               isPartOf: {
                 '@type': 'WebSite',
@@ -61,7 +60,7 @@ export default function EmergencyLayout({ children }) {
                 {
                   '@type': 'ListItem',
                   position: 2,
-                  name: 'Emergency Urge Support',
+                  name: 'Help Now',
                 },
               ],
             },

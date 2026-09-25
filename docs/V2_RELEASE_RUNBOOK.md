@@ -1,0 +1,37 @@
+# GraceGrip 2.0 protected release runbook
+
+This document describes work in the isolated 2.0 branch. It is **not** evidence that Cloudflare, email, Play, or qualified review are configured. On 2026-09-25 the Cloudflare dashboard showed production `main` at commit `bb3eb79`, whose package version is **1.2.3**; the 1.3.0 maintenance branch was still a preview. The public site stays on its current deployment until every 2.0 gate passes. The release evidence file starts blocked by design.
+
+## Account and isolation gate
+
+1. The Cloudflare dashboard verified on 2026-09-25 that one account contains the `gracegrip.app` zone and Pages project `gracegrip-webapp`, connected to `AIKUSAN/gracegrip-web`. Authenticate Wrangler or the connector to that account before creating resources; the local Wrangler session still exposes only an unrelated PTC account. Do not create GraceGrip resources there.
+2. Create separate preview and production D1 databases for `ACCOUNT_DB`, `COMMUNITY_DB`, and `EDITORIAL_DB`, each independent of the existing `FEEDBACK_DB`. Apply the SQL in `d1/accounts/migrations`, `d1/community/migrations`, and `d1/editorial/migrations` to their matching databases. Record database IDs only in the correct account's Cloudflare configuration, never in secrets or personal data files.
+3. Keep branch previews behind Cloudflare Access. Bind preview Pages Functions to preview D1 databases and the preview `COMMUNITY_ROOM` Durable Object Worker. Production gets its own D1 stores and production DO Worker only after the protected preview passes. Bind `AI` only to the intended account and monitor its free daily allocation.
+4. Set separate preview and production secrets: `ACCOUNT_RATE_SECRET`, `RECOVERY_PEPPER`, `AI_QUOTA_SECRET`, `EMAIL_UNSUB_SECRET`, `RESEND_API_KEY`, `GITHUB_APP_PRIVATE_KEY`. Set `PASSKEY_ORIGIN`, `EDITOR_ORIGIN`, and `HELPER_ORIGIN` to the exact HTTPS origin for each environment. Configure `ACCESS_ISSUER`, `ACCESS_AUD`, `OWNER_ACCESS_SUB`, `EDITOR_ACCESS_SUBS`, and `REVIEWER_ACCESS_SUBS`; Access must protect `/editor`, `/community/host`, and their owner/editor API paths. Grant the publishing GitHub App only repository content and pull-request access to `AIKUSAN/gracegrip-web`.
+5. Verify `POST /api/feedback` still uses only feedback D1. Do not bind the journal to any server database. Keep previews and personal routes out of search and homepage-only analytics unchanged.
+
+## Human review and static Resources
+
+- Qualified substance-use and safeguarding reviewers must review every focus guide, danger branch, and guided practice. They should test the seven safety choices with local contexts and sign their exact revision. The owner approves articles and Scripture claims separately.
+- The nine starter Resources are marked `pending` and `noindex`. The editor stores later drafts privately in editorial D1. A qualified reviewer signs health guidance after the last edit; the owner then approves and requests a **draft** GitHub pull request. The owner reviews the rendered protected preview and merges through protected `main` to publish. Import from ChatGPT fills the editor form only.
+- Replace pending starter entries with approved, human-reviewed Git content before release. The 2.0 release gate rejects any pending article.
+
+## Email and account recovery
+
+- Verify a GraceGrip sender domain with the transactional provider. Resend's free plan currently lists 100 emails per day and 3,000 per month; code caps account verification/recovery at 80/day and all mail at 100/day and 2,800/month. No paid tier is assumed. Test delivery, expired and replayed codes, and reply identity. Do not put a private inbox or API key in Git.
+- A passkey is primary sign-in. Recovery codes and optional verified email are independent recovery paths. Article mail starts off and requires a separate opt-in. Test unsubscribe separately from leaving community and deleting account. Article **sending** remains a separate release gate until verified.
+
+## Community and AI gates
+
+- Run the community room only while the owner heartbeat is current. Test owner absence, pending-only posts, approval before broadcast, aliases, block/report/remove, and the shutdown switch. Deploy daily cleanup against the matching community/account D1 stores. Ordinary chat expires after 30 days and separate incident evidence after 90 days.
+- Mirror a licensed, versioned small-model artifact and its WebGPU library into R2 behind `models.gracegrip.app`; measure the actual download, configure CORS and cache headers, and test representative phones before setting `HELPER_MODEL_URL`, `HELPER_MODEL_LIB_URL`, and `HELPER_MODEL_DOWNLOAD_MB`. Pages' individual asset limit makes R2 necessary. The UI asks before downloading. Verify the model license, checksum, device memory, fallback behavior, and a safety evaluation corpus.
+- Cloud fallback uses Workers AI with a global 40/day and hashed-IP 3/day cap. Check actual neuron usage and free-tier eligibility in the **GraceGrip** account. Neither model may browse, write the journal, post to community, or publish. Fixed Help Now guidance supersedes generated text. Response reports store categories, not prompt or answer text.
+
+## Android and coordinated publication
+
+- After a Play developer account and app ID are chosen, generate the Trusted Web Activity from the **verified 2.0** manifest with Bubblewrap. Keep signing keys out of Git. Obtain the **Play app signing** SHA-256 fingerprint, then publish `.well-known/assetlinks.json` on the apex domain and verify TWA ownership; a wrong fingerprint falls back to a Custom Tab.
+- Test phones and accessibility, data safety, health and AI disclosures, community moderation, and account deletion. If the Play account is a newer personal developer account, complete the required closed test with at least 12 continuously opted-in testers for 14 days before applying for production access. Hold the approved Play package with managed publishing until the web release is ready.
+- Run build, lint, content, SEO, feedback, local-data/backup, editorial, account, community, AI, and security checks. Test direct `/emergency` access before onboarding, representative mobile layouts, enlarged text, reduced motion, Cloudflare headers, canonical redirects, and no analytics on non-home routes. Verify the three logo Git blob IDs via `npm run verify:v2-release`.
+- Only after web and Android gates are satisfied: update `docs/v2-release-evidence.json` with evidence references, set status `ready`, bump to 2.0.0, merge protected main, verify Cloudflare, then release the approved Android package in the coordinated window. If any gate fails, leave the verified current production deployment in place.
+
+Official references: [Cloudflare Pages bindings](https://developers.cloudflare.com/pages/functions/bindings/), [Durable Object WebSockets](https://developers.cloudflare.com/durable-objects/best-practices/websockets/), [Workers AI pricing](https://developers.cloudflare.com/workers-ai/platform/pricing/), [Bubblewrap TWA quick start](https://developer.chrome.com/docs/android/trusted-web-activity/quick-start), [Play closed testing](https://support.google.com/googleplay/android-developer/answer/14151465), [managed publishing](https://support.google.com/googleplay/android-developer/answer/9859654), and [Resend pricing](https://resend.com/pricing).

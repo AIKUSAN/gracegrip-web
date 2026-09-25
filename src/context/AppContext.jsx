@@ -22,6 +22,7 @@ import {
   addOneDay,
 } from '../utils/storage'
 import { DAILY_ENCOURAGEMENTS, EMERGENCY_ENCOURAGEMENTS } from '../data/encouragements'
+import { startGoal, recordGoalCheckin, awardPracticeEmblem, saveGoalPlan, removeGoal, normalizeProgress } from '../utils/progress'
 
 const AppContext = createContext(null)
 
@@ -415,6 +416,25 @@ export function AppProvider({ children }) {
     onChangeReminderTime,
     onQRImport,
     onSubmitFeedback,
+    onStartGoal: (focusId, trackDays) => setAppState((current) => startGoal(current, focusId, trackDays, formatDate(new Date()))),
+    onSaveGoalPlan: (focusId, plan) => setAppState((current) => saveGoalPlan(current, focusId, plan)),
+    onRemoveGoal: (focusId) => setAppState((current) => removeGoal(current, focusId)),
+    onImportSyncedProgress: (remote) => setAppState((current) => {
+      const incoming = normalizeProgress(remote)
+      const selected = new Set(Array.isArray(remote?.selectedFocusIds) ? remote.selectedFocusIds : [])
+      return {
+        ...current,
+        goals: [...(current.goals ?? []).filter((goal) => !selected.has(goal.focusId)), ...incoming.goals.filter((goal) => selected.has(goal.focusId))],
+        goalCheckins: [...(current.goalCheckins ?? []).filter((entry) => !selected.has(entry.focusId)), ...incoming.goalCheckins.filter((entry) => selected.has(entry.focusId))],
+        emblems: [...new Set([...(current.emblems ?? []), ...incoming.emblems])],
+      }
+    }),
+    onGoalCheckin: (focusId, status) => setAppState((current) => recordGoalCheckin(current, focusId, status, formatDate(new Date()))),
+    onAwardPracticeEmblem: (emblem) => setAppState((current) => awardPracticeEmblem(current, emblem)),
+    onFinishPuzzle: (score) => setAppState((current) => {
+      const awarded = awardPracticeEmblem(current, 'first-puzzle')
+      return { ...awarded, puzzleBest: Math.max(current.puzzleBest || 0, Number.isInteger(score) && score > 0 ? score : 0) }
+    }),
     onStayedClean: () => {
       const today = formatDate(new Date())
       if (appState.streak.lastCheckIn === today) return

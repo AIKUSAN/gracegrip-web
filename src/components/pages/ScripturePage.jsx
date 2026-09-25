@@ -27,16 +27,16 @@ export function ScripturePage({
   const activeTab = SCRIPTURE_TABS.find((t) => t.id === activeScriptureTab)
 
   return (
-    <div className="screen-stack legacy-scripture-screen">
+    <div className="screen-stack legacy-scripture-screen v2-support-route">
 
       {/* ── Page Header ───────────────────────────────────────────── */}
       <div className="scripture-page-header">
         <h1 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0, fontSize: '1.5rem', fontWeight: 700 }}>
           <BookOpen size={22} aria-hidden="true" />
-          Scripture Library
+          Scripture, when you want it
         </h1>
         <p className="muted" style={{ margin: '0.25rem 0 0', fontSize: '0.9rem' }}>
-          Browse verses that speak directly into temptation, fear, peace, identity, forgiveness, and freedom.
+          A Christian source of reflection and encouragement. You can use every practical support tool without opening Scripture.
         </p>
       </div>
 
@@ -61,10 +61,10 @@ export function ScripturePage({
         {savedVerses.length > 0 && (
           <button
             className="scripture-jump-btn"
-            onClick={() => document.getElementById('saved-verses')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => document.getElementById('saved-verses')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })}
           >
             <ArrowDownToLine size={13} aria-hidden="true" />
-            View {savedVerses.length} Saved {savedVerses.length === 1 ? 'Verse' : 'Verses'}
+            View {savedVerses.length} saved {savedVerses.length === 1 ? 'verse' : 'verses'}
           </button>
         )}
       </section>

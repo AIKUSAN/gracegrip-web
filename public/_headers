@@ -1,5 +1,5 @@
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://cloudflareinsights.com; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; media-src 'self'; worker-src 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://cloudflareinsights.com https://models.gracegrip.app; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; media-src 'self'; worker-src 'none'
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
@@ -17,3 +17,24 @@ https://:deployment.:project.pages.dev/*
 
 /settings*
   X-Robots-Tag: noindex, follow
+
+/progress*
+  X-Robots-Tag: noindex, nofollow
+
+/account*
+  X-Robots-Tag: noindex, nofollow
+
+/community*
+  X-Robots-Tag: noindex, nofollow
+
+/editor*
+  X-Robots-Tag: noindex, nofollow
+
+/helper*
+  X-Robots-Tag: noindex, nofollow
+
+/unsubscribe*
+  X-Robots-Tag: noindex, nofollow
+
+/puzzle*
+  X-Robots-Tag: noindex, nofollow

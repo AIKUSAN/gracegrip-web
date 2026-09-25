@@ -2,117 +2,39 @@
 'use client'
 
 import Link from 'next/link'
-import { AlertTriangle, ArrowRight, BookOpen, BookMarked, CheckCircle2, PenLine, Trophy } from 'lucide-react'
-import { motion } from 'motion/react'
+import { ArrowRight, BookOpen, BookMarked, HeartHandshake, PenLine, Shield, Wind } from 'lucide-react'
+import { useApp } from '@/context/AppContext'
+import { getFocusArea } from '@/content/focusAreas'
 import { StreakRing } from '@/components/StreakRing'
 import { DailyVerse } from '@/components/DailyVerse'
 
-const quickActions = [
-  {
-    href: '/emergency',
-    label: 'Emergency',
-    description: 'I need help right now',
-    Icon: AlertTriangle,
-    accent: true,
-  },
-  {
-    href: '/scripture',
-    label: 'Scripture',
-    description: 'Browse verses',
-    Icon: BookOpen,
-  },
-  {
-    href: '/devotional',
-    label: 'Devotional',
-    description: 'Daily reflection',
-    Icon: BookMarked,
-  },
-  {
-    href: '/journal',
-    label: 'Journal',
-    description: 'Write it out',
-    Icon: PenLine,
-  },
+const tools = [
+  { href: '/emergency', name: 'Breathing and grounding', detail: 'Use a simple tool for this moment.', icon: Wind },
+  { href: '/focus', name: 'Choose a focus', detail: 'Explore support without a label.', icon: Shield },
+  { href: '/journal', name: 'Write privately', detail: 'Your journal stays on this device.', icon: PenLine },
+  { href: '/scripture', name: 'Scripture, if you wish', detail: 'Faith is available by choice.', icon: BookOpen },
 ]
 
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.08 } },
-}
+export function HomePage({ streak, verses, onStayedClean, onStumbledToday, checkedInToday }) {
+  const { appState } = useApp()
+  const firstGoal = appState.goals?.[0]
+  const focusName = firstGoal ? getFocusArea(firstGoal.focusId)?.title : null
 
-const tile = {
-  hidden: { opacity: 0, y: 24, filter: 'blur(5px)' },
-  visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
-}
+  return <div className="v2-home">
+    <section className="v2-home-lead">
+      <div className="v2-home-main">
+        <h1>What would help right now?</h1>
+        <p>GraceGrip offers private, practical support for the change you choose. We are a Christian mission; prayer and Scripture are always optional.</p>
+        <Link className="v2-home-help" href="/emergency">Help Now <ArrowRight size={19} aria-hidden="true" /></Link>
+        <div className="v2-home-tool-list" aria-label="Support options">{tools.map(({ href, name, detail, icon: Icon }) => <Link href={href} key={name}><Icon aria-hidden="true" size={21} /><span><strong>{name}</strong><small>{detail}</small></span><ArrowRight aria-hidden="true" size={17} /></Link>)}</div>
+      </div>
+      <aside className="v2-home-today"><h2>One step today</h2><p>{focusName ? `For your ${focusName.toLowerCase()} goal, choose one action you can take today.` : 'You can explore a focus area, or start with a tool. No setup is required.'}</p><Link href={firstGoal ? `/focus/${firstGoal.focusId}` : '/focus'}>{firstGoal ? 'Open my focus' : 'Find my focus'} <ArrowRight size={17} aria-hidden="true" /></Link><div className="v2-home-day-links"><Link href="/devotional"><BookMarked size={17} aria-hidden="true" /> Today’s devotional</Link><Link href="/scripture"><BookOpen size={17} aria-hidden="true" /> Scripture</Link></div></aside>
+    </section>
 
-const quickCard = {
-  hidden: { opacity: 0, scale: 0.94 },
-  visible: { opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 280, damping: 22 } },
-}
+    <section className="v2-home-areas"><div><h2>Support for the path you choose</h2><p>Alcohol, sexual habits, anger, nicotine, gambling, gaming and digital habits, and other drug use each have their own guide. Stress, loneliness, grief, and relationships can also be part of the story.</p></div><Link href="/focus">Explore seven focus areas <ArrowRight size={17} aria-hidden="true" /></Link></section>
 
-export function HomePage({
-  profileName,
-  encouragementOfDay,
-  greeting,
-  streak,
-  verses,
-  onStayedClean,
-  onStumbledToday,
-  checkedInToday,
-}) {
-  return (
-    <motion.div className="legacy-dashboard" variants={stagger} initial="hidden" animate="visible">
-      <motion.div className="home-greeting-inline" variants={tile}>
-        <p className="home-greeting-salutation">{greeting}, {profileName || 'friend'} 👋</p>
-        <p className="home-greeting-encouragement">{encouragementOfDay || 'You are not alone in this journey.'}</p>
-      </motion.div>
+    <section className="v2-home-secondary"><div className="v2-home-verse"><h2>Faith, when you want it</h2><p>Prayer and Scripture are here by invitation.</p><DailyVerse verses={verses} /></div><div className="v2-home-giving"><HeartHandshake size={26} aria-hidden="true" /><h2>Help keep GraceGrip free</h2><p>Every support tool stays free. Giving is voluntary and opens an external service.</p><a href="https://ko-fi.com/aikusan" target="_blank" rel="noopener noreferrer">Support on Ko-fi</a></div></section>
 
-      <motion.section className="panel legacy-streak-panel streak-panel-enhanced" variants={tile}>
-        <StreakRing count={streak.count} longest={streak.longest || 0} />
-        <div className="legacy-streak-best">
-          <Trophy size={16} aria-hidden="true" /> Best: <strong>{streak.longest || 0} days</strong>
-        </div>
-        <div className="actions-row">
-          <button className="btn-primary" onClick={onStayedClean} disabled={checkedInToday}>
-            {checkedInToday
-              ? <><CheckCircle2 size={14} aria-hidden="true" /> Checked in today</>
-              : 'I stayed clean today'}
-          </button>
-          <button className="btn-ghost" onClick={onStumbledToday}>I stumbled today</button>
-        </div>
-        {checkedInToday && (
-          <p className="streak-tomorrow-note">Come back tomorrow to keep your streak going.</p>
-        )}
-        <p className="grace-note">If you stumble, the counter resets. God&apos;s love does not.</p>
-      </motion.section>
-
-      <motion.section className="panel legacy-verse-panel" variants={tile}>
-        <h2>Today's Verse</h2>
-        <DailyVerse verses={verses} />
-      </motion.section>
-
-      <motion.section className="panel panel-wide legacy-quick-actions-panel" variants={tile}>
-        <h2>Quick Path</h2>
-        <motion.div
-          className="legacy-quick-grid"
-          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08, delayChildren: 0.3 } } }}
-        >
-          {quickActions.map(({ href, label, description, Icon, accent }) => (
-            <motion.div key={href} variants={quickCard}>
-              <Link className={`legacy-quick-card${accent ? ' legacy-quick-card-accent' : ''}`} href={href}>
-                <div className={`legacy-quick-icon-badge${accent ? ' legacy-quick-icon-badge-accent' : ''}`}>
-                  <Icon size={22} />
-                </div>
-                <div className="legacy-quick-card-body">
-                  <strong>{label}</strong>
-                  <span>{description}</span>
-                </div>
-                <span className="quick-arrow">Open <ArrowRight size={16} /></span>
-              </Link>
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.section>
-    </motion.div>
-  )
+    <section className="v2-home-progress"><h2>Your progress, in private</h2><p>See your chosen check-ins and permanent emblems. They stay on this device unless you explicitly choose a later sync option.</p><Link href="/progress">View private progress <ArrowRight size={17} aria-hidden="true" /></Link>{streak?.longest > 0 && <details><summary>Legacy streak history</summary><div className="v2-legacy-inner"><StreakRing count={streak.count} longest={streak.longest || 0} /><p>Your earlier progress remains separate from your new goals.</p><div className="actions-row"><button className="btn-primary" onClick={onStayedClean} disabled={checkedInToday}>{checkedInToday ? 'Checked in today' : 'Record legacy check-in'}</button><button className="btn-ghost" onClick={onStumbledToday}>Record a setback</button></div></div></details>}</section>
+  </div>
 }

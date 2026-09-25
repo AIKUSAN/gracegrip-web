@@ -27,9 +27,9 @@ export default function Page() {
           '@type': 'WebPage',
           '@id': 'https://gracegrip.app/#webpage',
           url: 'https://gracegrip.app/',
-          name: 'GraceGrip — Free Scripture-Based Addiction Recovery App',
+          name: 'GraceGrip — Private Support for the Change You Choose',
           description:
-            'GraceGrip is a free, privacy-first recovery app for pornography and masturbation addiction with Scripture, daily devotions, urge support, and encrypted journaling.',
+            'Free, private support for adults changing a habit or substance use. Practical Help Now tools, optional Christian encouragement, and a device-local journal.',
           inLanguage: 'en-US',
           isPartOf: {
             '@id': 'https://gracegrip.app/#website',
@@ -41,37 +41,36 @@ export default function Page() {
       />
       <noscript>
         <main style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '640px', margin: '0 auto' }}>
-          <h1>GraceGrip — Free Scripture-Based Addiction Recovery App</h1>
+          <h1>GraceGrip — Private Support for the Change You Choose</h1>
           <p>
-            GraceGrip is a free, private recovery app for porn and masturbation addiction.
-            Track your clean streak, read daily Scripture and devotionals, manage urges with guided
-            breathing and grounding tools, and write in an AES-encrypted private journal — no account
-            required. Your journal and progress stay on your device.
+            GraceGrip offers free, private support for adults who want to change a habit or substance use.
+            Explore seven focus areas, open Help Now without setup, and choose whether to use Scripture and prayer.
+            Your journal stays on your device.
           </p>
           <h2>Features</h2>
           <ul>
-            <li>Clean streak tracker with grace-first check-ins</li>
+            <li>Self-chosen private goals and check-ins</li>
             <li>Daily Scripture verses matched to your emotions</li>
             <li>Daily devotional reader with reflection and practice</li>
-            <li>Emergency urge support: breathing, grounding, panic verse</li>
+            <li>Help Now safety choices, breathing, grounding, and optional Scripture</li>
             <li>AES-encrypted private journal — stays on your device</li>
-              <li>No account or advertising. Completely free.</li>
+              <li>Core help is free without an account.</li>
           </ul>
           <h2>Why GraceGrip Helps</h2>
           <p>
-            GraceGrip is designed for people seeking Christian, Scripture-based support for
-            pornography and masturbation addiction recovery. The experience is built to stay
-            private, calm, and accessible from any modern browser without requiring an account.
+            GraceGrip is a Christian mission open to adults of any belief. Prayer and Scripture are optional.
+            This is nonclinical self-help, not diagnosis or emergency care.
           </p>
           <h2>Explore GraceGrip</h2>
           <ul>
-            <li><Link href="/emergency">Emergency Urge Support</Link> for moments of temptation and panic.</li>
+            <li><Link href="/emergency">Help Now</Link> for safety choices and immediate tools.</li>
+            <li><Link href="/focus">Focus areas</Link> for topic-specific starting points.</li>
             <li><Link href="/scripture">Scripture Library</Link> organized by temptation, shame, identity, peace, and strength.</li>
             <li><Link href="/devotional">Daily Devotional</Link> for reflection, encouragement, and practical next steps.</li>
           </ul>
         </main>
       </noscript>
-      <AppShell>
+      <AppShell allowBeforeOnboarding>
         <HomePage
           profileName={appState.profileName}
           encouragementOfDay={encouragementOfDay}

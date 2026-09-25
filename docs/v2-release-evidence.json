@@ -1,0 +1,16 @@
+{
+  "status": "blocked",
+  "cloudflareAccountConfirmed": true,
+  "protectedPreviewVerified": false,
+  "qualifiedSubstanceAndSafeguardingReview": false,
+  "allNineArticlesReviewed": false,
+  "editorialAccessAndGitHubAppVerified": false,
+  "accountRecoveryEmailVerified": false,
+  "articleEmailDeliveryVerified": false,
+  "communityHumanModerationVerified": false,
+  "aiSafetyAndQuotaVerified": false,
+  "androidClosedTestAndPlayApproval": false,
+  "webAndAndroidAccessibilityVerified": false,
+  "ownerReleaseApproval": false,
+  "evidence": ["2026-09-25: Cloudflare dashboard account contains the gracegrip.app zone and gracegrip-webapp Pages project connected to AIKUSAN/gracegrip-web. Wrangler and the connector still require authentication to this account."]
+}

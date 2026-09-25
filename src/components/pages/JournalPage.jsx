@@ -44,16 +44,16 @@ export function JournalPage({
   const entryCount = sortedJournalEntries.length
 
   return (
-    <div className="screen-stack legacy-journal-screen">
+    <div className="screen-stack legacy-journal-screen v2-support-route">
 
       {/* ── Page Header ───────────────────────────────────────────── */}
       <div className="journal-page-header">
-        <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0, fontSize: '1.5rem', fontWeight: 700 }}>
+        <h1 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0, fontSize: '1.5rem', fontWeight: 700 }}>
           <NotebookPen size={22} aria-hidden="true" />
           Journal
-        </h2>
+        </h1>
         <p className="muted" style={{ margin: '0.25rem 0 0', fontSize: '0.9rem' }}>
-          A private space to process what you&apos;re feeling. Everything stays on this device.
+          A private space for what you are carrying. Entries stay on this device and are never read by an AI helper automatically.
         </p>
       </div>
 
@@ -68,15 +68,16 @@ export function JournalPage({
             How are you feeling?
           </p>
           <MoodSelector value={journalMood} onChange={onChangeJournalMood} />
-          <p style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--ink)', margin: 0 }}>
+          <label htmlFor="journal-thoughts" style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--ink)', margin: 0 }}>
             Your thoughts
-          </p>
+          </label>
           <textarea
+            id="journal-thoughts"
             value={journalContent}
             onChange={(event) => onChangeJournalContent(event.target.value)}
             rows={5}
             maxLength={2000}
-            placeholder="Write freely — no judgment, just grace..."
+            placeholder="Write what you want to remember or work through..."
           />
           <p className="journal-char-count">{journalContent.length} / 2000</p>
           <button className="btn-primary journal-save-btn" onClick={onSaveJournalEntry} disabled={!journalContent.trim()}>

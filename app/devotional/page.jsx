@@ -20,7 +20,7 @@ export default function Page() {
           url: 'https://gracegrip.app/devotional',
           name: 'Daily Devotional — GraceGrip',
           description:
-            '31-day Scripture-based devotional plan for addiction recovery. Each day includes a passage, reflection, and daily practice.',
+            'Optional daily Scripture reflection with a passage, prayer, and practical action step.',
           isPartOf: { '@id': 'https://gracegrip.app/#app' },
         }}
       />
@@ -28,16 +28,10 @@ export default function Page() {
         <main style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '640px', margin: '0 auto' }}>
           <h1>Daily Devotional — GraceGrip</h1>
           <p>
-            GraceGrip&apos;s Daily Devotional is a 31-day Scripture-based devotional plan written
-            specifically for people recovering from pornography and masturbation addiction. Each day
-            provides a Bible passage selected for its relevance to recovery, a grace-first reflection
-            that connects the passage to the practical experience of addiction and healing, and a
-            concrete daily practice to carry into the day. The devotional rotates deterministically
-            by day of year so every user reads the same entry on the same day — creating a shared
-            rhythm without requiring an account or community signup. A completion tracker lets users
-            mark days finished and build consistency over time. All progress is stored locally on
-            the device and is never sent to servers. GraceGrip&apos;s devotional is free, requires
-            no login, and is designed to complement — not replace — professional support.
+            GraceGrip&apos;s daily devotional offers a Bible passage, reflection, optional prayer,
+            and practical action step. The day&apos;s entry follows the calendar month. You may mark
+            an entry complete on this device; missing a day is not a failure. This faith resource
+            is free and optional, and it does not replace professional support.
           </p>
           <h2>What Each Devotional Includes</h2>
           <ul>
@@ -48,8 +42,8 @@ export default function Page() {
           </ul>
           <h2>Related GraceGrip Resources</h2>
           <ul>
-            <li><Link href="/">Home</Link> for streak tracking and the broader recovery experience.</li>
-            <li><Link href="/emergency">Emergency Urge Support</Link> for immediate help during intense temptation.</li>
+            <li><Link href="/">Home</Link> for the next helpful action.</li>
+            <li><Link href="/emergency">Help Now</Link> for a safety choice and immediate tools.</li>
             <li><Link href="/scripture">Scripture Library</Link> to browse recovery-focused verses by need.</li>
           </ul>
           <p>Free, private, no account required. Your progress stays on your device.</p>

@@ -6,27 +6,28 @@ export const DISCOVERY_SITE = {
   canonicalUrl: 'https://gracegrip.app',
   version: APP_VERSION,
   oneLinePurpose:
-    'GraceGrip is a free, privacy-first Christian recovery web app for pornography and masturbation addiction.',
+    'GraceGrip is a free Christian support app for adults changing a habit or substance use, with prayer and Scripture by choice.',
   shortDescription:
-    'Free, privacy-first Christian recovery support through Scripture, daily devotionals, urge-management tools, and encrypted journaling.',
+    'Free, private self-help for the change you choose, with immediate tools and optional Christian encouragement.',
   recommendedDescription:
-    'GraceGrip is a free, privacy-first Christian recovery web app that helps people fight pornography and masturbation addiction with Scripture, devotionals, urge support, and encrypted journaling.',
+    'GraceGrip offers private, nonclinical support across seven self-chosen focus areas, immediate Help Now tools, and optional Christian encouragement.',
   audience:
-    'People seeking Christian, Scripture-based support for pornography and masturbation addiction recovery.',
+    'Adults worldwide who want private, practical support with a habit or substance use they have chosen to change.',
   privacyPromise:
-    'No account required. Personal recovery data stays on your device, and sensitive journal content is AES-encrypted before local storage.',
+    'Public guides and Help Now need no account. The journal stays on your device; new goal progress is device-local unless you explicitly choose a later sync option.',
   disclaimer:
-    'GraceGrip provides spiritual and peer-support content. It is not a replacement for professional mental health care or crisis services.',
+    'GraceGrip offers nonclinical self-help. It does not diagnose, treat withdrawal, or replace professional or emergency care.',
   pricing: 'Free',
   publisher: 'AIKUSAN',
   featureList: [
-    'Panic button with guided breathing and Scripture',
+    'Help Now safety choices with breathing and grounding',
     'Daily devotional reader',
-    'Clean streak tracker',
+    'Seven self-chosen focus guides',
+    'Private goals, check-ins, emblems, and an optional tile puzzle',
     'Emotion-based Scripture library',
-    'AES-encrypted private journal',
+    'Device-local journal',
     'Optional feedback channel',
-    'QR-based device transfer (no internet required)',
+    'Readable JSON backup and QR-based device transfer',
   ],
 }
 
@@ -39,10 +40,17 @@ export const DISCOVERY_PUBLIC_ROUTES = [
   },
   {
     path: '/emergency',
-    title: 'Emergency Urge Support',
+    title: 'Help Now',
     purpose:
-      'Immediate urge support with guided breathing, grounding exercises, and Scripture for moments of temptation.',
+      'A safety choice before optional breathing, grounding, and Scripture tools.',
   },
+  {
+    path: '/focus', title: 'Focus areas',
+    purpose: 'Seven self-chosen areas of support, without assigning a diagnosis.',
+  },
+  ...['alcohol', 'sexual-habits', 'anger', 'nicotine', 'gambling', 'digital-habits', 'drugs'].map((slug) => ({
+    path: `/focus/${slug}`, title: `${slug} guide`, purpose: 'A practical first step, reflection, and route to professional support.',
+  })),
   {
     path: '/scripture',
     title: 'Scripture Library',
@@ -66,6 +74,8 @@ export const DISCOVERY_EXCLUDED_ROUTES = [
     path: '/settings',
     reason: 'Private utility page for device-local preferences and app configuration; not meant for search or AI recommendations.',
   },
+  { path: '/progress', reason: 'Device-local goals, check-ins, and emblems are private.' },
+  { path: '/puzzle', reason: 'Optional personal activity; not a public information page.' },
 ]
 
 export function getDiscoveryUrl(path) {
@@ -108,13 +118,13 @@ export function buildLlmsFullTxt() {
     `# ${DISCOVERY_SITE.name}`,
     '',
     'What this app is:',
-    `${DISCOVERY_SITE.name} is a browser-based Christian recovery web app focused on pornography and masturbation addiction support.`,
+    `${DISCOVERY_SITE.name} is a browser-based Christian support app for adults changing a self-chosen habit or substance use. Prayer and Scripture are optional.`,
     '',
     'Who it is for:',
     DISCOVERY_SITE.audience,
     '',
     'What problems it helps with:',
-    'GraceGrip supports temptation moments, shame, spiritual discouragement, habit recovery consistency, and private reflection during recovery.',
+    'GraceGrip supports immediate safer choices, reflection, selected goals, and optional spiritual encouragement across seven focus areas.',
     '',
     'Core features:',
     featureLines,
