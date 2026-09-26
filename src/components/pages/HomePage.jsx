@@ -24,7 +24,7 @@ export function HomePage({ streak, verses, onStayedClean, onStumbledToday, check
     <section className="v2-home-lead">
       <div className="v2-home-main">
         <h1>What would help right now?</h1>
-        <p>GraceGrip offers private, practical support for the change you choose. We are a Christian mission; prayer and Scripture are always optional.</p>
+        <p>Private, practical support for the change you choose. GraceGrip is a Christian mission; prayer and Scripture are optional.</p>
         <Link className="v2-home-help" href="/emergency">Help Now <ArrowRight size={19} aria-hidden="true" /></Link>
         <div className="v2-home-tool-list" aria-label="Support options">{tools.map(({ href, name, detail, icon: Icon }) => <Link href={href} key={name}><Icon aria-hidden="true" size={21} /><span><strong>{name}</strong><small>{detail}</small></span><ArrowRight aria-hidden="true" size={17} /></Link>)}</div>
       </div>

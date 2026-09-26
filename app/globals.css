@@ -2446,7 +2446,34 @@ textarea:focus-visible {
 .v2-home-progress summary { cursor: pointer; font-weight: 750; }
 .v2-legacy-inner { max-width: 35rem; padding: 1rem 0; }
 @media (max-width: 900px) { .v2-home-lead { grid-template-columns: 1fr; } .v2-home-today { min-height: 200px; border-radius: 0; } }
-@media (max-width: 760px) { .v2-home-main { grid-template-columns: 1fr; padding: 1.3rem; } .v2-home-main h1, .v2-home-main > p, .v2-home-help, .v2-home-tool-list { grid-column: 1; grid-row: auto; } .v2-home-tool-list { margin-top: 1.8rem; } .v2-home-areas { display: block; } .v2-home-areas > a { margin-top: 1rem; white-space: normal; } .v2-home-secondary { grid-template-columns: 1fr; } }
+@media (max-width: 760px) {
+  .v2-home-main { display: block; padding: 1.3rem; }
+  .v2-home-main h1 { max-width: 14ch; }
+  .v2-home-main > p { margin: .65rem 0 1.1rem; line-height: 1.5; }
+  .v2-home-help { width: 100%; justify-content: center; }
+  .v2-home-tool-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .65rem;
+    margin-top: 1.35rem;
+    border-top: 0;
+  }
+  .v2-home-tool-list a {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: .45rem .55rem;
+    min-height: 92px;
+    padding: .8rem;
+    border: 1px solid var(--line);
+    border-radius: 11px;
+  }
+  .v2-home-tool-list a > svg:first-child { align-self: start; }
+  .v2-home-tool-list a > svg:last-child { align-self: center; }
+  .v2-home-tool-list small { font-size: .76rem; line-height: 1.3; }
+  .v2-home-areas { display: block; }
+  .v2-home-areas > a { margin-top: 1rem; white-space: normal; }
+  .v2-home-secondary { grid-template-columns: 1fr; }
+}
 .v2-puzzle-invite { border: 1px solid var(--line); border-radius: 14px; padding: 1.3rem; background: var(--card); }
 .v2-puzzle-invite h2 { font-size: 1.3rem; margin-bottom: .5rem; }
 .v2-puzzle-invite a { color: var(--brand); font-weight: 750; }
@@ -4473,7 +4500,7 @@ textarea:focus-visible {
   .mobile-nav .nav-btn-mobile-label { display: block; line-height: 1.15; text-align: center; white-space: normal; }
   .mobile-nav .nav-btn { min-width: 0; min-height: 54px; padding: .35rem .2rem; font-size: .76rem; }
   .mobile-nav .nav-btn-active::before { display: none; }
-  .page-shell { padding-bottom: calc(11.8rem + env(safe-area-inset-bottom)); }
+  .page-shell { padding-bottom: 1.5rem; }
   .v2-pages-control { bottom: calc(9.7rem + env(safe-area-inset-bottom)); }
 }
 @media (max-width: 340px) {

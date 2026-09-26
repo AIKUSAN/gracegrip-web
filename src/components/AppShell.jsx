@@ -28,40 +28,40 @@ export default function AppShell({ children }) {
 
         <div className="app-content app-content-topnav">
           <main>{children}</main>
-
-          <footer className="footer">
-            <p className="footer-legal">
-              Self-guided support with optional spiritual encouragement, not medical care.
-              In immediate danger, contact local emergency services.
-            </p>
-
-            <div className="footer-support">
-              <p className="footer-support-heading">If GraceGrip has helped you, consider supporting:</p>
-              <div className="footer-support-links">
-                <a
-                  href="https://ko-fi.com/aikusan"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="footer-support-link"
-                >
-                  <img src="/kofi_logo.svg" alt="Support on Ko-fi" className="support-logo kofi-logo" />
-                </a>
-                <a
-                  href="https://buymeacoffee.com/aikusan"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="footer-support-link"
-                >
-                  <img src="/bmc-button.svg" alt="Buy Me a Coffee" className="support-logo bmc-logo" />
-                </a>
-              </div>
-            </div>
-
-            <p className="footer-copyright">
-              © 2026 GraceGrip. Built for Freedom.
-            </p>
-          </footer>
         </div>
+
+        <footer className="footer">
+          <p className="footer-legal">
+            Self-guided support with optional spiritual encouragement, not medical care.
+            In immediate danger, contact local emergency services.
+          </p>
+
+          <div className="footer-support">
+            <p className="footer-support-heading">If GraceGrip has helped you, consider supporting:</p>
+            <div className="footer-support-links">
+              <a
+                href="https://ko-fi.com/aikusan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-support-link"
+              >
+                <img src="/kofi_logo.svg" alt="Support on Ko-fi" className="support-logo kofi-logo" />
+              </a>
+              <a
+                href="https://buymeacoffee.com/aikusan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-support-link"
+              >
+                <img src="/bmc-button.svg" alt="Buy Me a Coffee" className="support-logo bmc-logo" />
+              </a>
+            </div>
+          </div>
+
+          <p className="footer-copyright">
+            © 2026 GraceGrip. Built for Freedom.
+          </p>
+        </footer>
       </div>
 
       {panicActive && (
