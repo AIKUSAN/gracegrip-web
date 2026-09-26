@@ -114,7 +114,7 @@ export function AppNavigation() {
           <Link href="/community" onClick={() => setPagesOpen(false)}>Community sessions</Link>
           <Link href="/helper" onClick={() => setPagesOpen(false)}>Reflection helper</Link>
         </nav>}
-        <button type="button" className="v2-pages-button" aria-expanded={pagesOpen} aria-controls="v2-pages-menu" onClick={() => setPagesOpen((open) => !open)}><Compass size={18} aria-hidden="true" /> Pages</button>
+        <button type="button" className="v2-pages-button" aria-label="Pages" aria-expanded={pagesOpen} aria-controls="v2-pages-menu" onClick={() => setPagesOpen((open) => !open)}><Compass size={18} aria-hidden="true" /> Pages</button>
       </div>
     </>
   )

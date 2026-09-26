@@ -2424,7 +2424,9 @@ textarea:focus-visible {
 .v2-home-tool-list a { display: flex; align-items: center; gap: .7rem; min-height: 73px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
 .v2-home-tool-list a > svg:first-child { color: var(--brand); flex: none; }
 .v2-home-tool-list a > svg:last-child { margin-left: auto; color: var(--brand); flex: none; }
-.v2-home-tool-list span { display: grid; gap: .15rem; }
+.v2-home-tool-list > a > span { display: grid; gap: .15rem; min-width: 0; }
+.v2-tool-name-mobile { display: none; }
+.v2-tool-detail-mobile { display: none; }
 .v2-home-tool-list small { color: var(--ink-soft); font-size: .85rem; }
 .v2-home-today { background: #095f55; color: #fff; padding: 1.6rem; border-radius: 0; display: flex; flex-direction: column; }
 .v2-home-today h2 { font-size: 1.45rem; margin-bottom: .5rem; }
@@ -2460,7 +2462,7 @@ textarea:focus-visible {
   }
   .v2-home-tool-list a {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-columns: auto minmax(0, 1fr);
     gap: .45rem .55rem;
     min-height: 92px;
     padding: .8rem;
@@ -2468,11 +2470,20 @@ textarea:focus-visible {
     border-radius: 11px;
   }
   .v2-home-tool-list a > svg:first-child { align-self: start; }
-  .v2-home-tool-list a > svg:last-child { align-self: center; }
+  .v2-home-tool-list a > svg:last-child { display: none; }
+  .v2-tool-name-full { display: none; }
+  .v2-tool-name-mobile { display: inline; }
+  .v2-tool-detail-full { display: none; }
+  .v2-tool-detail-mobile { display: inline; }
   .v2-home-tool-list small { font-size: .76rem; line-height: 1.3; }
   .v2-home-areas { display: block; }
   .v2-home-areas > a { margin-top: 1rem; white-space: normal; }
   .v2-home-secondary { grid-template-columns: 1fr; }
+}
+@media (max-width: 340px) {
+  .v2-home-tool-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .v2-home-tool-list a { min-height: 88px; padding: .65rem; }
+  .v2-tool-detail-mobile { display: none; }
 }
 .v2-puzzle-invite { border: 1px solid var(--line); border-radius: 14px; padding: 1.3rem; background: var(--card); }
 .v2-puzzle-invite h2 { font-size: 1.3rem; margin-bottom: .5rem; }
@@ -4500,6 +4511,8 @@ textarea:focus-visible {
   .mobile-nav .nav-btn-mobile-label { display: block; line-height: 1.15; text-align: center; white-space: normal; }
   .mobile-nav .nav-btn { min-width: 0; min-height: 54px; padding: .35rem .2rem; font-size: .76rem; }
   .mobile-nav .nav-btn-active::before { display: none; }
+  .v2-pages-button { font-size: 0; padding: .65rem; }
+  .v2-pages-button svg { flex: none; }
   .page-shell { padding-bottom: 1.5rem; }
   .v2-pages-control { bottom: calc(9.7rem + env(safe-area-inset-bottom)); }
 }
@@ -4507,7 +4520,7 @@ textarea:focus-visible {
   .mobile-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .page-shell { padding-bottom: 1.5rem; }
   .footer { padding-bottom: calc(15.5rem + env(safe-area-inset-bottom)); }
-  .v2-pages-control { bottom: calc(13.7rem + env(safe-area-inset-bottom)); }
+  .v2-pages-control { right: 0; bottom: calc(13.7rem + env(safe-area-inset-bottom)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .v2-page *, .v2-pages-control * { animation-duration: .01ms !important; transition-duration: .01ms !important; }

@@ -9,10 +9,10 @@ import { StreakRing } from '@/components/StreakRing'
 import { DailyVerse } from '@/components/DailyVerse'
 
 const tools = [
-  { href: '/emergency', name: 'Breathing and grounding', detail: 'Use a simple tool for this moment.', icon: Wind },
-  { href: '/focus', name: 'Choose a focus', detail: 'Explore support without a label.', icon: Shield },
-  { href: '/journal', name: 'Write privately', detail: 'Your journal stays on this device.', icon: PenLine },
-  { href: '/scripture', name: 'Scripture, if you wish', detail: 'Faith is available by choice.', icon: BookOpen },
+  { href: '/emergency', name: 'Breathing and grounding', mobileName: 'Breathing', detail: 'Use a simple tool for this moment.', mobileDetail: 'Pause here.', icon: Wind },
+  { href: '/focus', name: 'Choose a focus', mobileName: 'Choose a focus', detail: 'Explore support without a label.', mobileDetail: 'Find a focus.', icon: Shield },
+  { href: '/journal', name: 'Write privately', mobileName: 'Journal', detail: 'Your journal stays on this device.', mobileDetail: 'On this device.', icon: PenLine },
+  { href: '/scripture', name: 'Scripture, if you wish', mobileName: 'Scripture', detail: 'Faith is available by choice.', mobileDetail: 'By choice.', icon: BookOpen },
 ]
 
 export function HomePage({ streak, verses, onStayedClean, onStumbledToday, checkedInToday }) {
@@ -26,7 +26,7 @@ export function HomePage({ streak, verses, onStayedClean, onStumbledToday, check
         <h1>What would help right now?</h1>
         <p>Private, practical support for the change you choose. GraceGrip is a Christian mission; prayer and Scripture are optional.</p>
         <Link className="v2-home-help" href="/emergency">Help Now <ArrowRight size={19} aria-hidden="true" /></Link>
-        <div className="v2-home-tool-list" aria-label="Support options">{tools.map(({ href, name, detail, icon: Icon }) => <Link href={href} key={name}><Icon aria-hidden="true" size={21} /><span><strong>{name}</strong><small>{detail}</small></span><ArrowRight aria-hidden="true" size={17} /></Link>)}</div>
+        <div className="v2-home-tool-list" aria-label="Support options">{tools.map(({ href, name, mobileName, detail, mobileDetail, icon: Icon }) => <Link href={href} key={name}><Icon aria-hidden="true" size={21} /><span><strong><span className="v2-tool-name-full">{name}</span><span className="v2-tool-name-mobile">{mobileName}</span></strong><small><span className="v2-tool-detail-full">{detail}</span><span className="v2-tool-detail-mobile">{mobileDetail}</span></small></span><ArrowRight aria-hidden="true" size={17} /></Link>)}</div>
       </div>
       <aside className="v2-home-today"><span className="v2-home-today-tag">Today in GraceGrip</span><h2>One step today</h2><p>{focusName ? `For your ${focusName.toLowerCase()} goal, choose one action you can take today.` : 'You can explore a focus area, or start with a tool. No setup is required.'}</p><Link href={firstGoal ? `/focus/${firstGoal.focusId}` : '/focus'}>{firstGoal ? 'Open my focus' : 'Find my focus'} <ArrowRight size={17} aria-hidden="true" /></Link><div className="v2-home-day-links"><Link href="/devotional"><BookMarked size={17} aria-hidden="true" /> Today’s devotional</Link><Link href="/scripture"><BookOpen size={17} aria-hidden="true" /> Scripture</Link></div></aside>
     </section>
