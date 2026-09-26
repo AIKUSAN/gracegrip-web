@@ -112,7 +112,7 @@ export function HeroSection({
           </div>
 
           <AnimatedGroup variants={transitionVariants} className="hero-action-row">
-            <button className="btn-primary welcome-cta" onClick={onBeginJourney}>
+            <button className="cc-btn-primary welcome-cta" onClick={onBeginJourney}>
               Begin Your Journey
             </button>
           </AnimatedGroup>

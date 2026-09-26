@@ -68,12 +68,12 @@ export function UrgeTimer() {
   }
 
   return (
-    <section className={`panel panel-wide emergency-block${running ? ' urge-timer-active' : ''}`}>
+    <section className={`cc-panel cc-panel-wide emergency-block${running ? ' urge-timer-active' : ''}`}>
       <div className="emergency-block-header">
         <Timer size={20} />
         <h3>Urge Timer</h3>
       </div>
-      <p className="muted emergency-block-hint">
+      <p className="cc-muted emergency-block-hint">
         Start the timer and ride out the urge. Most cravings peak and pass within 15–20 minutes.
       </p>
       <p className="panic-timer" aria-live="polite" aria-atomic="true" aria-label="Urge timer elapsed">
@@ -82,15 +82,15 @@ export function UrgeTimer() {
       <p className="emergency-encouragement">{getEncouragement(elapsed)}</p>
       <div className="actions-row flex justify-center">
         {!running ? (
-          <button type="button" className="btn-primary" onClick={onStart}>
+          <button type="button" className="cc-btn-primary" onClick={onStart}>
             {elapsed === 0 ? 'Start' : 'Resume'}
           </button>
         ) : (
-          <button type="button" className="btn-ghost" onClick={() => { baseRef.current = elapsed; setRunning(false) }}>
+          <button type="button" className="cc-btn-ghost" onClick={() => { baseRef.current = elapsed; setRunning(false) }}>
             Pause
           </button>
         )}
-        <button type="button" className="btn-ghost" onClick={onReset} disabled={elapsed === 0 && !running}>
+        <button type="button" className="cc-btn-ghost" onClick={onReset} disabled={elapsed === 0 && !running}>
           Reset
         </button>
       </div>

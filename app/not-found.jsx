@@ -16,7 +16,7 @@ export default function NotFound() {
       }}
     >
       <h1 style={{ fontSize: '2rem', fontWeight: 700 }}>Page not found</h1>
-      <p style={{ color: 'var(--color-text-muted)' }}>
+      <p style={{ color: 'var(--cc-muted)' }}>
         This page doesn&apos;t exist. Let&apos;s get you back on track.
       </p>
       <Link

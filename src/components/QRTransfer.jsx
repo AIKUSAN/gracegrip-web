@@ -136,7 +136,7 @@ export function QRTransfer({ appState, onQRImport }) {
 
       {tab === 'generate' && (
         <div className="qr-generate">
-          <p className="muted mb-3">
+          <p className="cc-muted mb-3">
             Choose what to include, then scan this code on your other device.
           </p>
           <div className="backup-selections mb-3">
@@ -164,7 +164,7 @@ export function QRTransfer({ appState, onQRImport }) {
           {scanStatus === 'success' && <p className="qr-success">{scanMsg}</p>}
           {scanStatus === 'error' && <p className="qr-warning">{scanMsg}</p>}
           {scanStatus === 'idle' && (
-            <p className="muted mb-3">
+            <p className="cc-muted mb-3">
               Point your camera at the QR code shown on the other device.
             </p>
           )}

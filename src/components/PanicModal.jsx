@@ -9,7 +9,7 @@ export function PanicModal({ panicVerse, panicMode, secondsLabel, onRestart, onC
         <p className="panic-timer" aria-live="polite" aria-atomic="true" aria-label="Breathing timer">
           {secondsLabel}
         </p>
-        <p className="muted">{panicMode}</p>
+        <p className="cc-muted">{panicMode}</p>
         <p className="verse-text">"{panicVerse.text}"</p>
         <p className="verse-ref">{panicVerse.reference}</p>
         <ol className="steps-list">
@@ -19,10 +19,10 @@ export function PanicModal({ panicVerse, panicMode, secondsLabel, onRestart, onC
           <li>Pray: "Jesus, lead me right now. Give me self-control and peace."</li>
         </ol>
         <div className="actions-row">
-          <button className="btn-primary" onClick={onRestart} aria-label="Restart 3 minute support timer">
+          <button className="cc-btn-primary" onClick={onRestart} aria-label="Restart 3 minute support timer">
             Restart 3 Minutes
           </button>
-          <button className="btn-ghost" onClick={onClose} aria-label="Close panic support modal">
+          <button className="cc-btn-ghost" onClick={onClose} aria-label="Close panic support modal">
             Close
           </button>
         </div>

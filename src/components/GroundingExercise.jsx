@@ -44,12 +44,12 @@ export function GroundingExercise() {
   const step = STEPS[stepIndex]
 
   return (
-    <section className="panel panel-wide emergency-block">
+    <section className="cc-panel cc-panel-wide emergency-block">
       <div className="emergency-block-header">
         <Leaf size={18} className="grounding-header-icon" />
         <h3>Grounding Exercise (5‑4‑3‑2‑1)</h3>
       </div>
-      <p className="muted emergency-block-hint">
+      <p className="cc-muted emergency-block-hint">
         Bring your mind back to the present by engaging your senses one at a time.
       </p>
 
@@ -96,10 +96,10 @@ export function GroundingExercise() {
             >
               <CheckCircle2 size={44} className="grounding-done-icon" />
               <p className="grounding-done-title">You're grounded.</p>
-              <p className="muted">
+              <p className="cc-muted">
                 You just pulled yourself back into the present. That takes real strength.
               </p>
-              <button className="btn-ghost" onClick={onRestart}>
+              <button className="cc-btn-ghost" onClick={onRestart}>
                 <RotateCcw size={15} /> Do it again
               </button>
             </motion.div>
@@ -119,7 +119,7 @@ export function GroundingExercise() {
               <p className="grounding-step-prompt">
                 Name <strong>{step.count}</strong> {step.sense}
               </p>
-              <button className="btn-primary" onClick={onNext}>
+              <button className="cc-btn-primary" onClick={onNext}>
                 {stepIndex < STEPS.length - 1 ? (
                   <>Next <ArrowRight size={15} /></>
                 ) : (

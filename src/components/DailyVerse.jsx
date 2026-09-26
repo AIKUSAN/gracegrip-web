@@ -4,7 +4,6 @@
 import { useState, useRef } from 'react'
 import { BookOpen, Check, Copy } from 'lucide-react'
 import { toast } from 'sonner'
-import { getVerseArt } from '@/lib/verseArt'
 
 function getDayOfYear(date) {
   const start = new Date(date.getFullYear(), 0, 0)
@@ -30,10 +29,8 @@ export function DailyVerse({ verses }) {
 
   if (!verse) return null
 
-  const verseArt = getVerseArt(verse.category)
-
   return (
-    <div className="daily-verse-card" style={{ backgroundImage: `url(${verseArt})` }}>
+    <div className="cc-daily-verse-card">
       <div className="daily-verse-bg-overlay" aria-hidden="true" />
       <div className="daily-verse-content">
         <div className="daily-verse-header">

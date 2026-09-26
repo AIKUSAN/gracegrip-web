@@ -59,12 +59,12 @@ export function BreathingExercise() {
     : 'breathing-ring--breathe-out'
 
   return (
-    <section className={`panel panel-wide emergency-block${running ? ' breathing-active' : ''}`}>
+    <section className={`cc-panel cc-panel-wide emergency-block${running ? ' breathing-active' : ''}`}>
       <div className="emergency-block-header">
         <Wind size={20} />
         <h3>Breathing Exercise (4‑7‑8)</h3>
       </div>
-      <p className="muted emergency-block-hint">
+      <p className="cc-muted emergency-block-hint">
         Inhale 4 s · Hold 7 s · Exhale 8 s. Repeat to activate your parasympathetic nervous system.
       </p>
 
@@ -84,17 +84,17 @@ export function BreathingExercise() {
       </div>
 
       {cycles > 0 && (
-        <p className="muted breathing-cycles">
+        <p className="cc-muted breathing-cycles">
           {cycles} {cycles === 1 ? 'cycle' : 'cycles'} completed
         </p>
       )}
 
       <div className="actions-row justify-center">
-        <button className="btn-primary breathing-toggle" onClick={onToggle}>
+        <button className="cc-btn-primary breathing-toggle" onClick={onToggle}>
           {running ? <><Pause size={16} /> Pause</> : <><Play size={16} /> {cycles === 0 && phaseIndex === 0 ? 'Start' : 'Resume'}</>}
         </button>
         {(running || cycles > 0 || phaseIndex > 0) && (
-          <button className="btn-ghost" onClick={onReset}>
+          <button className="cc-btn-ghost" onClick={onReset}>
             Reset
           </button>
         )}

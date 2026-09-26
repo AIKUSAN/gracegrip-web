@@ -16,10 +16,10 @@ export function DevotionalPage({ today, todayDevotional, devotionalCompletedDays
   const progressPct = totalDays > 0 ? Math.round((completedCount / totalDays) * 100) : 0
 
   return (
-    <div className="screen-stack legacy-devotional-screen v2-support-route">
-      <section className="panel panel-wide legacy-devotional-header">
+    <div className="cc-screen cc-devotional-screen cc-support-route">
+      <section className="cc-panel cc-panel-wide cc-devotional-header">
         <h1>Today&apos;s devotional</h1>
-        <p className="muted">An optional daily pause with Scripture, prayer, and one action. Missing a day is not a failure.</p>
+        <p className="cc-muted">An optional daily pause with Scripture, prayer, and one action. Missing a day is not a failure.</p>
         <div className="devotional-progress">
           <div className="devotional-progress-meta">
             <span>{completedCount} of {totalDays} days opened this month</span>
@@ -37,7 +37,7 @@ export function DevotionalPage({ today, todayDevotional, devotionalCompletedDays
         </div>
       </section>
 
-      <section className="panel panel-wide devotional-panel legacy-devotional-today">
+      <section className="cc-panel cc-panel-wide cc-devotional-panel cc-devotional-today">
         <div className="devotional-day-badge">Day {todayDevotional.day}</div>
         <h3>{todayDevotional.title}</h3>
         <p className="devotional-verse-ref">{todayDevotional.verse}</p>
@@ -49,7 +49,7 @@ export function DevotionalPage({ today, todayDevotional, devotionalCompletedDays
           <p className="devotional-action"><strong>Action Step:</strong> {todayDevotional.actionStep}</p>
         </details>
         <button
-          className={`btn-primary devotional-cta${isCompletedToday ? ' btn-completed' : ''}`}
+          className={`cc-btn-primary devotional-cta${isCompletedToday ? ' btn-completed' : ''}`}
           onClick={() => onToggleDevotionalDay(todayIso, isCompletedToday)}
         >
           {isCompletedToday
@@ -58,7 +58,7 @@ export function DevotionalPage({ today, todayDevotional, devotionalCompletedDays
         </button>
       </section>
 
-      <section className="panel panel-wide legacy-devotional-list-panel">
+      <section className="cc-panel cc-panel-wide cc-devotional-list-panel">
         <h3>This month&apos;s reflections</h3>
         <ul className="devotional-list">
           {monthDevotionals.map((d) => {
@@ -71,7 +71,7 @@ export function DevotionalPage({ today, todayDevotional, devotionalCompletedDays
                 </span>
                 <div className="devotional-list-content">
                   <span className="devotional-list-title">{d.title}</span>
-                  <span className="devotional-list-ref muted">{d.verse}</span>
+                  <span className="devotional-list-ref cc-muted">{d.verse}</span>
                 </div>
               </li>
             )

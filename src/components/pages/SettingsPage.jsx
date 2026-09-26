@@ -54,7 +54,7 @@ export function SettingsPage({
   }
 
   return (
-    <div className="screen-stack legacy-settings-screen v2-support-route">
+    <div className="cc-screen cc-settings-screen cc-support-route">
 
       {/* ── Page Header ───────────────────────────────────────────── */}
       <div className="settings-page-header">
@@ -63,7 +63,7 @@ export function SettingsPage({
       </div>
 
       {/* ── Profile ───────────────────────────────────────────────── */}
-      <section className="panel panel-wide settings-section legacy-settings-panel">
+      <section className="cc-panel cc-panel-wide settings-section cc-settings-panel">
         <h3 className="settings-section-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem', fontSize: '1rem', fontWeight: 700 }}>
           <User size={17} aria-hidden="true" />
           Profile
@@ -79,12 +79,12 @@ export function SettingsPage({
               if (event.key === 'Enter') onSaveProfileName()
             }}
           />
-          <button className="btn-primary" onClick={onSaveProfileName}>Save</button>
+          <button className="cc-btn-primary" onClick={onSaveProfileName}>Save</button>
         </div>
       </section>
 
       {/* ── Local Reminders ───────────────────────────────────────── */}
-      <section className="panel panel-wide settings-section legacy-settings-panel">
+      <section className="cc-panel cc-panel-wide settings-section cc-settings-panel">
         <h3 className="settings-section-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem', fontSize: '1rem', fontWeight: 700 }}>
           <Bell size={17} aria-hidden="true" />
           Daily Reminder
@@ -107,7 +107,7 @@ export function SettingsPage({
         </label>
         {reminder?.enabled && (
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginTop: '0.85rem', paddingTop: '0.85rem', borderTop: '1px solid var(--line)' }}>
-            <label className="muted" htmlFor="reminder-time" style={{ fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
+            <label className="cc-muted" htmlFor="reminder-time" style={{ fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
               Remind me at
             </label>
             <input
@@ -122,7 +122,7 @@ export function SettingsPage({
       </section>
 
       {/* ── Data & Backup ─────────────────────────────────────────── */}
-      <section className="panel panel-wide settings-section legacy-settings-panel">
+      <section className="cc-panel cc-panel-wide settings-section cc-settings-panel">
         <h3 className="settings-section-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem', fontSize: '1rem', fontWeight: 700 }}>
           <HardDrive size={17} aria-hidden="true" />
           Data &amp; Backup
@@ -162,15 +162,15 @@ export function SettingsPage({
         </div>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--line)' }}>
-          <button className="btn-primary" onClick={() => onExportData(backupSelections)}>
+          <button className="cc-btn-primary" onClick={() => onExportData(backupSelections)}>
             <Download size={15} aria-hidden="true" />Export &amp; Download
           </button>
           {canShare && (
-            <button className="btn-ghost" onClick={() => onShareData(backupSelections)}>
+            <button className="cc-btn-ghost" onClick={() => onShareData(backupSelections)}>
               <Share2 size={15} aria-hidden="true" />Share via&hellip;
             </button>
           )}
-          <button className="btn-ghost" onClick={onImportClick}>
+          <button className="cc-btn-ghost" onClick={onImportClick}>
             <Upload size={15} aria-hidden="true" />Import Backup
           </button>
           <input
@@ -184,7 +184,7 @@ export function SettingsPage({
       </section>
 
       {/* ── Transfer to Another Device ────────────────────────────── */}
-      <section className="panel panel-wide settings-section legacy-settings-panel">
+      <section className="cc-panel cc-panel-wide settings-section cc-settings-panel">
         <h3 className="settings-section-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem', fontSize: '1rem', fontWeight: 700 }}>
           <Smartphone size={17} aria-hidden="true" />
           Transfer to Another Device
@@ -197,7 +197,7 @@ export function SettingsPage({
 
       {/* ── Recovery Controls ─────────────────────────────────────── */}
       <section
-        className="panel panel-wide settings-section legacy-settings-panel"
+        className="cc-panel cc-panel-wide settings-section cc-settings-panel"
         style={{ borderLeft: '3px solid color-mix(in srgb, var(--danger) 55%, transparent)', background: 'color-mix(in srgb, var(--danger) 3%, var(--card))' }}
       >
         <h3 className="settings-section-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem', fontSize: '1rem', fontWeight: 700, color: 'var(--danger)' }}>
@@ -209,10 +209,10 @@ export function SettingsPage({
           entries will be erased from this device.
         </p>
         <div className="actions-row">
-          <button className="btn-danger" onClick={onResetStreakWithConfirm}>
+          <button className="cc-btn-danger" onClick={onResetStreakWithConfirm}>
             <AlertTriangle size={14} aria-hidden="true" />Reset Streak
           </button>
-          <button className="btn-danger" onClick={onClearJournal}>
+          <button className="cc-btn-danger" onClick={onClearJournal}>
             <AlertTriangle size={14} aria-hidden="true" />Clear Journal
           </button>
         </div>
@@ -220,7 +220,7 @@ export function SettingsPage({
 
       {/* ── Streak History ────────────────────────────────────────── */}
       {streakHistory.length > 0 && (
-        <section className="panel panel-wide settings-section legacy-settings-panel">
+        <section className="cc-panel cc-panel-wide settings-section cc-settings-panel">
           <h3 className="settings-section-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem', fontSize: '1rem', fontWeight: 700 }}>
             <History size={17} aria-hidden="true" />
             Streak History
@@ -242,7 +242,7 @@ export function SettingsPage({
       )}
 
       {/* ── Send Feedback ─────────────────────────────────────────── */}
-      <section className="panel panel-wide settings-section legacy-settings-panel">
+      <section className="cc-panel cc-panel-wide settings-section cc-settings-panel">
         <h3 className="settings-section-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem', fontSize: '1rem', fontWeight: 700 }}>
           <MessageSquare size={17} aria-hidden="true" />
           Send Feedback
@@ -253,7 +253,7 @@ export function SettingsPage({
         {feedbackSent ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', alignItems: 'flex-start' }}>
             <p className="feedback-sent-msg">Thank you &mdash; your voice helps shape GraceGrip. 🙏</p>
-            <button className="btn-ghost" onClick={() => setFeedbackSent(false)}>Send another</button>
+            <button className="cc-btn-ghost" onClick={() => setFeedbackSent(false)}>Send another</button>
           </div>
         ) : (
           <>
@@ -287,7 +287,7 @@ export function SettingsPage({
               onChange={(e) => setFeedbackMessage(e.target.value)}
             />
             <button
-              className="btn-primary"
+              className="cc-btn-primary"
               disabled={!feedbackRating || feedbackSubmitting}
               onClick={handleFeedbackSubmit}
             >
@@ -298,7 +298,7 @@ export function SettingsPage({
       </section>
 
       {/* ── Contact ──────────────────────────────────────────────── */}
-      <section className="panel panel-wide settings-section legacy-settings-panel">
+      <section className="cc-panel cc-panel-wide settings-section cc-settings-panel">
         <h3 className="settings-section-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem', fontSize: '1rem', fontWeight: 700 }}>
           <MessageSquare size={17} aria-hidden="true" />
           Contact GraceGrip
@@ -312,7 +312,7 @@ export function SettingsPage({
       </section>
 
       {/* ── About, FAQ & Legal ────────────────────────────────────── */}
-      <section className="panel panel-wide settings-section legacy-settings-about">
+      <section className="cc-panel cc-panel-wide settings-section cc-settings-about">
 
         {/* App meta */}
         <div className="about-meta-row">

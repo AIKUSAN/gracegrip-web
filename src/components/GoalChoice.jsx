@@ -14,7 +14,7 @@ const FIELDS = [
 function GoalPlanForm({ area, goal, onSaveGoalPlan }) {
   const [plan, setPlan] = useState(goal.plan ?? {})
   const [saved, setSaved] = useState(false)
-  return <form className="v2-goal-plan" onSubmit={(event) => {
+  return <form className="cc-goal-plan" onSubmit={(event) => {
     event.preventDefault()
     onSaveGoalPlan(area.id, plan)
     setSaved(true)
@@ -22,7 +22,7 @@ function GoalPlanForm({ area, goal, onSaveGoalPlan }) {
     <h3>Your next-step plan</h3>
     <p>Write only what you want to keep on this device. You can leave any field blank.</p>
     {FIELDS.map(([key, label]) => <label key={key}>{label}<textarea value={plan[key] ?? ''} maxLength={300} rows={2} onChange={(event) => { setSaved(false); setPlan((current) => ({ ...current, [key]: event.target.value })) }} /></label>)}
-    <button type="submit" className="v2-action">Save my plan</button>
+    <button type="submit" className="cc-action">Save my plan</button>
     {saved && <span role="status">Saved on this device.</span>}
   </form>
 }
@@ -34,20 +34,20 @@ export function GoalChoice({ area }) {
   const today = formatDate(new Date())
   const todayEntry = appState.goalCheckins?.find((item) => item.focusId === area.id && item.date === today)
 
-  return <section className="v2-goal-box">
+  return <section className="cc-goal-box">
     <h2>Your private goal</h2>
     {!goal ? <>
       <p>Set a personal intention for this topic. It stays on this device and is never inferred from your earlier streak.</p>
-      {area.dayMilestones && <label className="v2-check-label"><input type="checkbox" checked={trackDays} onChange={(event) => setTrackDays(event.target.checked)} /> Mark consecutive days toward this goal. I can turn this off by removing the goal.</label>}
-      <button type="button" className="v2-action" onClick={() => onStartGoal(area.id, trackDays)}>Start a private goal</button>
+      {area.dayMilestones && <label className="cc-check-label"><input type="checkbox" checked={trackDays} onChange={(event) => setTrackDays(event.target.checked)} /> Mark consecutive days toward this goal. I can turn this off by removing the goal.</label>}
+      <button type="button" className="cc-action" onClick={() => onStartGoal(area.id, trackDays)}>Start a private goal</button>
     </> : <>
       <p>Started {goal.startedAt}. Your goal and check-ins stay on this device unless you explicitly choose a later sync option.</p>
       <GoalPlanForm area={area} goal={goal} onSaveGoalPlan={onSaveGoalPlan} />
       <h3>Today&apos;s reflection</h3>
       <p>What feels true today? Either answer can lead to a helpful next step.</p>
-      <div className="v2-goal-actions"><button type="button" onClick={() => onGoalCheckin(area.id, 'step')} aria-pressed={todayEntry?.status === 'step'}>I took a helpful step</button><button type="button" onClick={() => onGoalCheckin(area.id, 'setback')} aria-pressed={todayEntry?.status === 'setback'}>I had a setback</button></div>
+      <div className="cc-goal-actions"><button type="button" onClick={() => onGoalCheckin(area.id, 'step')} aria-pressed={todayEntry?.status === 'step'}>I took a helpful step</button><button type="button" onClick={() => onGoalCheckin(area.id, 'setback')} aria-pressed={todayEntry?.status === 'setback'}>I had a setback</button></div>
       {todayEntry && <p role="status">Today is recorded privately. You can change this choice today.</p>}
-      <button type="button" className="v2-remove-goal" onClick={() => { if (window.confirm('Remove this goal, plan, and check-ins from this device? Earned emblems will remain.')) onRemoveGoal(area.id) }}>Remove this goal and check-ins</button>
+      <button type="button" className="cc-remove-goal" onClick={() => { if (window.confirm('Remove this goal, plan, and check-ins from this device? Earned emblems will remain.')) onRemoveGoal(area.id) }}>Remove this goal and check-ins</button>
     </>}
   </section>
 }

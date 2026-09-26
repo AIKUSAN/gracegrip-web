@@ -40,10 +40,10 @@ function NavLinks({ mobile = false, compact = false }) {
         key={`${mobile ? 'mobile' : 'desktop'}-${item.path}`}
         href={item.path}
         title={item.label}
-        className={`nav-btn${mobile ? ' nav-btn-mobile' : ' nav-btn-desktop'}${compact ? ' nav-btn-compact' : ''}${isActive ? ` nav-btn-active${item.emergency ? ' nav-btn-emergency' : ''}` : ''}`}
+        className={`cc-nav-btn${mobile ? ' cc-nav-btn-mobile' : ' cc-nav-btn-desktop'}${compact ? ' cc-nav-btn-compact' : ''}${isActive ? ` cc-nav-btn-active${item.emergency ? ' cc-nav-btn-emergency' : ''}` : ''}`}
       >
-        <Icon size={mobile ? 20 : 18} className="nav-icon" />
-        <span className={mobile ? 'nav-btn-mobile-label' : 'nav-btn-label'}>{item.label}</span>
+        <Icon size={mobile ? 20 : 18} className="cc-nav-icon" />
+        <span className={mobile ? 'cc-nav-btn-mobile-label' : 'cc-nav-btn-label'}>{item.label}</span>
       </Link>
     )
   })
@@ -61,19 +61,19 @@ export function AppNavigation() {
 
   return (
     <>
-      <header className="desktop-top-nav" aria-label="Primary navigation">
-        <div className="desktop-top-nav-brand">
-          <Link className="top-nav-brand-link" href="/" aria-label="Go to home">
-            <DynamicLogo size={34} className="top-nav-logo-mark" />
-            <span className="top-nav-brand-text">GraceGrip</span>
+      <header className="cc-desktop-top-nav" aria-label="Primary navigation">
+        <div className="cc-desktop-top-nav-brand">
+          <Link className="cc-top-nav-brand-link" href="/" aria-label="Go to home">
+            <DynamicLogo size={34} className="cc-top-nav-logo-mark" />
+            <span className="cc-top-nav-brand-text">GraceGrip</span>
           </Link>
         </div>
 
-        <nav className="desktop-top-nav-links" aria-label="Desktop primary">
+        <nav className="cc-desktop-top-nav-links" aria-label="Desktop primary">
           <NavLinks compact />
         </nav>
 
-        <div className="desktop-top-nav-actions">
+        <div className="cc-desktop-top-nav-actions">
           <button
             className="theme-cycle-btn"
             onClick={cycleThroughThemes}
@@ -85,11 +85,11 @@ export function AppNavigation() {
         </div>
       </header>
 
-      <header className="mobile-top-brand" aria-label="Mobile header">
-        <div className="mobile-top-brand-inner">
-          <div className="mobile-top-brand-lockup">
+      <header className="cc-mobile-top-brand" aria-label="Mobile header">
+        <div className="cc-mobile-top-brand-inner">
+          <div className="cc-mobile-top-brand-lockup">
             <DynamicLogo size={24} className="mobile-top-logo-mark" />
-            <span className="mobile-top-brand-text">GraceGrip</span>
+            <span className="cc-mobile-top-brand-text">GraceGrip</span>
           </div>
           <button
             className="sidebar-collapse-btn"
@@ -102,11 +102,11 @@ export function AppNavigation() {
         </div>
       </header>
 
-      <nav className="mobile-nav" aria-label="Mobile Primary">
+      <nav className="cc-mobile-nav" aria-label="Mobile Primary">
         <NavLinks mobile />
       </nav>
-      <div className="v2-pages-control">
-        {pagesOpen && <nav id="v2-pages-menu" className="v2-pages-menu" aria-label="More pages">
+      <div className="cc-pages-control">
+        {pagesOpen && <nav id="cc-pages-menu" className="cc-pages-menu" aria-label="More pages">
           <Link href="/focus" onClick={() => setPagesOpen(false)}>Choose a focus</Link>
           <Link href="/progress" onClick={() => setPagesOpen(false)}>My progress</Link>
           <Link href="/resources" onClick={() => setPagesOpen(false)}>Resources</Link>
@@ -114,7 +114,7 @@ export function AppNavigation() {
           <Link href="/community" onClick={() => setPagesOpen(false)}>Community sessions</Link>
           <Link href="/helper" onClick={() => setPagesOpen(false)}>Reflection helper</Link>
         </nav>}
-        <button type="button" className="v2-pages-button" aria-label="Pages" aria-expanded={pagesOpen} aria-controls="v2-pages-menu" onClick={() => setPagesOpen((open) => !open)}><Compass size={18} aria-hidden="true" /> Pages</button>
+        <button type="button" className="cc-pages-button" aria-label="Pages" aria-expanded={pagesOpen} aria-controls="cc-pages-menu" onClick={() => setPagesOpen((open) => !open)}><Compass size={18} aria-hidden="true" /> Pages</button>
       </div>
     </>
   )

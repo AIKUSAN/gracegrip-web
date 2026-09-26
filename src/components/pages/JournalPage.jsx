@@ -44,7 +44,7 @@ export function JournalPage({
   const entryCount = sortedJournalEntries.length
 
   return (
-    <div className="screen-stack legacy-journal-screen v2-support-route">
+    <div className="cc-screen cc-journal-screen cc-support-route">
 
       {/* ── Page Header ───────────────────────────────────────────── */}
       <div className="journal-page-header">
@@ -52,13 +52,13 @@ export function JournalPage({
           <NotebookPen size={22} aria-hidden="true" />
           Journal
         </h1>
-        <p className="muted" style={{ margin: '0.25rem 0 0', fontSize: '0.9rem' }}>
+        <p className="cc-muted" style={{ margin: '0.25rem 0 0', fontSize: '0.9rem' }}>
           A private space for what you are carrying. Entries stay on this device and are never read by an AI helper automatically.
         </p>
       </div>
 
       {/* ── Write an Entry ────────────────────────────────────────── */}
-      <section className="panel panel-wide legacy-journal-form">
+      <section className="cc-panel cc-panel-wide cc-journal-form">
         <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0 0 0.75rem', fontSize: '1rem', fontWeight: 700 }}>
           <PenLine size={17} aria-hidden="true" />
           Write an Entry
@@ -80,7 +80,7 @@ export function JournalPage({
             placeholder="Write what you want to remember or work through..."
           />
           <p className="journal-char-count">{journalContent.length} / 2000</p>
-          <button className="btn-primary journal-save-btn" onClick={onSaveJournalEntry} disabled={!journalContent.trim()}>
+          <button className="cc-btn-primary journal-save-btn" onClick={onSaveJournalEntry} disabled={!journalContent.trim()}>
             <PenLine size={15} aria-hidden="true" />
             Save Entry
           </button>
@@ -88,7 +88,7 @@ export function JournalPage({
       </section>
 
       {/* ── Recent Entries ────────────────────────────────────────── */}
-      <section className="panel panel-wide legacy-journal-list-panel">
+      <section className="cc-panel cc-panel-wide cc-journal-list-panel">
         <div className="journal-entries-header" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.75rem' }}>
           <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0, fontSize: '1rem', fontWeight: 700 }}>
             <ScrollText size={17} aria-hidden="true" />
@@ -99,7 +99,7 @@ export function JournalPage({
         <div className="journal-filter-row" style={{ alignItems: 'center' }}>
           <span style={{ fontSize: '0.8rem', color: 'var(--ink-soft)', whiteSpace: 'nowrap' }}>Filter:</span>
           <button
-            className={`chip ${journalMoodFilter === 'all' ? 'chip-active' : ''}`}
+            className={`cc-chip ${journalMoodFilter === 'all' ? 'cc-chip-active' : ''}`}
             onClick={() => onChangeJournalMoodFilter('all')}
           >
             All
@@ -107,7 +107,7 @@ export function JournalPage({
           {MOOD_CONFIG.map((mood) => (
             <button
               key={mood.value}
-              className={`chip ${journalMoodFilter === mood.value ? 'chip-active' : ''}`}
+              className={`cc-chip ${journalMoodFilter === mood.value ? 'cc-chip-active' : ''}`}
               onClick={() => onChangeJournalMoodFilter(mood.value)}
             >
               <span aria-hidden="true" className="mood-emoji">{mood.emoji}</span>
@@ -126,7 +126,7 @@ export function JournalPage({
           {sortedJournalEntries.map((entry) => {
             const moodCfg = MOOD_CONFIG.find((m) => m.value === entry.mood)
             return (
-              <li key={entry.id} className="journal-item legacy-journal-item" data-mood={entry.mood} style={{ borderLeft: `3px solid ${MOOD_BORDER[entry.mood] || 'var(--line)'}` }}>
+              <li key={entry.id} className="journal-item cc-journal-item" data-mood={entry.mood} style={{ borderLeft: `3px solid ${MOOD_BORDER[entry.mood] || 'var(--line)'}` }}>
                 <div className="journal-meta">
                   <span className="mood-tag" data-mood={entry.mood}>
                     {moodCfg && <span aria-hidden="true" className="mood-emoji">{moodCfg.emoji}</span>}
@@ -134,7 +134,7 @@ export function JournalPage({
                   </span>
                   <span>{formatEntryDate(entry.date)}</span>
                   <button
-                    className="btn-ghost legacy-delete-btn"
+                    className="cc-btn-ghost cc-delete-btn"
                     onClick={() => onDeleteJournalEntry(entry.id)}
                     aria-label="Delete entry"
                   >

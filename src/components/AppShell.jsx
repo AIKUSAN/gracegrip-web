@@ -22,11 +22,11 @@ export default function AppShell({ children }) {
   if (!stateLoaded) return null
 
   return (
-    <div className="page-shell">
-      <div className="app-layout app-layout-topnav">
+    <div className="cc-page-shell">
+      <div className="cc-app-layout cc-app-layout-topnav">
         <AppNavigation />
 
-        <div className="app-content app-content-topnav">
+        <div className="cc-app-content cc-app-content-topnav">
           <main>{children}</main>
         </div>
 

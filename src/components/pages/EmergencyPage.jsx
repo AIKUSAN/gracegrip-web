@@ -35,48 +35,48 @@ export function EmergencyPage({ emergencyVerses, onCopyVerse, onStayedClean }) {
   const [celebrated, setCelebrated] = useState(false)
   const versesToShow = showAllVerses ? emergencyVerses : emergencyVerses.slice(0, 3)
 
-  if (safety !== 'not-now') return <div className="v2-page v2-safety">
-    <header className="v2-intro"><h1>What kind of help do you need right now?</h1><p>You can open Help Now without an account. Choose the situation that fits best. This choice is not saved.</p></header>
-    <div className="v2-safety-options">
+  if (safety !== 'not-now') return <div className="cc-page cc-safety">
+    <header className="cc-intro"><h1>What kind of help do you need right now?</h1><p>You can open Help Now without an account. Choose the situation that fits best. This choice is not saved.</p></header>
+    <div className="cc-safety-options">
       <button type="button" onClick={() => setSafety('overdose')}>Possible overdose or trouble breathing</button>
       <button type="button" onClick={() => setSafety('withdrawal')}>Withdrawal or severe physical symptoms</button>
       <button type="button" onClick={() => setSafety('violence')}>Threats, violence, or abuse</button>
       <button type="button" onClick={() => setSafety('not-now')}>None of these — show support tools</button>
     </div>
-    {safety && <section className="v2-danger-guidance" role="alert">
+    {safety && <section className="cc-danger-guidance" role="alert">
       <h2>{safety === 'overdose' ? 'Get emergency help now' : safety === 'withdrawal' ? 'Get medical help' : 'Put safety first'}</h2>
       <p>{safety === 'overdose' ? 'If someone may have overdosed, is unresponsive, or is having trouble breathing, contact local emergency services immediately. GraceGrip cannot provide emergency care.' : safety === 'withdrawal' ? 'Severe withdrawal can be dangerous. Seek urgent medical care, especially if symptoms are serious or worsening. GraceGrip does not give detox or withdrawal instructions.' : 'If someone is in immediate danger, contact local emergency services. If you can, move to a safer place and contact a trusted person or local specialist service. If your device use is monitored, consider using a safer device.'}</p>
       <label htmlFor="help-country">Your country (optional)</label><select id="help-country" value={country} onChange={(event) => setCountry(event.target.value)}><option value="">Choose a country</option>{helplineCountries.map(({ code, name }) => <option value={code} key={code}>{name}</option>)}</select>
       <p>{country ? `Open the directory for ${helplineCountries.find((item) => item.code === country)?.name}. Check the service details before relying on them.` : 'Find support by country in the directory below.'}</p>
       <a href={country ? `https://findahelpline.com/countries/${country}` : 'https://www.iasp.info/crisis-centres-helplines/'} target="_blank" rel="noopener noreferrer">{country ? 'Open this country’s helplines' : 'Find a country helpline through IASP'}</a>
-      <button type="button" className="v2-back-button" onClick={() => setSafety('')}>Choose a different situation</button>
+      <button type="button" className="cc-back-button" onClick={() => setSafety('')}>Choose a different situation</button>
     </section>}
   </div>
 
   return (
     <motion.div
-      className="screen-stack legacy-emergency-screen"
+      className="cc-screen cc-emergency-screen"
       variants={staggerContainer}
       initial="hidden"
       animate="visible"
     >
-      <motion.section className="panel panel-wide emergency-urgent-card legacy-emergency-header" variants={panelVariants}>
+      <motion.section className="cc-panel cc-panel-wide emergency-urgent-card cc-emergency-header" variants={panelVariants}>
         <h1 className="emergency-title">One next step is enough</h1>
-        <p className="muted emergency-subcopy">
+        <p className="cc-muted emergency-subcopy">
           Choose a tool that fits this moment. You can stop or reach out to someone at any time.
         </p>
       </motion.section>
-      <button type="button" className="v2-back-button" onClick={() => setSafety('')}>Return to safety choices</button>
+      <button type="button" className="cc-back-button" onClick={() => setSafety('')}>Return to safety choices</button>
 
-      <div className="legacy-emergency-tools">
+      <div className="cc-emergency-tools">
         <motion.div variants={panelVariants}><UrgeTimer /></motion.div>
         <motion.div variants={panelVariants}><BreathingExercise /></motion.div>
       </div>
 
-      <details className="panel panel-wide emergency-block emergency-calm-card legacy-emergency-verses">
+      <details className="cc-panel cc-panel-wide emergency-block emergency-calm-card cc-emergency-verses">
         <summary>Scripture, if you want it</summary>
         <h3>Verses for This Moment</h3>
-        <p className="muted emergency-block-hint">Read these slowly — let each word land.</p>
+        <p className="cc-muted emergency-block-hint">Read these slowly — let each word land.</p>
         <ul className="verse-list emergency-verse-list">
           {versesToShow.map((verse, i) => (
             <motion.li
@@ -90,7 +90,7 @@ export function EmergencyPage({ emergencyVerses, onCopyVerse, onStayedClean }) {
               <div className="verse-row">
                 <p className="verse-ref">{verse.reference}</p>
                 <button
-                  className="btn-ghost btn-copy"
+                  className="cc-btn-ghost cc-btn-copy"
                   onClick={() => onCopyVerse(verse.text, verse.reference)}
                   aria-label={`Copy verse ${verse.reference}`}
                   title="Copy verse"
@@ -103,7 +103,7 @@ export function EmergencyPage({ emergencyVerses, onCopyVerse, onStayedClean }) {
         </ul>
         {emergencyVerses.length > 3 && (
           <button
-            className="btn-ghost emergency-verse-toggle"
+            className="cc-btn-ghost emergency-verse-toggle"
             onClick={() => setShowAllVerses((v) => !v)}
           >
             {showAllVerses ? 'Show fewer verses' : `See ${emergencyVerses.length - 3} more`}
@@ -111,13 +111,13 @@ export function EmergencyPage({ emergencyVerses, onCopyVerse, onStayedClean }) {
         )}
       </details>
 
-      <motion.div variants={panelVariants} className="legacy-emergency-grounding"><GroundingExercise /></motion.div>
+      <motion.div variants={panelVariants} className="cc-emergency-grounding"><GroundingExercise /></motion.div>
 
-      <section className="v2-puzzle-invite"><h2>Need a quiet visual task?</h2><p>The optional tile puzzle offers a score-free pause or a separate three-minute challenge. You can stop at any time.</p><Link href="/puzzle">Open the puzzle</Link></section>
+      <section className="cc-puzzle-invite"><h2>Need a quiet visual task?</h2><p>The optional tile puzzle offers a score-free pause or a separate three-minute challenge. You can stop at any time.</p><Link href="/puzzle">Open the puzzle</Link></section>
 
-      <motion.section className="panel panel-wide emergency-block legacy-emergency-actions" variants={panelVariants}>
+      <motion.section className="cc-panel cc-panel-wide emergency-block cc-emergency-actions" variants={panelVariants}>
         <h3>Take One Action Right Now</h3>
-        <p className="muted emergency-block-hint">
+        <p className="cc-muted emergency-block-hint">
           Pick one action that is safe for you. You do not need to do every step.
         </p>
         <div className="quick-action-grid">
@@ -139,7 +139,7 @@ export function EmergencyPage({ emergencyVerses, onCopyVerse, onStayedClean }) {
               </div>
               <div>
                 <p className="quick-action-label">{label}</p>
-                <p className="quick-action-desc muted">{description}</p>
+                <p className="quick-action-desc cc-muted">{description}</p>
               </div>
             </motion.button>
           ))}
@@ -151,7 +151,7 @@ export function EmergencyPage({ emergencyVerses, onCopyVerse, onStayedClean }) {
         )}
       </motion.section>
 
-      <motion.section className="panel panel-wide emergency-close-note legacy-emergency-close" variants={panelVariants}>
+      <motion.section className="cc-panel cc-panel-wide emergency-close-note cc-emergency-close" variants={panelVariants}>
         <details><summary>Scripture for this moment, if you want it</summary><div className="close-note-verse">
           <p className="close-note-scripture">
             <em>"No temptation has overtaken you except what is common to mankind. And God is
@@ -160,7 +160,7 @@ export function EmergencyPage({ emergencyVerses, onCopyVerse, onStayedClean }) {
           <div className="close-note-ref-row">
             <strong className="close-note-ref">— 1 Corinthians 10:13</strong>
             <button
-              className="btn-ghost btn-copy close-note-copy"
+              className="cc-btn-ghost cc-btn-copy close-note-copy"
               onClick={() => onCopyVerse(
                 'No temptation has overtaken you except what is common to mankind. And God is faithful; he will not let you be tempted beyond what you can bear.',
                 '1 Corinthians 10:13'
@@ -178,7 +178,7 @@ export function EmergencyPage({ emergencyVerses, onCopyVerse, onStayedClean }) {
         {!celebrated ? (
           <button
             type="button"
-            className="btn-primary close-note-cta"
+            className="cc-btn-primary close-note-cta"
             onClick={() => { onStayedClean(); setCelebrated(true) }}
           >
             <ShieldCheck size={17} /> Record a legacy check-in
@@ -190,7 +190,7 @@ export function EmergencyPage({ emergencyVerses, onCopyVerse, onStayedClean }) {
           </div>
         )}
         {celebrated && (
-          <Link href="/journal" className="btn-ghost close-note-journal-link">
+          <Link href="/journal" className="cc-btn-ghost close-note-journal-link">
             Write it down →
           </Link>
         )}

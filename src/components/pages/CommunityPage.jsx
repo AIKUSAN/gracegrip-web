@@ -21,10 +21,10 @@ function CommunityPost({ post, onRefresh, onNotice, onError }) {
       if (action === 'block') await onRefresh()
     } catch (issue) { onError(issue.message) }
   }
-  return <li className="v2-community-post">
-    <div className="v2-community-post-head"><img src={avatarPath(post.avatarId)} alt="" width="40" height="40" /><strong>{post.alias}</strong><time dateTime={post.at}>{new Date(post.at).toLocaleString()}</time></div>
+  return <li className="cc-community-post">
+    <div className="cc-community-post-head"><img src={avatarPath(post.avatarId)} alt="" width="40" height="40" /><strong>{post.alias}</strong><time dateTime={post.at}>{new Date(post.at).toLocaleString()}</time></div>
     <p>{post.body}</p>
-    <div className="v2-community-post-actions"><label>Report reason<select value={reason} onChange={(event) => setReason(event.target.value)}><option value="harm">Harmful content</option><option value="harassment">Harassment</option><option value="privacy">Privacy concern</option><option value="other">Other</option></select></label><button type="button" onClick={() => run('report', { postId: post.id, reason })}>Report</button><button type="button" onClick={() => run('block', { memberId: post.senderId })}>Block member</button></div>
+    <div className="cc-community-post-actions"><label>Report reason<select value={reason} onChange={(event) => setReason(event.target.value)}><option value="harm">Harmful content</option><option value="harassment">Harassment</option><option value="privacy">Privacy concern</option><option value="other">Other</option></select></label><button type="button" onClick={() => run('report', { postId: post.id, reason })}>Report</button><button type="button" onClick={() => run('block', { memberId: post.senderId })}>Block member</button></div>
   </li>
 }
 
@@ -96,20 +96,20 @@ export function CommunityPage() {
     setNotice('Alias request sent to the owner. Your current alias remains until approval.')
   })
 
-  return <div className="v2-page v2-community">
-    <header className="v2-intro"><h1>Community sessions</h1><p>One text room for conversation and prayer, hosted by a person. The room is read-only when the owner is away. It is not an urgent-help service.</p></header>
-    <div className="v2-community-status"><strong>{availability?.open ? 'A hosted session is open' : 'Room is read-only'}</strong><span>{availability?.nextSessionAt ? `Next planned session: ${new Date(availability.nextSessionAt).toLocaleString()}` : 'No next session is scheduled yet.'}</span></div>
-    {error && <p role="alert" className="v2-account-error">{error}</p>}
-    {notice && <p role="status" className="v2-account-notice">{notice}</p>}
-    {!member?.joined && <section className="v2-community-join"><h2>Join by choice</h2><p>Membership uses a passkey. Other members see only an alias and avatar you choose, not your account, email, goals, or journal.</p>
-      <fieldset><legend>Choose an avatar</legend><div className="v2-avatar-grid">{AVATARS.map((id) => <label key={id} className={avatarId === id ? 'selected' : ''}><input type="radio" name="avatar" value={id} checked={avatarId === id} onChange={() => setAvatarId(id)} /><img src={avatarPath(id)} alt="" width="52" height="52" /><span>{id}</span></label>)}</div></fieldset>
-      <div className="v2-room-rules"><h3>Room rules</h3><ul><li>Share only what you choose; respect privacy and differences.</li><li>No threats, abuse, sexual content, direct messages, media, or outbound links.</li><li>Human approval is required before a post appears. Reports go to the owner.</li><li>Chat text is kept for 30 days; incident evidence can be kept for 90 days.</li></ul></div>
-      <label className="v2-check-label"><input type="checkbox" checked={acceptRules} onChange={(event) => setAcceptRules(event.target.checked)} /> I accept these rules and understand the room is not monitored for urgent help.</label>
-      <button type="button" className="v2-action" disabled={busy || !acceptRules} onClick={join}>Join community</button><p>Need a passkey first? <Link href="/account">Open private membership</Link>.</p>
+  return <div className="cc-page cc-community">
+    <header className="cc-intro"><h1>Community sessions</h1><p>One text room for conversation and prayer, hosted by a person. The room is read-only when the owner is away. It is not an urgent-help service.</p></header>
+    <div className="cc-community-status"><strong>{availability?.open ? 'A hosted session is open' : 'Room is read-only'}</strong><span>{availability?.nextSessionAt ? `Next planned session: ${new Date(availability.nextSessionAt).toLocaleString()}` : 'No next session is scheduled yet.'}</span></div>
+    {error && <p role="alert" className="cc-account-error">{error}</p>}
+    {notice && <p role="status" className="cc-account-notice">{notice}</p>}
+    {!member?.joined && <section className="cc-community-join"><h2>Join by choice</h2><p>Membership uses a passkey. Other members see only an alias and avatar you choose, not your account, email, goals, or journal.</p>
+      <fieldset><legend>Choose an avatar</legend><div className="cc-avatar-grid">{AVATARS.map((id) => <label key={id} className={avatarId === id ? 'selected' : ''}><input type="radio" name="avatar" value={id} checked={avatarId === id} onChange={() => setAvatarId(id)} /><img src={avatarPath(id)} alt="" width="52" height="52" /><span>{id}</span></label>)}</div></fieldset>
+      <div className="cc-room-rules"><h3>Room rules</h3><ul><li>Share only what you choose; respect privacy and differences.</li><li>No threats, abuse, sexual content, direct messages, media, or outbound links.</li><li>Human approval is required before a post appears. Reports go to the owner.</li><li>Chat text is kept for 30 days; incident evidence can be kept for 90 days.</li></ul></div>
+      <label className="cc-check-label"><input type="checkbox" checked={acceptRules} onChange={(event) => setAcceptRules(event.target.checked)} /> I accept these rules and understand the room is not monitored for urgent help.</label>
+      <button type="button" className="cc-action" disabled={busy || !acceptRules} onClick={join}>Join community</button><p>Need a passkey first? <Link href="/account">Open private membership</Link>.</p>
     </section>}
-    {member?.joined && <div className="v2-community-columns"><section><h2>Room conversation</h2><p>Only owner-approved posts appear here. You can report or block any member.</p><ol className="v2-community-posts">{messages.map((message) => <CommunityPost key={message.id} post={message} onRefresh={refreshMessages} onNotice={setNotice} onError={setError} />)}</ol>{messages.length === 0 && <p>No approved posts in the last 30 days.</p>}
-      {availability?.open ? <div className="v2-community-compose"><label htmlFor="room-message">Share a short message or prayer request</label><textarea id="room-message" value={postInput} maxLength={700} rows={4} onChange={(event) => setPostInput(event.target.value)} placeholder="Your post will be reviewed before others see it." /><p>{postInput.length} / 700 · Text only. No links or contact details.</p><button type="button" className="v2-action" disabled={busy || !postInput.trim()} onClick={post}>Send for owner review</button></div> : <p className="v2-note">The owner is away. You can read approved posts; new posts wait for the next hosted session.</p>}</section>
+    {member?.joined && <div className="cc-community-columns"><section><h2>Room conversation</h2><p>Only owner-approved posts appear here. You can report or block any member.</p><ol className="cc-community-posts">{messages.map((message) => <CommunityPost key={message.id} post={message} onRefresh={refreshMessages} onNotice={setNotice} onError={setError} />)}</ol>{messages.length === 0 && <p>No approved posts in the last 30 days.</p>}
+      {availability?.open ? <div className="cc-community-compose"><label htmlFor="room-message">Share a short message or prayer request</label><textarea id="room-message" value={postInput} maxLength={700} rows={4} onChange={(event) => setPostInput(event.target.value)} placeholder="Your post will be reviewed before others see it." /><p>{postInput.length} / 700 · Text only. No links or contact details.</p><button type="button" className="cc-action" disabled={busy || !postInput.trim()} onClick={post}>Send for owner review</button></div> : <p className="cc-note">The owner is away. You can read approved posts; new posts wait for the next hosted session.</p>}</section>
       <aside><h2>Your community identity</h2><img src={avatarPath(member.avatarId)} alt="Your chosen avatar" width="72" height="72" /><p><strong>{member.alias}</strong> is what other members see.</p><label>Request a display alias<input value={aliasInput} maxLength={24} onChange={(event) => setAliasInput(event.target.value)} /></label><button type="button" disabled={busy || aliasInput.trim().length < 3} onClick={requestAlias}>Ask owner to approve alias</button><hr /><button type="button" onClick={leave} disabled={busy}>Leave community and remove posts</button></aside></div>}
-    <aside className="v2-note"><h2>Need help now?</h2><p>This room is not a crisis service. Help Now gives immediate safety choices and private tools.</p><Link href="/emergency">Open Help Now</Link></aside>
+    <aside className="cc-note"><h2>Need help now?</h2><p>This room is not a crisis service. Help Now gives immediate safety choices and private tools.</p><Link href="/emergency">Open Help Now</Link></aside>
   </div>
 }

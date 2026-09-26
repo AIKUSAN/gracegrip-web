@@ -25,5 +25,5 @@ export function UnsubscribePage() {
     } catch (issue) { setStatus(issue.message) }
     finally { setBusy(false) }
   }
-  return <div className="v2-page"><header className="v2-intro"><h1>Article email preference</h1><p>Article emails are optional and separate from account recovery and community membership.</p></header><section className="v2-note"><p role="status">{status || (token ? 'Ready to unsubscribe.' : 'Open the link from a GraceGrip article email, or sign in to change your choice.')}</p>{token && <button type="button" className="v2-action" disabled={busy} onClick={unsubscribe}>Unsubscribe from article emails</button>}<p><Link href="/account">Open private membership</Link></p></section></div>
+  return <div className="cc-page"><header className="cc-intro"><h1>Article email preference</h1><p>Article emails are optional and separate from account recovery and community membership.</p></header><section className="cc-note"><p role="status">{status || (token ? 'Ready to unsubscribe.' : 'Open the link from a GraceGrip article email, or sign in to change your choice.')}</p>{token && <button type="button" className="cc-action" disabled={busy} onClick={unsubscribe}>Unsubscribe from article emails</button>}<p><Link href="/account">Open private membership</Link></p></section></div>
 }

@@ -27,7 +27,7 @@ export function ScripturePage({
   const activeTab = SCRIPTURE_TABS.find((t) => t.id === activeScriptureTab)
 
   return (
-    <div className="screen-stack legacy-scripture-screen v2-support-route">
+    <div className="cc-screen cc-scripture-screen cc-support-route">
 
       {/* ── Page Header ───────────────────────────────────────────── */}
       <div className="scripture-page-header">
@@ -35,13 +35,13 @@ export function ScripturePage({
           <BookOpen size={22} aria-hidden="true" />
           Scripture, when you want it
         </h1>
-        <p className="muted" style={{ margin: '0.25rem 0 0', fontSize: '0.9rem' }}>
+        <p className="cc-muted" style={{ margin: '0.25rem 0 0', fontSize: '0.9rem' }}>
           A Christian source of reflection and encouragement. You can use every practical support tool without opening Scripture.
         </p>
       </div>
 
       {/* ── Category Tabs ─────────────────────────────────────────── */}
-      <section className="panel panel-wide legacy-scripture-header">
+      <section className="cc-panel cc-panel-wide cc-scripture-header">
         <h3 className="scripture-cat-heading">
           <LayoutGrid size={17} aria-hidden="true" />
           Browse by Category
@@ -70,7 +70,7 @@ export function ScripturePage({
       </section>
 
       {/* ── Verses by Category ────────────────────────────────────── */}
-      <section className="panel panel-wide legacy-scripture-verses">
+      <section className="cc-panel cc-panel-wide cc-scripture-verses">
         <div className="scripture-section-header">
           <h3 className="scripture-section-heading">
             <ScrollText size={17} aria-hidden="true" />
@@ -84,21 +84,21 @@ export function ScripturePage({
           {filteredVerses.map((verse) => {
             const isFavorite = favoriteVerseIds.includes(verse.id)
             return (
-              <li key={verse.id} data-cat={activeScriptureTab} className="verse-card legacy-scripture-card">
+              <li key={verse.id} data-cat={activeScriptureTab} className="verse-card cc-scripture-card">
                 <p className="verse-text">
                   &ldquo;{verse.text}&rdquo;
                 </p>
-                <div className="legacy-scripture-actions">
+                <div className="cc-scripture-actions">
                   <p className="verse-ref">{verse.reference}</p>
                   <button
-                    className={`btn-icon-bookmark${isFavorite ? ' btn-icon-bookmark-active' : ''}`}
+                    className={`cc-btn-icon-bookmark${isFavorite ? ' cc-btn-icon-bookmark-active' : ''}`}
                     onClick={() => onFavoriteToggle(verse.id)}
                     aria-label={isFavorite ? 'Remove from saved' : 'Save verse'}
                   >
                     {isFavorite ? (
                       <>
                         <BookmarkCheck size={15} />
-                        <span className="btn-bookmark-label">Saved</span>
+                        <span className="cc-btn-bookmark-label">Saved</span>
                       </>
                     ) : (
                       <Bookmark size={15} />
@@ -112,7 +112,7 @@ export function ScripturePage({
       </section>
 
       {/* ── Saved Verses ──────────────────────────────────────────── */}
-      <section id="saved-verses" className="panel panel-wide legacy-scripture-saved">
+      <section id="saved-verses" className="cc-panel cc-panel-wide cc-scripture-saved">
         <div className="scripture-section-header">
           <h3 className="scripture-section-heading scripture-saved-heading">
             <BookmarkCheck size={17} aria-hidden="true" />
@@ -134,15 +134,15 @@ export function ScripturePage({
                 <p className="verse-text">
                   &ldquo;{verse.text}&rdquo;
                 </p>
-                <div className="legacy-scripture-actions">
+                <div className="cc-scripture-actions">
                   <p className="verse-ref">{verse.reference}</p>
                   <button
-                    className="btn-icon-bookmark btn-icon-bookmark-active"
+                    className="cc-btn-icon-bookmark cc-btn-icon-bookmark-active"
                     onClick={() => onFavoriteToggle(verse.id)}
                     aria-label="Remove from saved"
                   >
                     <BookmarkCheck size={15} />
-                    <span className="btn-bookmark-label">Saved</span>
+                    <span className="cc-btn-bookmark-label">Saved</span>
                   </button>
                 </div>
               </li>
